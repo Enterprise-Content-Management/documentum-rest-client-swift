@@ -49,10 +49,6 @@
 		1EC128501CEC1ACB0093E978 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC1284F1CEC1ACB0093E978 /* LoginViewController.swift */; };
 		1EC128541CF2B2580093E978 /* InfoItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC128531CF2B2580093E978 /* InfoItemTableViewCell.swift */; };
 		1EC2F8F51D20F9660041CEEB /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC2F8F41D20F9660041CEEB /* SideMenuViewController.swift */; };
-		1EC5398E1D41C1AD0024D789 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC5398D1D41C1AD0024D789 /* NotificationCenter.framework */; };
-		1EC539911D41C1AD0024D789 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC539901D41C1AD0024D789 /* TodayViewController.swift */; };
-		1EC539941D41C1AD0024D789 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EC539921D41C1AD0024D789 /* MainInterface.storyboard */; };
-		1EC539981D41C1AD0024D789 /* RestWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1EC5398C1D41C1AD0024D789 /* RestWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1EC782F71D139B2100982FA2 /* RestServiceEnhance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC782F61D139B2100982FA2 /* RestServiceEnhance.swift */; };
 		1ED776001D24EF4B0039CDA4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED775FF1D24EF4B0039CDA4 /* ProfileViewController.swift */; };
 		1ED776021D25079F0039CDA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED776011D25079F0039CDA4 /* User.swift */; };
@@ -78,13 +74,6 @@
 			remoteGlobalIDString = 1E665C961CAA2BB700EF3774;
 			remoteInfo = RestClient;
 		};
-		1EC539961D41C1AD0024D789 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1E665C8F1CAA2BB700EF3774 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1EC5398B1D41C1AD0024D789;
-			remoteInfo = RestWidget;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -104,7 +93,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				1EC539981D41C1AD0024D789 /* RestWidget.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,11 +149,7 @@
 		1EC1284F1CEC1ACB0093E978 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1EC128531CF2B2580093E978 /* InfoItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoItemTableViewCell.swift; sourceTree = "<group>"; };
 		1EC2F8F41D20F9660041CEEB /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
-		1EC5398C1D41C1AD0024D789 /* RestWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RestWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EC5398D1D41C1AD0024D789 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		1EC539901D41C1AD0024D789 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		1EC539931D41C1AD0024D789 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		1EC539951D41C1AD0024D789 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EC782F61D139B2100982FA2 /* RestServiceEnhance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestServiceEnhance.swift; sourceTree = "<group>"; };
 		1ED775FF1D24EF4B0039CDA4 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1ED776011D25079F0039CDA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -200,14 +184,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1EC539891D41C1AD0024D789 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1EC5398E1D41C1AD0024D789 /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,7 +298,6 @@
 				1E665C991CAA2BB700EF3774 /* RestClient */,
 				1E665CAE1CAA2BB700EF3774 /* RestClientTests */,
 				1E665CB91CAA2BB700EF3774 /* RestClientUITests */,
-				1EC5398F1D41C1AD0024D789 /* RestWidget */,
 				1E665C981CAA2BB700EF3774 /* Products */,
 				A0136D9C4705888D4A91C529 /* Frameworks */,
 				D0308ADB2F7D43AC11691BFF /* Pods */,
@@ -335,7 +310,6 @@
 				1E665C971CAA2BB700EF3774 /* RestClient.app */,
 				1E665CAB1CAA2BB700EF3774 /* RestClientTests.xctest */,
 				1E665CB61CAA2BB700EF3774 /* RestClientUITests.xctest */,
-				1EC5398C1D41C1AD0024D789 /* RestWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -460,16 +434,6 @@
 			name = menu;
 			sourceTree = "<group>";
 		};
-		1EC5398F1D41C1AD0024D789 /* RestWidget */ = {
-			isa = PBXGroup;
-			children = (
-				1EC539901D41C1AD0024D789 /* TodayViewController.swift */,
-				1EC539921D41C1AD0024D789 /* MainInterface.storyboard */,
-				1EC539951D41C1AD0024D789 /* Info.plist */,
-			);
-			path = RestWidget;
-			sourceTree = "<group>";
-		};
 		1ED776031D251D380039CDA4 /* cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -529,7 +493,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				1EC539971D41C1AD0024D789 /* PBXTargetDependency */,
 			);
 			name = RestClient;
 			productName = RestClient;
@@ -572,23 +535,6 @@
 			productReference = 1E665CB61CAA2BB700EF3774 /* RestClientUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		1EC5398B1D41C1AD0024D789 /* RestWidget */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1EC5399B1D41C1B50024D789 /* Build configuration list for PBXNativeTarget "RestWidget" */;
-			buildPhases = (
-				1EC539881D41C1AD0024D789 /* Sources */,
-				1EC539891D41C1AD0024D789 /* Frameworks */,
-				1EC5398A1D41C1AD0024D789 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = RestWidget;
-			productName = RestWidget;
-			productReference = 1EC5398C1D41C1AD0024D789 /* RestWidget.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -613,10 +559,6 @@
 						DevelopmentTeam = J2G9387ZST;
 						TestTargetID = 1E665C961CAA2BB700EF3774;
 					};
-					1EC5398B1D41C1AD0024D789 = {
-						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = J2G9387ZST;
-					};
 				};
 			};
 			buildConfigurationList = 1E665C921CAA2BB700EF3774 /* Build configuration list for PBXProject "RestClient" */;
@@ -635,7 +577,6 @@
 				1E665C961CAA2BB700EF3774 /* RestClient */,
 				1E665CAA1CAA2BB700EF3774 /* RestClientTests */,
 				1E665CB51CAA2BB700EF3774 /* RestClientUITests */,
-				1EC5398B1D41C1AD0024D789 /* RestWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -664,14 +605,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1EC5398A1D41C1AD0024D789 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1EC539941D41C1AD0024D789 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -791,14 +724,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1EC539881D41C1AD0024D789 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1EC539911D41C1AD0024D789 /* TodayViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -811,11 +736,6 @@
 			isa = PBXTargetDependency;
 			target = 1E665C961CAA2BB700EF3774 /* RestClient */;
 			targetProxy = 1E665CB71CAA2BB700EF3774 /* PBXContainerItemProxy */;
-		};
-		1EC539971D41C1AD0024D789 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1EC5398B1D41C1AD0024D789 /* RestWidget */;
-			targetProxy = 1EC539961D41C1AD0024D789 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -834,14 +754,6 @@
 				1E665CA41CAA2BB700EF3774 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		1EC539921D41C1AD0024D789 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1EC539931D41C1AD0024D789 /* Base */,
-			);
-			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -938,7 +850,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = RestClient/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -958,7 +869,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = RestClient/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1017,36 +927,6 @@
 			};
 			name = Release;
 		};
-		1EC539991D41C1B10024D789 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = RestWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.emc.RestClient.RestWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		1EC5399A1D41C1B10024D789 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = RestWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.emc.RestClient.RestWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1085,14 +965,6 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
-		};
-		1EC5399B1D41C1B50024D789 /* Build configuration list for PBXNativeTarget "RestWidget" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1EC539991D41C1B10024D789 /* Debug */,
-				1EC5399A1D41C1B10024D789 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
