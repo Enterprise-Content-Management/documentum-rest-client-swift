@@ -37,8 +37,8 @@ Run below command to install `CocoaPods`.
 3. Open the terminal and navigate to the project directory which contains the file `Podfile`.
 ```sh
  $ cd documentum-rest-client-swift/SwiftClient
-
 ```
+
 4. Run below command to install all dependency libraries for this project.
 ```sh
  $ pod install
@@ -48,9 +48,9 @@ Run below command to install `CocoaPods`.
 default connection parameters for Documentum REST Services access. You can change the default values to accommodate to your
 Documentum REST Services deployment. Of course, you can also manually fill the connection parameters in the test launcher.
 
-4. Build the project with **Xcode**.
+6. Build the project with **Xcode**.
 	* Click the Build button or press `⌘R` on **Xcode** IDE to launch the test.
 
-## Test
+## Demo
 
 <img src="demo/swift-demo.gif" width="376">
