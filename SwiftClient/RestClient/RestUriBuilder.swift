@@ -9,8 +9,6 @@
 import UIKit
 
 class RestUriBuilder {
-    static let rootUrl = DbUtil.getValueFromTable(attrName: "rooturl")!
-    static let serviceContext = DbUtil.getValueFromTable(attrName: "context")!
     static let services = "/services"
     static let repositories = "/repositories"
     
@@ -28,11 +26,9 @@ class RestUriBuilder {
     }
     
     static func getServicesUrl() -> String {
+        let rootUrl = DbUtil.getValueFromTable(attrName: DbUtil.ATTR_ROOTURL)!
+        let serviceContext = DbUtil.getValueFromTable(attrName: DbUtil.ATTR_CONTEXT)!
         return rootUrl + serviceContext + services
-    }
-    
-    static func getRepositoriesUrl() -> String {
-        return rootUrl + serviceContext + repositories
     }
     
     static func inlineParam() -> [String : String] {

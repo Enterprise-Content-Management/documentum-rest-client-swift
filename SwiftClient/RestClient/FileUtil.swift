@@ -12,12 +12,6 @@ class FileUtil {
     
     static let fileManager = NSFileManager.defaultManager()
     
-    static func getViewController(name: String) -> UIViewController {
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyBoard.instantiateViewControllerWithIdentifier(name)
-        return viewController
-    }
-    
     static func isDownloaded(objectId: String) -> Bool {
         let path = getFilePathFromId(objectId)
         let flag = fileManager.fileExistsAtPath(path)
@@ -53,5 +47,19 @@ class FileUtil {
         let directoryUrl = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
         let pathComponent = objectId
         return directoryUrl.URLByAppendingPathComponent(pathComponent)
+    }
+    
+    static func getTopController() -> UIViewController? {
+        var rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
+        while (rootViewController is SWRevealViewController || rootViewController is UINavigationController) {
+            if rootViewController is SWRevealViewController {
+                let swRevealVC = rootViewController as! SWRevealViewController
+                rootViewController = swRevealVC.frontViewController
+            } else {
+                let naviVC = rootViewController as! UINavigationController
+                rootViewController = naviVC.topViewController
+            }
+        }
+        return rootViewController
     }
 }

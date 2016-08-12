@@ -3,7 +3,7 @@
 //  RestClient
 //
 //  Created by Song, Michyo on 3/29/16.
-//  Copyright © 2016 EMC Corporation. All rights reserved.
+//  Copyright © 2016 Song, Michyo. All rights reserved.
 //
 
 import UIKit

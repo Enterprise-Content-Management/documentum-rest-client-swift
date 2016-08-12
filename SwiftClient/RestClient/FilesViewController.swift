@@ -86,7 +86,7 @@ class FilesViewController: ListViewController {
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let editAction = UITableViewRowAction(style: .Default, title: "Edit") { (action: UITableViewRowAction, indexPath: NSIndexPath) -> Void in
-            let fileViewController = FileUtil.getViewController("FileViewController") as! FileViewController
+            let fileViewController = UIUtil.getViewController("FileViewController") as! FileViewController
             fileViewController.isEditable = true
             fileViewController.file = self.files[indexPath.row]
             self.navigationController?.pushViewController(fileViewController, animated: true)

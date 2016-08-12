@@ -29,8 +29,20 @@ class RestCollectionService {
         return params
     }
     
+    private func getLatestUrl() {
+        if (url != nil) {
+            let rootUrl = DbUtil.getValueFromTable(attrName: DbUtil.ATTR_ROOTURL)
+            let root = rootUrl?.characters.split("/").map(String.init)
+            let context = DbUtil.getValueFromTable(attrName: DbUtil.ATTR_CONTEXT)
+            var strings = url.characters.split("/").map(String.init)
+            strings[1] = root![1]
+            strings[2] = (context! as NSString).substringFromIndex(1)
+            url = strings.joinWithSeparator("/")
+        }
+    }
+    
     func getService(pageNo: NSInteger, completionHandler: (NSArray?, Error?) -> ()) {
-        RestService.getResponseWithParams(self.url!, params: self.getParams(pageNo), completionHandler: completionHandler)
+        getLatestUrl()
     }
     
     // TODO: Add error control when get error

@@ -15,6 +15,13 @@ class DbUtil {
     static let attr = Expression<String>("attr")
     static let value = Expression<String>("value")
     
+    static let ATTR_ROOTURL = "rooturl"
+    static let ATTR_CONTEXT = "context"
+    static let ATTR_AUTO = "shouldautologin"
+    static let ATTR_USERNAME = "username"
+    static let ATTR_PASSWORD = "password"
+    static let ATTR_REMEMBER = "shouldremember"
+    
     static private func getConnectionOfDb(name: String) -> Connection? {
         let paths = NSBundle.mainBundle().pathsForResourcesOfType("db", inDirectory: nil)
         let manager = NSFileManager.defaultManager()

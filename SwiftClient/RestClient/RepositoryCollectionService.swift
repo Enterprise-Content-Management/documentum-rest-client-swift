@@ -16,6 +16,8 @@ class RepositoryCollectionService : RestCollectionService {
     }
     
     override func getService(pageNo: NSInteger, completionHandler: (NSArray?, Error?) -> ()) {
+        super.getService(pageNo, completionHandler: completionHandler)
+        
         RestService.getRepositoriesUrl { url, error in
             if let error = error {
                 completionHandler(nil, error)

@@ -16,11 +16,6 @@ class LoginViewController : UIViewController {
     @IBOutlet var isAutoLogin: CheckBox!
     @IBOutlet var isRemember: CheckBox!
     
-    let ATTR_USERNAME = "username"
-    let ATTR_PASSWORD = "password"
-    let ATTR_REMEMBER = "shouldremember"
-    let ATTR_AUTO = "shouldautologin"
-    
     var parentObject: RestObject!
     
     override func viewDidLoad() {
@@ -28,8 +23,8 @@ class LoginViewController : UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        userNameTextField.text = DbUtil.getValueFromTable(attrName: ATTR_USERNAME)
-        passwordTextField.text = DbUtil.getValueFromTable(attrName: ATTR_PASSWORD)
+        userNameTextField.text = DbUtil.getValueFromTable(attrName: DbUtil.ATTR_USERNAME)
+        passwordTextField.text = DbUtil.getValueFromTable(attrName: DbUtil.ATTR_PASSWORD)
         
         setCheckBoxes()
         
@@ -39,13 +34,13 @@ class LoginViewController : UIViewController {
     }
     
     private func setCheckBoxes() {
-        if DbUtil.getValueFromTable(attrName: ATTR_REMEMBER)! == "true" {
+        if DbUtil.getValueFromTable(attrName: DbUtil.ATTR_REMEMBER)! == "true" {
             isRemember.isChecked = true
         } else {
             isRemember.isChecked = false
         }
         
-        if DbUtil.getValueFromTable(attrName: ATTR_AUTO)! == "true" {
+        if DbUtil.getValueFromTable(attrName: DbUtil.ATTR_AUTO)! == "true" {
             isAutoLogin.isChecked = true
         } else {
             isAutoLogin.isChecked = false
@@ -79,11 +74,11 @@ class LoginViewController : UIViewController {
         
         let shouldRemember = isRemember.isChecked.description
         let shouldAuto = isAutoLogin.isChecked.description
-        DbUtil.updateValueFromTable(attrName: ATTR_REMEMBER, attrValue: shouldRemember)
-        DbUtil.updateValueFromTable(attrName: ATTR_AUTO, attrValue: shouldAuto)
+        DbUtil.updateValueFromTable(attrName: DbUtil.ATTR_REMEMBER, attrValue: shouldRemember)
+        DbUtil.updateValueFromTable(attrName: DbUtil.ATTR_AUTO, attrValue: shouldAuto)
         if isRemember.isChecked {
-            DbUtil.updateValueFromTable(attrName: ATTR_USERNAME, attrValue: userNameTextField.text!)
-            DbUtil.updateValueFromTable(attrName: ATTR_PASSWORD, attrValue: passwordTextField.text!)
+            DbUtil.updateValueFromTable(attrName: DbUtil.ATTR_USERNAME, attrValue: userNameTextField.text!)
+            DbUtil.updateValueFromTable(attrName: DbUtil.ATTR_PASSWORD, attrValue: passwordTextField.text!)
         }
         
         RestUriBuilder.currentLoginCredential.userName = userNameTextField.text!.stringByTrimmingCharactersInSet(
@@ -97,8 +92,8 @@ class LoginViewController : UIViewController {
             self.navigationController?.navigationBarHidden = true
             
             let revealViewController = segue.destinationViewController as! SWRevealViewController
-            revealViewController.setFrontViewController(FileUtil.getViewController("MainNavi"), animated: true)
-            revealViewController.setRearViewController(FileUtil.getViewController("MenuView"), animated: true)
+            revealViewController.setFrontViewController(UIUtil.getViewController("MainNavi"), animated: true)
+            revealViewController.setRearViewController(UIUtil.getViewController("MenuView"), animated: true)
             
             let menuViewController = revealViewController.rearViewController as! SideMenuViewController
             menuViewController.repo = self.parentObject

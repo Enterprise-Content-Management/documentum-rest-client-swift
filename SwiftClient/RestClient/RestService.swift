@@ -32,17 +32,6 @@ class RestService {
         return ["Authorization": "Basic " + base64String!]
     }
     
-    private static func getCurrentController() -> UIViewController {
-        let mainNavi = FileUtil.getViewController("MainNavi") as! UINavigationController
-        if let topController = mainNavi.topViewController {
-            while let presentedViewController = topController.presentedViewController {
-                return presentedViewController
-            }
-            return topController
-        }
-        return UIViewController()
-    }
-    
     private static func getPostRequestHeaders() -> [String: String] {
         var headers = self.setPreAuth()
         headers["Content-Type"] = MIME_JSON

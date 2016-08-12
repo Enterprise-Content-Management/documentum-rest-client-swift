@@ -173,14 +173,14 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     private func previewPic(url: String, id: String) {
-        let picViewController = FileUtil.getViewController("PicViewController") as! PreviewViewController
+        let picViewController = UIUtil.getViewController("PicViewController") as! PreviewViewController
         picViewController.downloadUrl = url
         picViewController.objectId = id
         self.navigationController?.pushViewController(picViewController, animated: true)
     }
     
     private func previewFile() {
-        let textViewController = FileUtil.getViewController("FileViewController") as! FileViewController
+        let textViewController = UIUtil.getViewController("FileViewController") as! FileViewController
         textViewController.needPreviewDownload = true
         textViewController.objectUrl = object.getLink(LinkRel.selfRel.rawValue)
         self.navigationController?.pushViewController(textViewController, animated: true)

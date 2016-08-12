@@ -33,6 +33,8 @@ class SysObjectCollectionService : RestCollectionService {
     }
     
     override func getService(pageNo: NSInteger, completionHandler: (NSArray?, Error?) -> ()) {
+        super.getService(pageNo, completionHandler: completionHandler)
+        
         let params: [String: String]!
         if parentObject.getType() == RestObjectType.repository.rawValue {
             params = getCabinetsParam(pageNo)

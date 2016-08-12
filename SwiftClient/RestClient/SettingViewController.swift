@@ -12,10 +12,6 @@ class SettingViewController: UITableViewController {
     @IBOutlet weak var rootCell: InfoItemTableViewCell!
     @IBOutlet weak var contextCell: InfoItemTableViewCell!
     @IBOutlet var isAutoLoginCell: SwitchableTableViewCell!
-
-    let ATTR_ROOTURL = "rooturl"
-    let ATTR_CONTEXT = "context"
-    let ATTR_AUTO = "shouldautologin"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,11 +20,11 @@ class SettingViewController: UITableViewController {
     }
     
     private func setInitialValues() {
-        rootCell.infoValueLabel.text = DbUtil.getValueFromTable(attrName: ATTR_ROOTURL)
+        rootCell.infoValueLabel.text = DbUtil.getValueFromTable(attrName: DbUtil.ATTR_ROOTURL)
         setLabelStyle(rootCell.infoValueLabel)
-        contextCell.infoValueLabel.text = DbUtil.getValueFromTable(attrName: ATTR_CONTEXT)
+        contextCell.infoValueLabel.text = DbUtil.getValueFromTable(attrName: DbUtil.ATTR_CONTEXT)
         setLabelStyle(contextCell.infoValueLabel)
-        let shouldAutoLogin = DbUtil.getValueFromTable(attrName: ATTR_AUTO)! == "true"
+        let shouldAutoLogin = DbUtil.getValueFromTable(attrName: DbUtil.ATTR_AUTO)! == "true"
         isAutoLoginCell.switchItem.setOn(shouldAutoLogin, animated: true)
     }
     
@@ -41,10 +37,13 @@ class SettingViewController: UITableViewController {
     // MARK: - Navigation
     
     @IBAction func onClickSave(sender: UIBarButtonItem) {
-        DbUtil.updateValueFromTable(attrName: ATTR_ROOTURL, attrValue: rootCell.infoValueLabel.text)
-        DbUtil.updateValueFromTable(attrName: ATTR_CONTEXT, attrValue: contextCell.infoValueLabel.text)
+        DbUtil.updateValueFromTable(attrName: DbUtil.ATTR_ROOTURL, attrValue: rootCell.infoValueLabel.text)
+        DbUtil.updateValueFromTable(attrName: DbUtil.ATTR_CONTEXT, attrValue: contextCell.infoValueLabel.text)
         let shouldAutoLogin = isAutoLoginCell.switchItem.on.description
-        DbUtil.updateValueFromTable(attrName: ATTR_AUTO, attrValue: shouldAutoLogin)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        DbUtil.updateValueFromTable(attrName: DbUtil.ATTR_AUTO, attrValue: shouldAutoLogin)
+        self.dismissViewControllerAnimated(true) {
+            let listVC = FileUtil.getTopController() as! ListViewController
+            listVC.reloadData()
+        }
     }
 }
