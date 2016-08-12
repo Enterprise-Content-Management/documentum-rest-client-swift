@@ -38,7 +38,6 @@
 		1E67BCB91D20C88400716A33 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E67BCB81D20C88400716A33 /* ErrorAlert.swift */; };
 		1E82F3811CF4386B001720BE /* JsonUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E82F3801CF4386B001720BE /* JsonUtility.swift */; };
 		1E82F3831CF5AB94001720BE /* AddObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E82F3821CF5AB94001720BE /* AddObjectViewController.swift */; };
-		1E87C2A31D224CEE007B743F /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E87C2A21D224CEE007B743F /* SWRevealViewController.m */; };
 		1E9A6B0D1CAA848F00B97BC0 /* RestUriBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9A6B0C1CAA848F00B97BC0 /* RestUriBuilder.swift */; };
 		1EAB839F1CFE8786002AA4BC /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAB839E1CFE8786002AA4BC /* PreviewViewController.swift */; };
 		1EAB83A51D051AA9002AA4BC /* FilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAB83A41D051AA9002AA4BC /* FilesViewController.swift */; };
@@ -136,9 +135,6 @@
 		1E67BCB81D20C88400716A33 /* ErrorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
 		1E82F3801CF4386B001720BE /* JsonUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonUtility.swift; sourceTree = "<group>"; };
 		1E82F3821CF5AB94001720BE /* AddObjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddObjectViewController.swift; sourceTree = "<group>"; };
-		1E87C2A01D224CEE007B743F /* RestClient-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RestClient-Bridging-Header.h"; sourceTree = "<group>"; };
-		1E87C2A11D224CEE007B743F /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		1E87C2A21D224CEE007B743F /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		1E9A6B0C1CAA848F00B97BC0 /* RestUriBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestUriBuilder.swift; sourceTree = "<group>"; };
 		1EAB839E1CFE8786002AA4BC /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		1EAB83A41D051AA9002AA4BC /* FilesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesViewController.swift; sourceTree = "<group>"; };
@@ -293,7 +289,6 @@
 		1E665C8E1CAA2BB700EF3774 = {
 			isa = PBXGroup;
 			children = (
-				1E87C29F1D224CDF007B743F /* SWReveal */,
 				1E167C581CAA8332000459E3 /* Podfile */,
 				1E665C991CAA2BB700EF3774 /* RestClient */,
 				1E665CAE1CAA2BB700EF3774 /* RestClientTests */,
@@ -363,16 +358,6 @@
 				1EDF74381D23A95B00EB6ADC /* DbUtil.swift */,
 			);
 			name = Utility;
-			sourceTree = "<group>";
-		};
-		1E87C29F1D224CDF007B743F /* SWReveal */ = {
-			isa = PBXGroup;
-			children = (
-				1E87C2A01D224CEE007B743F /* RestClient-Bridging-Header.h */,
-				1E87C2A11D224CEE007B743F /* SWRevealViewController.h */,
-				1E87C2A21D224CEE007B743F /* SWRevealViewController.m */,
-			);
-			name = SWReveal;
 			sourceTree = "<group>";
 		};
 		1E9A6B0B1CAA843300B97BC0 /* Rest */ = {
@@ -687,7 +672,6 @@
 				1EC782F71D139B2100982FA2 /* RestServiceEnhance.swift in Sources */,
 				1E397B7A1D17D020005DB494 /* ActivityIndicatorHelper.swift in Sources */,
 				1E82F3831CF5AB94001720BE /* AddObjectViewController.swift in Sources */,
-				1E87C2A31D224CEE007B743F /* SWRevealViewController.m in Sources */,
 				1E6299DD1CACD5D500A59B47 /* RestObject.swift in Sources */,
 				1E9A6B0D1CAA848F00B97BC0 /* RestUriBuilder.swift in Sources */,
 				1EC2F8F51D20F9660041CEEB /* SideMenuViewController.swift in Sources */,
@@ -856,7 +840,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.emc.RestClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "RestClient-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Pods/SWRevealViewController/SWRevealViewController/RestClient-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -875,7 +859,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.emc.RestClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "RestClient-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Pods/SWRevealViewController/SWRevealViewController/RestClient-Bridging-Header.h";
 			};
 			name = Release;
 		};
