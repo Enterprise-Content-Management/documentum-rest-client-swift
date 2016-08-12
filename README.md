@@ -1,6 +1,8 @@
 Documentum REST iOS Client Samples in Swift
 =========
 
+[![License: Apache 2](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+
 This iOS project contains a reference implementation of Documentum REST Services client written in Swift code. The
 purpose of this project is to demonstrate one way to develop a hypermedia driven REST client to consume Documentum
 REST Services. It does NOT indicate that users could not develop a REST client using other technologies.
@@ -32,24 +34,20 @@ Run below command to install `CocoaPods`.
 ## Build and Run
 1. Download the project into your local workspace.
 
-2. Double click on the project file `RestClient.xcworkspace` to open the project in `cocoapods` project structure.
+2. Open the terminal and navigate to the project directory which contains the file `Podfile`. 
+>  $ cd documentum-rest-client-swift/SwiftClient
 
-3. Open the terminal and navigate to the project directory which contains the file `Podfile`.
-```sh
- $ cd documentum-rest-client-swift/SwiftClient
-```
+3. Run below command to install all dependency libraries for this project.
+>  $ pod install
 
-4. Run below command to install all dependency libraries for this project.
-```sh
- $ pod install
-```
+4. Double click on the project file `RestClient.xcworkspace` to open the project as `cocoapods` project structure.
 
-5. Find the configuration file `database.db` under location `documentum-rest-client-swift/SwiftClient`. It contains the
-default connection parameters for Documentum REST Services access. You can change the default values to accommodate to your
-Documentum REST Services deployment. Of course, you can also manually fill the connection parameters in the test launcher.
+5. Find the configuration file `database.db` under location `documentum-rest-client-swift/SwiftClient`. 
+  * It contains the default connection parameters for Documentum REST Services access. 
+  * You can change the default values to accommodate to your Documentum REST Services deployment. 
+  * You can also manually fill the connection parameters in the test launcher.
 
-6. Build the project with **Xcode**.
-	* Click the Build button or press `⌘R` on **Xcode** IDE to launch the test.
+6. Build the project with **Xcode** by clicking the **Build** button or pressing **⌘R** on the IDE to launch the test.
 
 ## Demo
 
