@@ -44,16 +44,11 @@ Run below command to install `CocoaPods`.
  $ pod install
 ```
 
-5. Copy the bridging file to right place to build bridge between Object-C and Swift.
-```sh
- $ cp RestClient-Bridging-Header.h Pods/SWRevealViewController/SWRevealViewController/
-```
-
-6. Find the configuration file `database.db` under location `documentum-rest-client-swift/SwiftClient`. It contains the
+5. Find the configuration file `database.db` under location `documentum-rest-client-swift/SwiftClient`. It contains the
 default connection parameters for Documentum REST Services access. You can change the default values to accommodate to your
 Documentum REST Services deployment. Of course, you can also manually fill the connection parameters in the test launcher.
 
-7. Build the project with **Xcode**.
+6. Build the project with **Xcode**.
 	* Click the Build button or press `⌘R` on **Xcode** IDE to launch the test.
 
 ## Demo

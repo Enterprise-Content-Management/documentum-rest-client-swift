@@ -840,7 +840,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.emc.RestClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Pods/SWRevealViewController/SWRevealViewController/RestClient-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "RestClient-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -859,7 +859,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.emc.RestClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Pods/SWRevealViewController/SWRevealViewController/RestClient-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "RestClient-Bridging-Header.h";
 			};
 			name = Release;
 		};
