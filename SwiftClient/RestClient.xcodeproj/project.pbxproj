@@ -38,6 +38,7 @@
 		1E67BCB91D20C88400716A33 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E67BCB81D20C88400716A33 /* ErrorAlert.swift */; };
 		1E82F3811CF4386B001720BE /* JsonUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E82F3801CF4386B001720BE /* JsonUtility.swift */; };
 		1E82F3831CF5AB94001720BE /* AddObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E82F3821CF5AB94001720BE /* AddObjectViewController.swift */; };
+		1E96A6B31D5DBF97008CEB47 /* UIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96A6B21D5DBF97008CEB47 /* UIUtil.swift */; };
 		1E9A6B0D1CAA848F00B97BC0 /* RestUriBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9A6B0C1CAA848F00B97BC0 /* RestUriBuilder.swift */; };
 		1EAB839F1CFE8786002AA4BC /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAB839E1CFE8786002AA4BC /* PreviewViewController.swift */; };
 		1EAB83A51D051AA9002AA4BC /* FilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAB83A41D051AA9002AA4BC /* FilesViewController.swift */; };
@@ -135,6 +136,7 @@
 		1E67BCB81D20C88400716A33 /* ErrorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
 		1E82F3801CF4386B001720BE /* JsonUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonUtility.swift; sourceTree = "<group>"; };
 		1E82F3821CF5AB94001720BE /* AddObjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddObjectViewController.swift; sourceTree = "<group>"; };
+		1E96A6B21D5DBF97008CEB47 /* UIUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtil.swift; sourceTree = "<group>"; };
 		1E9A6B0C1CAA848F00B97BC0 /* RestUriBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestUriBuilder.swift; sourceTree = "<group>"; };
 		1EAB839E1CFE8786002AA4BC /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		1EAB83A41D051AA9002AA4BC /* FilesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesViewController.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				1E82F3801CF4386B001720BE /* JsonUtility.swift */,
 				1EAB83AC1D056B79002AA4BC /* FileUtil.swift */,
 				1EDF74381D23A95B00EB6ADC /* DbUtil.swift */,
+				1E96A6B21D5DBF97008CEB47 /* UIUtil.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -675,6 +678,7 @@
 				1E6299DD1CACD5D500A59B47 /* RestObject.swift in Sources */,
 				1E9A6B0D1CAA848F00B97BC0 /* RestUriBuilder.swift in Sources */,
 				1EC2F8F51D20F9660041CEEB /* SideMenuViewController.swift in Sources */,
+				1E96A6B31D5DBF97008CEB47 /* UIUtil.swift in Sources */,
 				1ED776021D25079F0039CDA4 /* User.swift in Sources */,
 				1E6299D01CABB08100A59B47 /* RepositoryCollectionService.swift in Sources */,
 				1E665C9B1CAA2BB700EF3774 /* AppDelegate.swift in Sources */,

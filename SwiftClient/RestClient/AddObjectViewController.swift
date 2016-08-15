@@ -57,7 +57,7 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
         aiHelper.startActivityIndicator()
         let type = typePickData![picker.selectedRowInComponent(0)]
 
-        if isUploadable {
+        if isUploadable && chosenData != nil {
             let url = updatePostUrl()
             let json = JsonUtility.getUploadRequestBodyJson(attrDic)
             RestService.uploadFile(
