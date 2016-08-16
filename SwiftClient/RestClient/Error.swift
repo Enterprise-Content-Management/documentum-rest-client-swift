@@ -16,6 +16,14 @@ class Error {
     var details: String!
     var id: String!
     
+    init(msg: String, detail: String = "nothing") {
+        status = 400
+        errorCode = "E_ERROR"
+        message = msg
+        details = detail
+        id = "ID"
+    }
+    
     init(json: JSON) {
         status = json["status"].intValue
         errorCode = json["code"].stringValue

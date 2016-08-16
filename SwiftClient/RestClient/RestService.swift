@@ -261,12 +261,13 @@ class RestService {
     static func downloadFile(
         url: String,
         objectId: String,
-        completionHandler: (NSData?, NSError?) -> ()
+        completionHandler: (NSData?, Error?) -> ()
         ) {
         var fileUrl: NSURL?
         Alamofire.download(
         .GET, url,
-        headers: self.getDownloadRequestHeaders()) { temporaryUrl, response in
+        headers: self.getDownloadRequestHeaders()
+        ) { temporaryUrl, response in
             fileUrl = FileUtil.getSaveToUrl(objectId)
             FileUtil.deleteFile(objectId)
 
@@ -275,8 +276,9 @@ class RestService {
         }
             .response { request, response, data, error in
                 if let error = error {
+                    let e = Error(msg: "Please check if this content server is recognizable by this device.")
                     print("Failed with error:\(error).")
-                    completionHandler(nil, error)
+                    completionHandler(nil, e)
                 } else {
                     print("Downloaded file successfully.")
                     completionHandler(NSData(contentsOfURL: fileUrl!), nil)

@@ -47,6 +47,10 @@ class PreviewViewController: UIViewController {
     
     private func downloadPicFromUrl(url: String) {
         RestService.downloadFile(url, objectId: self.objectId!) { data, error in
+            if let e = error {
+                ErrorAlert.show(e.message, controller: self)
+                return
+            }
             if let d = data {
                 // set picture to a new one
                 dispatch_async(dispatch_get_main_queue(), {
