@@ -42,8 +42,26 @@ class SettingViewController: UITableViewController {
         let shouldAutoLogin = isAutoLoginCell.switchItem.on.description
         DbUtil.updateValueFromTable(attrName: DbUtil.ATTR_AUTO, attrValue: shouldAutoLogin)
         self.dismissViewControllerAnimated(true) {
-            let listVC = FileUtil.getTopController() as! ListViewController
-            listVC.reloadData()
+            let topViewController = UIUtil.getTopController()
+            if  topViewController is RepoViewController {
+                let repoViewController = topViewController as! RepoViewController
+                repoViewController.reloadData()
+            } else if topViewController is SysObjectViewController {
+                let navigationViewController = topViewController!.navigationController! as UINavigationController
+                let revealViewController = navigationViewController.revealViewController() as SWRevealViewController
+                revealViewController.navigationController!.setNavigationBarHidden(false, animated: true)
+                revealViewController.navigationController!.popViewControllerAnimated(true)
+                let loginViewController = UIUtil.getTopController() as! LoginViewController
+                let anotherNavigationViewController = loginViewController.navigationController! as UINavigationController
+                anotherNavigationViewController.popToRootViewControllerAnimated(true)
+                let VCs = anotherNavigationViewController.viewControllers
+                for vc in VCs {
+                    if vc is RepoViewController {
+                        let repoViewController = vc as! RepoViewController
+                        repoViewController.reloadData()
+                    }
+                }
+            }
         }
     }
 }

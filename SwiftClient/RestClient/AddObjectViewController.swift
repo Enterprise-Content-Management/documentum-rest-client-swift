@@ -75,6 +75,11 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
                     print("Successfully create a new \(type).")
                     self.goBackAndRefresh()
                 }
+                if let error = error {
+                    let errorMsg = error.message
+                    ErrorAlert.show(errorMsg, controller: self)
+                    return
+                }
             }
         }
     }

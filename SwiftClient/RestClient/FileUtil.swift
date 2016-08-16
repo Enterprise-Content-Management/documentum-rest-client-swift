@@ -48,18 +48,4 @@ class FileUtil {
         let pathComponent = objectId
         return directoryUrl.URLByAppendingPathComponent(pathComponent)
     }
-    
-    static func getTopController() -> UIViewController? {
-        var rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
-        while (rootViewController is SWRevealViewController || rootViewController is UINavigationController) {
-            if rootViewController is SWRevealViewController {
-                let swRevealVC = rootViewController as! SWRevealViewController
-                rootViewController = swRevealVC.frontViewController
-            } else {
-                let naviVC = rootViewController as! UINavigationController
-                rootViewController = naviVC.topViewController
-            }
-        }
-        return rootViewController
-    }
 }
