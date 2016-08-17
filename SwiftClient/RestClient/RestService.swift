@@ -276,7 +276,11 @@ class RestService {
         }
             .response { request, response, data, error in
                 if let error = error {
-                    let e = Error(msg: "Please check if this content server is recognizable by this device.")
+                    let userInfo = error.userInfo as [NSObject: AnyObject]
+                    let url = userInfo["NSErrorFailingURLStringKey"] as! String
+                    let parts = url.characters.split("/").map(String.init)
+                    let hostname = parts[1].characters.split(":").map(String.init)[0]
+                    let e = Error(msg: "A server with the specified hostname '\(hostname)' could not be recognizable by this device.")
                     print("Failed with error:\(error).")
                     completionHandler(nil, e)
                 } else {
