@@ -29,12 +29,14 @@ class RestObject {
         let id = getLink("self")
         basic["id"] = id
         let props = dic["properties"] as! NSDictionary
-        basic["type"] = props["r_object_type"] as? String
+        if let type = props["r_object_type"] as? String {
+            basic["type"] = RestObject.getShowType(type)
+        }
         basic["name"] = props["object_name"] as? String
     }
     
     func setType(type: String) {
-        basic["type"] = type
+        basic["type"] = RestObject.getShowType(type)
     }
     
     func getName() -> String {
@@ -49,6 +51,10 @@ class RestObject {
         return basic["type"]!
     }
     
+    func getNameWithType() -> String {
+        return basic["type"]! + " " + basic["name"]!
+    }
+    
     func setLink(rel: String, href: String) -> Dictionary<String, String> {
         links[rel] = href
         return links
@@ -60,6 +66,13 @@ class RestObject {
     
     func getRawId() -> String {
         let idArray = getId().characters.split("/").map(String.init)
+        let last = idArray.count - 1
+        return idArray[last]
+    }
+    
+    func getRawParentID() -> String {
+        let parentLink = getLink(LinkRel.parent.rawValue)!
+        let idArray = parentLink.characters.split("/").map(String.init)
         let last = idArray.count - 1
         return idArray[last]
     }
@@ -81,14 +94,29 @@ class RestObject {
             }
         }
     }
+    
+    static func getShowType(type: String) -> String {
+        switch type {
+            case "Repository": return RestObjectType.repository.rawValue
+            case "dm_cabinet": return RestObjectType.cabinet.rawValue
+            case "dm_folder": return RestObjectType.folder.rawValue
+            case "dm_document": return RestObjectType.document.rawValue
+            case "dm_sysobject": return RestObjectType.sysObject.rawValue
+            case "dm_group": return RestObjectType.group.rawValue
+            case "dm_user": return RestObjectType.user.rawValue
+            default: return RestObjectType.sysObject.rawValue
+        }
+    }
 }
 
 
 enum RestObjectType : String {
     case repository = "Repository"
-    case document = "dm_document"
-    case folder = "dm_folder"
-    case cabinet = "dm_cabinet"
-    case sysObject = "dm_sysobject"
+    case document = "Document"
+    case folder = "Folder"
+    case cabinet = "Cabinet"
+    case sysObject = "Sysobject"
+    case group = "Group"
+    case user = "User"
 }
 

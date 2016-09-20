@@ -20,10 +20,9 @@ class RestService {
     static let MIME_JPEG = "image/jpeg"
     static let MIME_TEXT = "text/plain"
     
-    // Navigation: - Util
+    // MARK: - Util
     
     private static func setPreAuth(plainString: NSString = RestUriBuilder.getCurrentLoginAuthString()) -> [String : String] {
-        print("plainString: \(plainString)")
         let plainData = plainString.dataUsingEncoding(NSUTF8StringEncoding)
         let base64String = plainData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
         Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders = [
@@ -49,9 +48,9 @@ class RestService {
         return headers
     }
     
-    // Navigation: - Basic request
+    // MARK: - Basic request
     
-    static func sendRequest(
+    private static func sendRequest(
         method: Alamofire.Method,
         url: String,
         params: Dictionary<String, AnyObject>? = nil,
@@ -66,8 +65,10 @@ class RestService {
                 switch response.result {
                 case .Success:
                     print("Success request to \(url)")
-                    let json = JSON(response.result.value!)
-                    onSuccess(json)
+                    if let value = response.result.value {
+                        let json = JSON(value)
+                        onSuccess(json)
+                    }
                 case .Failure:
                     let json = JSON(data: response.data!)
                     print("error: \(json)")
@@ -76,7 +77,7 @@ class RestService {
         }
     }
 
-    // Navigation: - Entity Collection request
+    // MARK: - Entity Collection request
     
     private static func getEntriesOnSuccess(json: JSON, completionHandler: (NSArray?, Error?) -> ()) {
         let dictionary = json.object as! Dictionary<String, AnyObject>
@@ -109,7 +110,7 @@ class RestService {
         })
     }
     
-    // Navigation: - Singel Entity request
+    // MARK: - Single Entity request
     
     private static func getEntityOnSuccess(json: JSON, completionHandler: (RestObject?, Error?) -> ()) {
         let dictionary = json.object as! Dictionary<String, AnyObject>
@@ -146,15 +147,15 @@ class RestService {
     
     static func getUser(url: String, completionHandler: (User?, Error?) -> ()) {
         sendRequest(.GET, url: url, headers: self.setPreAuth(),
-                    onSuccess: { json in
-                        getUserOnSuccess(json, completionHandler: completionHandler)
+                onSuccess: { json in
+                getUserOnSuccess(json, completionHandler: completionHandler)
             },
-                    onFailure: { json in
-                        processFailureJson(json, completionHandler: completionHandler)
+                onFailure: { json in
+                processFailureJson(json, completionHandler: completionHandler)
         })
     }
     
-    // Navigation: - CRUD control requests
+    // MARK: - CRUD control requests
     
     private static func getStringOnSuccess(message: String, completionHandler: (String?, Error?) -> ()) {
         completionHandler(message, nil)
@@ -221,7 +222,7 @@ class RestService {
             })
     }
     
-    // Navigation: - Upload and Downlad files
+    // MARK: - Upload and Downlad files
     static func uploadFile(
         url: String,
         metadata: JSON,
@@ -313,8 +314,70 @@ class RestService {
                 }
         }
     }
+    
+    // MARK: - Misc control
+    static func moveObject(
+        url: String,
+        requestBody: Dictionary<String, AnyObject>,
+        completionHandler: (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(.PUT, url, parameters: requestBody, headers: self.getPostRequestHeaders(), encoding: .JSON)
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .Success:
+                    print("Success move to \(url).")
+                    let json = JSON(response.result.value!)
+                    completionHandler(json.object as? NSDictionary, nil)
+                case .Failure:
+                    let json = JSON(data: response.data!)
+                    print("error: \(json)")
+                    let error = Error(json: json)
+                    completionHandler(nil, error)
+                }
+        }
+    }
+    
+    // MARK: - Response with no content
+    private static func sendRequestForResponse(
+        method: Alamofire.Method,
+        url: String,
+        params: Dictionary<String, AnyObject>? = nil,
+        headers: [String: String]? = nil,
+        encoding: ParameterEncoding = .URL,
+        onResponse: (String) -> ()
+        ) {
+        Alamofire.request(method, url, parameters: params, headers: headers, encoding: encoding)
+            .validate()
+            .response { request, response, data, error in
+                let statusCode = response!.statusCode as Int
+                let result: String!
+                if error != nil {
+                    let json = JSON(data: data!)
+                    print("error: \(json)")
+                    let e = json.object as! NSDictionary
+                    result = e["message"] as! String
+                } else {
+                    print("Success request to \(url) with status code \(statusCode)")
+                    result = "Success"
+                }
+                onResponse(result)
+        }
+    }
+    
+    static func addMembership(
+        url: String,
+        requestBody: Dictionary<String, AnyObject>,
+        completionHandler: (String?, Error?) -> ()) {
+        sendRequestForResponse(.POST, url: url, params: requestBody, headers: self.getPostRequestHeaders(), encoding: .JSON) { result in
+            if result == "Success" {
+                completionHandler("Success", nil)
+            } else {
+                completionHandler(nil, Error(msg: result))
+            }
+        }
+    }
 
-    // Navigation: - Helper
+    // MARK: - Helper
     
     private static func getNSDataFromNSDictionary(dic: NSDictionary) -> NSData {
         let data = NSKeyedArchiver.archivedDataWithRootObject(dic)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate {
+class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
 
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet var footView: UILabel!
@@ -16,7 +16,11 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate {
     var parentObject: RestObject?
     var thisUrl: String?
     
-    var addableTypes = ["dm_cabinet", "dm_folder", "dm_document"]
+    var addableTypes = [
+        RestObjectType.cabinet.rawValue,
+        RestObjectType.folder.rawValue,
+        RestObjectType.document.rawValue
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +29,6 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate {
         setFootViewWithAi(footView)
         
         self.loadData()
-        print("this url: \(thisUrl!)")
         
         // Set side menu toggle
         if self.revealViewController() != nil {
@@ -153,5 +156,118 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate {
             addObjectViewController.postUrl = thisUrl!
         }
     }
+    
+    // MARK: - Button control
+    @IBAction func onClickMore(sender: UIBarButtonItem) {
+        popUpMenu(sender)
+    }
+    
+    // MARK: Shift control & Action sheet
+    // Handle shift operation on single item
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let type = objects[indexPath.row].getType()
+        if type == RestObjectType.sysObject.rawValue ||
+            (type == RestObjectType.cabinet.rawValue && Context.clickBoard == nil) {
+            return super.tableView(tableView, editActionsForRowAtIndexPath: indexPath)
+        }
+        let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { action, indexPath in
+            self.showAlert(indexPath, type: self.objects[indexPath.row].getType(), name: self.objects[indexPath.row].getName())
+            tableView.setEditing(false, animated: false)
+        }
+        let moreAction = UITableViewRowAction(style: .Default, title: "More") { action, indexPath in
+            self.showMoreActionSheet(indexPath)
+            tableView.setEditing(false, animated: false)
+        }
+        moreAction.backgroundColor = UIColor.lightGrayColor()
+        
+        deleteAction.backgroundColor = UIColor.redColor()
+        return [deleteAction, moreAction]
+    }
+    
+    internal func showMoreActionSheet(indexPath: NSIndexPath) {
+        let object = objects[indexPath.row]
+        let actionSheet = UIAlertController(
+            title: "More...",
+            message: "What do you want to do with this object?",
+            preferredStyle:  .ActionSheet
+        )
+        if object.getType() != RestObjectType.cabinet.rawValue {
+            let addToClickboardAction = UIAlertAction(title: "Add To Clickboard", style: .Default) { (action: UIAlertAction!) in
+                self.addToClickboard(object)
+            }
+            actionSheet.addAction(addToClickboardAction)
+        }
+        
+        if object.getType() != RestObjectType.document.rawValue && Context.clickBoard != nil {
+            let copyHere = UIAlertAction(title: "Copy Here", style: .Default) { (action: UIAlertAction!) in
+                self.copyHere(object)
+            }
+            actionSheet.addAction(copyHere)
+            let moveHere = UIAlertAction(title: "Move Here", style: .Default) { (action: UIAlertAction!) in
+                self.moveHere(object)
+            }
+            actionSheet.addAction(moveHere)
+            let linkHere = UIAlertAction(title: "Link Here", style: .Default) { (action: UIAlertAction!) in
+                self.linkHere(object)
+            }
+            actionSheet.addAction(linkHere)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        actionSheet.addAction(cancelAction)
 
+        presentViewController(actionSheet, animated: true, completion: nil)
+    }
+    
+    private func addToClickboard(object: RestObject) {
+        Context.clickBoard = object
+        print("Add \(object.getNameWithType()) to clickboard.")
+    }
+    
+    private func copyHere(object: RestObject) {
+        print("** Copy \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
+    }
+    
+    private func moveHere(object: RestObject) {
+        print("Move \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
+        
+        MiscService.moveTo(object, thiscontroller: self) {
+            self.refreshData()
+        }
+    }
+    
+    private func linkHere(object: RestObject) {
+        print("** Link \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
+    }
+    
+    // - MARK: Popover control
+    
+    func popUpMenu(sender: UIBarButtonItem) {
+        let menuView = UIUtil.getViewController("SysObjectMoreMenu") as! PopOverMenuForSysObjectController
+        menuView.preferredContentSize = CGSizeMake(120, 44)
+        menuView.modalPresentationStyle = .Popover
+        menuView.parentObject = parentObject!
+        
+        let popOverPresentationController = menuView.popoverPresentationController!
+        popOverPresentationController.barButtonItem = sender
+        popOverPresentationController.permittedArrowDirections = .Any
+        popOverPresentationController.delegate = self
+        
+        presentViewController(menuView, animated: true, completion: nil)
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.None
+    }
+    
+    func presentationController(controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
+        let navigationController = UINavigationController(rootViewController: controller.presentedViewController)
+        let buttonDone = UIBarButtonItem(title: "Done", style: .Done, target: self, action: #selector(SysObjectViewController.dismissPopOver))
+        navigationController.topViewController!.navigationItem.rightBarButtonItem = buttonDone
+        return navigationController
+    }
+    
+    func dismissPopOver() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }

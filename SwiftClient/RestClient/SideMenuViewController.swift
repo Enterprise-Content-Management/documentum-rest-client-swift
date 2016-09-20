@@ -9,7 +9,8 @@
 import UIKit
 
 class SideMenuViewController: UITableViewController {
-    var repo: RestObject!
+    
+    var currentUser: User!
     
     let logoutIndex = NSIndexPath(forRow: 1, inSection: 0)
 
@@ -17,6 +18,47 @@ class SideMenuViewController: UITableViewController {
         super.awakeFromNib()
         self.preferredContentSize = CGSize(width: 250, height: 600)
     }
+    
+    // MARK: - Admin controll
+    
+    private func showGroupControll() -> Bool {
+        if currentUser != nil {
+            let userPrivileges = currentUser.getProperty("user_privileges")!
+            return Int(userPrivileges)! >= 8
+        } else {
+            return false
+        }
+    }
+    
+    private func hideGroupSection(section: Int) -> Bool {
+        return !showGroupControll() && section == 2
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if hideGroupSection(section) {
+            return 0.0
+        } else {
+            return super.tableView(tableView, heightForHeaderInSection: section)
+        }
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if hideGroupSection(section) {
+            return nil
+        } else {
+            return super.tableView(tableView, titleForHeaderInSection: section)
+        }
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if hideGroupSection(section) {
+            return 0;
+        } else {
+            return super.tableView(tableView, numberOfRowsInSection: section)
+        }
+    }
+
+    // MARK: - Table view control
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -39,8 +81,17 @@ class SideMenuViewController: UITableViewController {
         if segue.identifier == "ShowProfile" {
             let naviVC = segue.destinationViewController as! UINavigationController
             let profileViewController = naviVC.topViewController as! ProfileViewController
-            profileViewController.userUrl = repo.getLink(LinkRel.currentUser.rawValue)
+            profileViewController.userUrl = Context.repo.getLink(LinkRel.currentUser.rawValue)
+        } else if segue.identifier == "ShowGroups" {
+            let naviCV = segue.destinationViewController as! UINavigationController
+            let groupsViewController = naviCV.topViewController as! MembersViewController
+            groupsViewController.groupsUrl = Context.repo.getLink(LinkRel.groups.rawValue)
+            groupsViewController.navigationItem.title = "Groups Management"
+        } else if segue.identifier == "ShowUsers" {
+            let naviCV = segue.destinationViewController as! UINavigationController
+            let usersViewController = naviCV.topViewController as! MembersViewController
+            usersViewController.groupsUrl = Context.repo.getLink(LinkRel.users.rawValue)
+            usersViewController.navigationItem.title = "Users Management"
         }
     }
-    
 }

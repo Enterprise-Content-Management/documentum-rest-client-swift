@@ -147,6 +147,9 @@ class FileViewController: UIViewController {
     }
     
     // MARK: - Button control
+    @IBAction func onClickEdit(sender: UIBarButtonItem) {
+        setTextEnable(true)
+    }
     
     @IBAction func onClickSave(sender: UIBarButtonItem) {
         if needPreviewDownload {

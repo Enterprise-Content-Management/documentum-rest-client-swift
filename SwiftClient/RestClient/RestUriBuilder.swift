@@ -65,6 +65,11 @@ enum LinkRel: String {
     case checkinMinor = "http://identifiers.emc.com/linkrel/checkin-next-minor"
     case parent = "parent"
     case currentUser = "http://identifiers.emc.com/linkrel/current-user"
+    case groups = "http://identifiers.emc.com/linkrel/groups"
+    case users = "http://identifiers.emc.com/linkrel/users"
+    case batches = "http://identifiers.emc.com/linkrel/batches"
+    case removeMember = "removeMember"
+    case parentLinks = "http://identifiers.emc.com/linkrel/parent-links"
     
     static func getLink(linkRel: String, links: NSArray) -> String? {
         var downloadUrl: String?
@@ -75,5 +80,9 @@ enum LinkRel: String {
             }
         }
         return downloadUrl
+    }
+
+    static func parentLinkTitle(parent: String, child: String) -> String {
+        return "Folder link between child \(child) and parent \(parent)"
     }
 }

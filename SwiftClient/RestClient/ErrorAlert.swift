@@ -10,7 +10,7 @@ import UIKit
 
 class ErrorAlert {
     
-    static func show(msg: String, controller: UIViewController) {
+    static func show(msg: String, controller: UIViewController, dismissViewController: Bool = true) {
         let alertController = UIAlertController(
             title: "Error Alert",
             message: msg,
@@ -18,7 +18,9 @@ class ErrorAlert {
         alertController.addAction(UIAlertAction(
             title: "Dismiss",
             style: .Default) { UIAlertAction in
-                dismissThisViewController(controller)
+                if dismissViewController {
+                    dismissThisViewController(controller)
+                }
             }
         )
         controller.presentViewController(alertController, animated: true, completion: nil)

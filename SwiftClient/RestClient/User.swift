@@ -23,10 +23,14 @@ class User: RestObject {
             }
             self.properties[key] = value as? String
         }
-        setType("dm_user")
+        setType(RestObjectType.user.rawValue)
     }
     
     override func getName() -> String {
         return properties["user_name"]!
+    }
+    
+    func getProperty(propertyName: String) -> String? {
+        return properties[propertyName]
     }
 }

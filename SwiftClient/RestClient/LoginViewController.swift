@@ -16,8 +16,6 @@ class LoginViewController : UIViewController {
     @IBOutlet var isAutoLogin: CheckBox!
     @IBOutlet var isRemember: CheckBox!
     
-    var parentObject: RestObject!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -72,10 +70,39 @@ class LoginViewController : UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepareForSegue(segue, sender: sender)
         
+        recordLoginPreferences()
+        handleUserLoginInfo()
+        
+        if segue.identifier == "SuccessLogin" {
+            self.navigationController?.navigationBarHidden = true
+            
+            let revealViewController = segue.destinationViewController as! SWRevealViewController
+            revealViewController.setFrontViewController(UIUtil.getViewController("MainNavi"), animated: true)
+            revealViewController.setRearViewController(UIUtil.getViewController("MenuView"), animated: true)
+            
+            let menuViewController = revealViewController.rearViewController as! SideMenuViewController
+            let naviViewController = revealViewController.frontViewController as! UINavigationController
+            let cabinetViewController = naviViewController.viewControllers.first as! SysObjectViewController
+            cabinetViewController.parentObject = Context.repo
+
+            let currentUserUrl = Context.repo.getLink(LinkRel.currentUser.rawValue)!
+            RestService.getUser(currentUserUrl) { object, error in
+                if let user = object {
+                    menuViewController.currentUser = user
+                    print("Successfully Log into REPOSITORY \(Context.repo.getName()) as USER \(user.getName()) with priviledge \(user.getProperty("user_privileges")!).")
+                }
+            }
+        }
+    }
+    
+    private func recordLoginPreferences() {
         let shouldRemember = isRemember.isChecked.description
         let shouldAuto = isAutoLogin.isChecked.description
         DbUtil.updateValueFromTable(attrName: DbUtil.ATTR_REMEMBER, attrValue: shouldRemember)
         DbUtil.updateValueFromTable(attrName: DbUtil.ATTR_AUTO, attrValue: shouldAuto)
+    }
+    
+    private func handleUserLoginInfo() {
         if isRemember.isChecked {
             DbUtil.updateValueFromTable(attrName: DbUtil.ATTR_USERNAME, attrValue: userNameTextField.text!)
             DbUtil.updateValueFromTable(attrName: DbUtil.ATTR_PASSWORD, attrValue: passwordTextField.text!)
@@ -87,21 +114,5 @@ class LoginViewController : UIViewController {
         RestUriBuilder.currentLoginCredential.password = passwordTextField.text!.stringByTrimmingCharactersInSet(
             NSCharacterSet.whitespaceAndNewlineCharacterSet()
         )
-        
-        if segue.identifier == "SuccessLogin" {
-            self.navigationController?.navigationBarHidden = true
-            
-            let revealViewController = segue.destinationViewController as! SWRevealViewController
-            revealViewController.setFrontViewController(UIUtil.getViewController("MainNavi"), animated: true)
-            revealViewController.setRearViewController(UIUtil.getViewController("MenuView"), animated: true)
-            
-            let menuViewController = revealViewController.rearViewController as! SideMenuViewController
-            menuViewController.repo = self.parentObject
-            let naviViewController = revealViewController.frontViewController as! UINavigationController
-            let cabinetViewController = naviViewController.viewControllers.first as! SysObjectViewController
-            cabinetViewController.parentObject = self.parentObject
-            
-            print("Successfully Log into REPOSITORY \(parentObject.getName()).")
-        }
     }
 }

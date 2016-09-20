@@ -51,7 +51,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         if downloadUrl == nil {
-            if object.getType() == "dm_document" {
+            if object.getType() == RestObjectType.document.rawValue {
                 // Set for preview button
                 RestServiceEnhance.getDownloadUrl(object!) { url, properties, links in
                     self.downloadUrl = url
@@ -96,13 +96,14 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         basicArray.append(getBasicPair("type"))
         basicArray.append(getBasicPair("name"))
         info.append(("Basic", basicArray))
-        
-        let linkDic = object?.links
-        var linkArray = [] as Array<(String, String)>
-        for link in linkDic! {
-            linkArray.append((RestObject.getRawLinkRel(link.0), link.1))
-        }
-        info.append(("Links", linkArray))
+
+        // Unshown links
+//        let linkDic = object?.links
+//        var linkArray = [] as Array<(String, String)>
+//        for link in linkDic! {
+//            linkArray.append((RestObject.getRawLinkRel(link.0), link.1))
+//        }
+//        info.append(("Links", linkArray))
     }
     
     private func getBasicPair(key: String) -> (String, String) {

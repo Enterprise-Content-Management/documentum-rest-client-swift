@@ -35,6 +35,7 @@ class RestCollectionService {
             let root = rootUrl?.characters.split("/").map(String.init)
             let context = DbUtil.getValueFromTable(attrName: DbUtil.ATTR_CONTEXT)
             var strings = url.characters.split("/").map(String.init)
+            strings[0] += "/"
             strings[1] = root![1]
             strings[2] = (context! as NSString).substringFromIndex(1)
             url = strings.joinWithSeparator("/")
@@ -45,7 +46,6 @@ class RestCollectionService {
         getLatestUrl()
     }
     
-    // TODO: Add error control when get error
     func getEntries(
         pageNo: NSInteger,
         thisViewController: UIViewController,
@@ -82,5 +82,16 @@ class RestCollectionService {
         restObject.constructLinks(links)
         
         return restObject
+    }
+    
+    internal func getContent(dic: Dictionary<String, AnyObject>, contentName: String) -> AnyObject {
+        let content = dic["content"] as! Dictionary<String, AnyObject>
+        return content[contentName]!
+    }
+    
+    internal func getProperty(dic: Dictionary<String, AnyObject>, propertyName: String) -> String {
+        let properties = getContent(dic, contentName: "properties")
+        let property = properties[propertyName] as! String
+        return property
     }
 }

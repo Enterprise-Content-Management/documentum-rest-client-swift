@@ -55,6 +55,7 @@ class ListViewController: UITableViewController, UISearchResultsUpdating {
     }
     
     internal func reloadData() {
+        page = 1
         clearAll()
         loadData()
         self.tableView.reloadData()
@@ -193,25 +194,31 @@ class ListViewController: UITableViewController, UISearchResultsUpdating {
         }
     }
     
-    private func setFootViewText(num: NSInteger) {
+    internal func setFootViewText(num: NSInteger) {
         let label = tableView.tableFooterView! as! UILabel
         label.text = "- \(num) objects in total -"
     }
 
     // Handle shift operation on single item
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        // Shift to left means deleting this item
-        if editingStyle == .Delete {
-            showAlert(indexPath, type: objects[indexPath.row].getType(), name: objects[indexPath.row].getName())
-            // Shift back to recovery this selected cell
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { action, indexPath in
+            self.showAlert(indexPath, type: self.objects[indexPath.row].getType(), name: self.objects[indexPath.row].getName())
             tableView.setEditing(false, animated: false)
         }
+        deleteAction.backgroundColor = UIColor.redColor()
+        return [deleteAction]
     }
     
-    private func showAlert(indexPath: NSIndexPath, type: String, name: String) {
+    internal func showAlert(indexPath: NSIndexPath, type: String, name: String, message: String = "") {
+        let showingMessage: String
+        if message.isEmpty {
+            showingMessage = "Are you sure to delete this \(type.lowercaseString) named \(name)"
+        } else {
+            showingMessage = message
+        }
         let alertController = UIAlertController(
             title: "Delete Warning",
-            message: "Are you sure to delete this \(type.lowercaseString) named \(name)",
+            message: showingMessage,
             preferredStyle: .Alert)
         
         let cancelAction = UIAlertAction(title: "Cancle", style: .Cancel) { (action: UIAlertAction!) in
@@ -227,7 +234,7 @@ class ListViewController: UITableViewController, UISearchResultsUpdating {
         presentViewController(alertController, animated: true, completion: nil)
     }
     
-    private func doDelete(indexPath: NSIndexPath) {
+    internal func doDelete(indexPath: NSIndexPath) {
         aiHelper.startActivityIndicator()
         let object = objects[indexPath.row] as RestObject
         let objectFullName = "\(objects[indexPath.row].getType()) \(objects[indexPath.row].getName())"
@@ -243,7 +250,9 @@ class ListViewController: UITableViewController, UISearchResultsUpdating {
         }
         
         print("Delete \(objectFullName) from list.")
-        items.removeAtIndex(indexPath.row)
+        if !items.isEmpty {
+            items.removeAtIndex(indexPath.row)
+        }
         objects.removeAtIndex(indexPath.row)
         setFootViewText(objects.count)
         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)

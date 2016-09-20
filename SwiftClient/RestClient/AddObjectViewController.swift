@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import CoreLocation
 
+// TODO: Location service
 class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource,
-    UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate
+    UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate /*, CLLocationManagerDelegate*/
 {
     var postUrl: String?
     
-    var typePickData: [String]?
     let imagePickController: UIImagePickerController = UIImagePickerController()
+//    let locationManager: CLLocationManager = CLLocationManager()
+    
+    var typePickData: [String]?
     var chosenData: NSData? // Really used for upload
     var chosenType: String?
     var isUploadable: Bool = false
@@ -36,6 +40,10 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
         picker.delegate = self
         imagePickController.delegate = self
         imagePickController.allowsEditing = true
+//        locationManager.delegate = self
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        locationManager.requestWhenInUseAuthorization()
+//        locationManager.startUpdatingLocation()
         
         aiHelper.addActivityIndicator(self.view)
         view.bringSubviewToFront(tableView)
@@ -53,7 +61,7 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
     
     @IBAction func confirmAdd(sender: UIButton) {
         
-        let attrDic = self.constructAttrDic()
+        let attrDic = constructAttrDic()
         aiHelper.startActivityIndicator()
         let type = typePickData![picker.selectedRowInComponent(0)]
 
@@ -115,7 +123,7 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if self.typePickData![row] == "dm_document" {
+        if self.typePickData![row] == RestObjectType.document.rawValue {
             isUploadable = true
         } else {
             isUploadable = false
@@ -171,4 +179,34 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
         let last = array.count - 1
         return "/" + array[last]
     }
+    
+    // MARK: - Location service !! Error in simulator
+//    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+//        ErrorAlert.show("Error while updatiing location. " + error.localizedDescription, controller: self)
+//    }
+//    
+//    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error)-> Void in
+//            if (error != nil) {
+//                print("Reverse geocoder failed with error" + error!.localizedDescription)
+//                return
+//            }
+//            
+//            if placemarks!.count > 0 {
+//                let pm = placemarks![0] as CLPlacemark
+//                self.displayLocationInfo(pm)
+//            } else {
+//                print("Problem with the data received from geocoder")
+//            }
+//        })
+//    }
+//    
+//    func displayLocationInfo(placemark: CLPlacemark) {
+//        //stop updating location to save battery life
+//        locationManager.stopUpdatingLocation()
+//        print(placemark.locality)
+//        print(placemark.postalCode)
+//        print(placemark.administrativeArea)
+//        print(placemark.country)
+//    }
 }

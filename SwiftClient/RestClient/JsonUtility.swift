@@ -11,8 +11,10 @@ import SwiftyJSON
 class JsonUtility {
     
     static let REQUEST_ROOT = [
-        "dm_cabinet": "cabinet",
-        "dm_folder": "folder",
+        RestObjectType.cabinet.rawValue : "cabinet",
+        RestObjectType.folder.rawValue: "folder",
+        RestObjectType.user.rawValue: "user",
+        RestObjectType.group.rawValue: "group"
         ]
     static let ATTR_NAME = [
         "name": "object_name"
@@ -50,5 +52,26 @@ class JsonUtility {
         let dic = self.getUploadRequestBody(attrDic)
         let json = JSON(dic)
         return json
+    }
+    
+    static func buildBatchRequest(operations: NSArray) -> NSDictionary {
+        let batchDic: NSDictionary = [
+            "transactional": true,
+            "sequential": false,
+            "on-error": "CONTINUE",
+            "return-request": true,
+            "operations": operations
+            ]
+        
+        return batchDic
+    }
+    
+    static func buildSingleBatchOperation(
+        id: String, description: String,
+        method: String, uri: String,
+        headers: NSArray, entity: String) -> NSDictionary {
+        let requestDic: NSDictionary = ["method": method, "uri": uri, "headers": headers, "entity": entity]
+        let batchOpDic: NSDictionary = ["id": id, "description": description, "request": requestDic]
+        return batchOpDic
     }
 }

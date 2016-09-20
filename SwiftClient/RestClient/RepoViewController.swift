@@ -65,11 +65,10 @@ class RepoViewController: ListViewController {
         super.prepareForSegue(segue, sender: sender)
         
         if segue.identifier == "AskLogin" {
-            let loginViewController = segue.destinationViewController as! LoginViewController
             if let cell = sender as? ItemTableViewCell {
                 let indexPath = tableView.indexPathForCell(cell)!
                 let selectedItem = objects[indexPath.row]
-                loginViewController.parentObject = selectedItem as RestObject
+                Context.repo = selectedItem as RestObject
             }
         }
     }

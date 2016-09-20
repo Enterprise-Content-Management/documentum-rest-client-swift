@@ -24,25 +24,34 @@ class ProfileViewController: UITableViewController {
     }
     
     private func getCurrentUser() {
-        aiHelper.startActivityIndicator()
-        RestService.getUser(userUrl) { object, error in
-            if let user = object {
-                self.currentUser = user
-                print("Current user is \(user.getName()).")
-                
-                self.view?.bringSubviewToFront(self.tableView)
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.tableView.reloadData()
-                    self.navigationItem.title = user.getName()
+        if currentUser != nil {
+            userUrl = currentUser.getLink(LinkRel.selfRel.rawValue)
+            tableView.reloadData()
+            setTableView(currentUser)
+        } else {
+            aiHelper.startActivityIndicator()
+            RestService.getUser(userUrl) { object, error in
+                if let user = object {
+                    self.currentUser = user
+                    print("Current user is \(user.getName()).")
                     
-                    // Set auto layout for cell
-                    self.tableView.estimatedRowHeight = 44
-                    self.tableView.rowHeight = UITableViewAutomaticDimension
-                    
-                    self.aiHelper.stopActivityIndicator()
-                })
+                    self.view?.bringSubviewToFront(self.tableView)
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.tableView.reloadData()
+                        self.setTableView(user)
+                        self.aiHelper.stopActivityIndicator()
+                    })
+                }
             }
         }
+    }
+    
+    private func setTableView(user: User) {
+        self.navigationItem.title = user.getName()
+        
+        // Set auto layout for cell
+        self.tableView.estimatedRowHeight = 44
+        self.tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     // MARK: - Tableview control

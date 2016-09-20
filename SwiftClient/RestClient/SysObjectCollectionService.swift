@@ -55,10 +55,7 @@ class SysObjectCollectionService : RestCollectionService {
     }
     
     private func getTypeFromContent(dic: Dictionary<String, AnyObject>) -> String {
-        let content = dic["content"] as! Dictionary<String, AnyObject>
-        let properties = content["properties"] as! Dictionary<String, AnyObject>
-        let objectType = properties["r_object_type"] as! String
-        return objectType
+        return getProperty(dic, propertyName: "r_object_type")
     }
     
 }
