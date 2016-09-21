@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "folder.jpg",
+      "filename" : "folder_yellow.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "folder-1.jpg",
       "scale" : "2x"
     },
     {

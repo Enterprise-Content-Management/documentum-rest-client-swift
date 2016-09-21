@@ -117,7 +117,7 @@ class MembersViewController: ListViewController, UIGestureRecognizerDelegate, UI
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "GroupItemCell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MemberTableViewCell
 
         let object: RestObject
         if self.isSearchActive() {
@@ -126,14 +126,12 @@ class MembersViewController: ListViewController, UIGestureRecognizerDelegate, UI
             object = self.objects[indexPath.row]
         }
         
-        cell.textLabel?.text = object.getName()
-        cell.detailTextLabel?.text = object.getType()
-        
         if object is Group {
             cell.accessoryType = .DisclosureIndicator
         } else if object is User {
             cell.accessoryType = .None
         }
+        cell.initCell(object.getType(), name: object.getName())
         
         return cell
     }
@@ -179,9 +177,6 @@ class MembersViewController: ListViewController, UIGestureRecognizerDelegate, UI
             }
             
             print("Delete \(objectFullName) from list.")
-            if !items.isEmpty {
-                items.removeAtIndex(indexPath.row)
-            }
             objects.removeAtIndex(indexPath.row)
             setFootViewText(objects.count)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)

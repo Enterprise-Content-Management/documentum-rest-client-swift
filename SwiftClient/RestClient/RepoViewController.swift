@@ -45,9 +45,6 @@ class RepoViewController: ListViewController {
             self.isLastPage = isLastPage
             for repo in repos {
                 self.objects.append(repo)
-                let photo = UIImage(named: "CabinetImage")!
-                let item = Item(url: repo.getId(), fileType: repo.getType(), fileName: repo.getName(), photo: photo)
-                self.items.append(item)
             }
             // set for ui
             self.view?.bringSubviewToFront(self.tableView)

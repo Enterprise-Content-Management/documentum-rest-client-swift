@@ -17,15 +17,8 @@ class ItemTableViewCell: UITableViewCell {
     @IBOutlet weak var fileTypeLabel: UILabel!
     @IBOutlet weak var infoButton: UIButton!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    func initCell(filename: String, fileType: String) {
+        fileNameLabel.text = filename
+        thumbnailPhotoImageView.image = UIImage(named: fileType)
     }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

@@ -36,7 +36,11 @@ class RestObject {
     }
     
     func setType(type: String) {
-        basic["type"] = RestObject.getShowType(type)
+        basic["type"] = type
+    }
+    
+    func setTypeWithDmType(dmType: String) {
+        basic["type"] = RestObject.getShowType(dmType)
     }
     
     func getName() -> String {
@@ -115,7 +119,7 @@ enum RestObjectType : String {
     case document = "Document"
     case folder = "Folder"
     case cabinet = "Cabinet"
-    case sysObject = "Sysobject"
+    case sysObject = "SysObject"
     case group = "Group"
     case user = "User"
 }

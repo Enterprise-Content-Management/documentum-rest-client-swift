@@ -110,9 +110,6 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
             self.isLastPage = isLastPage
             for sysObject in sysObjects {
                 self.objects.append(sysObject)
-                let photo = self.getPhotoByType(sysObject.getType())
-                let item = Item(url: sysObject.getId(), fileType: sysObject.getType(), fileName: sysObject.getName(), photo: photo)
-                self.items.append(item)
             }
             // set for ui
             self.view?.bringSubviewToFront(self.tableView)
@@ -123,19 +120,6 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
                 () -> Void in
                 self.tableView.reloadData()
             })
-        }
-    }
-    
-    func getPhotoByType(type: String) -> UIImage {
-        switch type {
-            case RestObjectType.document.rawValue:
-                return UIImage(named: "DocumentImage")!
-            case RestObjectType.folder.rawValue:
-                return UIImage(named: "FolderImage")!
-            case RestObjectType.cabinet.rawValue:
-                return UIImage(named: "CabinetImage")!
-            default:
-                return UIImage(named: "SystemFileImage")!
         }
     }
     

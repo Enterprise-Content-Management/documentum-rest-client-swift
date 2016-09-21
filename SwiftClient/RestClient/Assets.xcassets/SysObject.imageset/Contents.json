@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "cabinet-1.jpg",
+      "filename" : "gnome_preferences_system.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "cabinet.jpg",
       "scale" : "2x"
     },
     {

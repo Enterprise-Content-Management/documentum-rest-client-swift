@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "system-1.jpg",
+      "filename" : "generic_folder_graphite.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "system.jpg",
       "scale" : "2x"
     },
     {

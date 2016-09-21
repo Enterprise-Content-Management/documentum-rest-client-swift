@@ -50,7 +50,7 @@ class SysObjectCollectionService : RestCollectionService {
     
     override func constructRestObject(dic: Dictionary<String, AnyObject>) -> RestObject {
         let sysObject = super.constructRestObject(dic)
-        sysObject.setType(self.getTypeFromContent(dic))
+        sysObject.setTypeWithDmType(self.getTypeFromContent(dic))
         return sysObject
     }
     

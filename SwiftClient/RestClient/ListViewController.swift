@@ -9,13 +9,11 @@
 import UIKit
 
 class ListViewController: UITableViewController, UISearchResultsUpdating {
-    var items = [Item]()
     var objects = [RestObject]()
+    var filteredObjects = [RestObject]()
     
     // Properties for search bar
     let searchController = UISearchController(searchResultsController: nil)
-    var filteredItems = [Item]()
-    var filteredObjects = [RestObject]()
     
     // Properties for activity indicator
     var aiHelper = ActivityIndicatorHelper()
@@ -68,9 +66,7 @@ class ListViewController: UITableViewController, UISearchResultsUpdating {
     
     // Clear all stored data
     private func clearAll() {
-        self.items.removeAll()
         self.objects.removeAll()
-        self.filteredItems.removeAll()
         self.filteredObjects.removeAll()
     }
     
@@ -112,9 +108,6 @@ class ListViewController: UITableViewController, UISearchResultsUpdating {
     }
     
     internal func filterContentForSearchText(searchText: String, scope: String = "All") {
-        self.filteredItems = items.filter { item in
-            return item.itemName.lowercaseString.containsString(searchText.lowercaseString)
-        }
         self.filteredObjects = objects.filter { object in
             return object.getName().lowercaseString.containsString(searchText.lowercaseString)
         }
@@ -137,9 +130,9 @@ class ListViewController: UITableViewController, UISearchResultsUpdating {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.isSearchActive() {
-            return filteredItems.count
+            return filteredObjects.count
         }
-        return items.count
+        return objects.count
     }
     
     
@@ -147,11 +140,11 @@ class ListViewController: UITableViewController, UISearchResultsUpdating {
         let cellIdentifier = "ItemTableViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ItemTableViewCell
         
-        let item: Item
+        let object: RestObject
         if self.isSearchActive() {
-            item = self.filteredItems[indexPath.row]
+            object = self.filteredObjects[indexPath.row]
         } else {
-            item = self.items[indexPath.row]
+            object = self.objects[indexPath.row]
         }
         
         // Set different view for disclosurable item and the opposite.
@@ -159,9 +152,10 @@ class ListViewController: UITableViewController, UISearchResultsUpdating {
             return view is UIButton
         }
         let infoButton = buttons[0]
-        if item.itemType == RestObjectType.cabinet.rawValue
-            || item.itemType == RestObjectType.folder.rawValue
-            || item.itemType == RestObjectType.repository.rawValue {
+        let type = object.getType()
+        if type == RestObjectType.cabinet.rawValue
+            || type == RestObjectType.folder.rawValue
+            || type == RestObjectType.repository.rawValue {
             cell.accessoryType = .DisclosureIndicator
             infoButton.hidden = false
         } else {
@@ -169,9 +163,7 @@ class ListViewController: UITableViewController, UISearchResultsUpdating {
             infoButton.hidden = true
         }
         
-        cell.fileNameLabel.text = item.itemName
-        cell.fileTypeLabel.text = item.itemType
-        cell.thumbnailPhotoImageView.image = item.photo
+        cell.initCell(object.getName(), fileType: type)
         
         return cell
     }
@@ -250,8 +242,8 @@ class ListViewController: UITableViewController, UISearchResultsUpdating {
         }
         
         print("Delete \(objectFullName) from list.")
-        if !items.isEmpty {
-            items.removeAtIndex(indexPath.row)
+        if !objects.isEmpty {
+            objects.removeAtIndex(indexPath.row)
         }
         objects.removeAtIndex(indexPath.row)
         setFootViewText(objects.count)

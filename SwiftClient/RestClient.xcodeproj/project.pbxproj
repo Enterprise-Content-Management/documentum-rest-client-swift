@@ -68,6 +68,7 @@
 		1EDF74351D23A77700EB6ADC /* database.sql in Resources */ = {isa = PBXBuildFile; fileRef = 1EDF74341D23A77700EB6ADC /* database.sql */; };
 		1EDF74391D23A95B00EB6ADC /* DbUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDF74381D23A95B00EB6ADC /* DbUtil.swift */; };
 		1EEB097B1D81422C007E65D7 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEB097A1D81422C007E65D7 /* Context.swift */; };
+		1EEFF0DC1D92733C002D40C7 /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEFF0DB1D92733C002D40C7 /* MemberTableViewCell.swift */; };
 		B649C01B605ACDC877E53316 /* Pods_RestClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE603100E6D889883AA09AE7 /* Pods_RestClient.framework */; };
 /* End PBXBuildFile section */
 
@@ -180,6 +181,7 @@
 		1EDF74341D23A77700EB6ADC /* database.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = database.sql; sourceTree = "<group>"; };
 		1EDF74381D23A95B00EB6ADC /* DbUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DbUtil.swift; sourceTree = "<group>"; };
 		1EEB097A1D81422C007E65D7 /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
+		1EEFF0DB1D92733C002D40C7 /* MemberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
 		8C14D7D9B0BA4084C37E96AA /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE603100E6D889883AA09AE7 /* Pods_RestClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RestClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0C8E69404FE28047F999BC0 /* Pods-RestClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RestClient/Pods-RestClient.debug.xcconfig"; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 				1EC128531CF2B2580093E978 /* InfoItemTableViewCell.swift */,
 				1EAB83A61D051F95002AA4BC /* FileItemTableViewCell.swift */,
 				1E596D031D26534F00BD13F9 /* SwitchableTableViewCell.swift */,
+				1EEFF0DB1D92733C002D40C7 /* MemberTableViewCell.swift */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -707,6 +710,7 @@
 				1E9FD0521D7D259600403DE7 /* MultiMemberViewController.swift in Sources */,
 				1EEB097B1D81422C007E65D7 /* Context.swift in Sources */,
 				1EAB839F1CFE8786002AA4BC /* PreviewViewController.swift in Sources */,
+				1EEFF0DC1D92733C002D40C7 /* MemberTableViewCell.swift in Sources */,
 				1E6299CE1CABAEF800A59B47 /* Repository.swift in Sources */,
 				1E167A5B1CAA5428000459E3 /* RepoViewController.swift in Sources */,
 				1E596D041D26534F00BD13F9 /* SwitchableTableViewCell.swift in Sources */,
