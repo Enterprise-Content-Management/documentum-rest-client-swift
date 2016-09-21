@@ -226,12 +226,15 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
     
     private func copyHere(object: RestObject) {
         print("** Copy \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
+        MiscService.copyTo(object, thisController: self) {
+            self.refreshData()
+        }
     }
     
     private func moveHere(object: RestObject) {
         print("Move \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
         
-        MiscService.moveTo(object, thiscontroller: self) {
+        MiscService.moveTo(object, thisController: self) {
             self.refreshData()
         }
     }

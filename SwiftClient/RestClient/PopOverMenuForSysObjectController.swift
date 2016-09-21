@@ -45,12 +45,16 @@ class PopOverMenuForSysObjectController: UITableViewController {
     
     private func copyHere(object: RestObject) {
         print("** Copy \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
+        let topController = UIUtil.getTopController() as! SysObjectViewController
+        MiscService.copyTo(object, thisController: topController) {
+            topController.refreshData()
+        }
     }
     
     private func moveHere(object: RestObject) {
         print("** Move \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
         let topController = UIUtil.getTopController() as! SysObjectViewController
-        MiscService.moveTo(object, thiscontroller: topController) {
+        MiscService.moveTo(object, thisController: topController) {
             topController.refreshData()
         }
     }
