@@ -38,4 +38,17 @@ class MiscService {
             }
         }
     }
+    
+    static func linkTo(object: RestObject, thisController: SysObjectViewController, completionHandler: () -> ()) {
+        let clickedObject = Context.clickBoard
+        let requestUrl = object.getLink(LinkRel.childLinks.rawValue)!
+        let dic = ["href": clickedObject.getId()]
+        RestService.createWithAuth(requestUrl, requestBody: dic) { response, error in
+            if let error = error {
+                ErrorAlert.show(error.message, controller: thisController, dismissViewController: false)
+            } else if response != nil {
+                completionHandler()
+            }
+        }
+    }
 }

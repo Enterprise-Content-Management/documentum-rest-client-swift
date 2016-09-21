@@ -225,7 +225,7 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
     }
     
     private func copyHere(object: RestObject) {
-        print("** Copy \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
+        print("Copy \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
         MiscService.copyTo(object, thisController: self) {
             self.refreshData()
         }
@@ -240,7 +240,11 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
     }
     
     private func linkHere(object: RestObject) {
-        print("** Link \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
+        print("Link \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
+        
+        MiscService.linkTo(object, thisController: self) {
+            self.refreshData()
+        }
     }
     
     // - MARK: Popover control
