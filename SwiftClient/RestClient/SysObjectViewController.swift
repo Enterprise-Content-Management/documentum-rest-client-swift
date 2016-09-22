@@ -15,6 +15,7 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
     
     var parentObject: RestObject?
     var thisUrl: String?
+    var formerPath: String = ""
     
     var addableTypes = [
         RestObjectType.cabinet.rawValue,
@@ -25,10 +26,14 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setNavigatorName()
+        if navigationItem.title == nil {
+            navigationItem.title = "/" + (parentObject?.getName())!
+        }
+    
         setFootViewWithAi(footView)
+        setNaviLabel()
         
-        self.loadData()
+        loadData()
         
         // Set side menu toggle
         if self.revealViewController() != nil {
@@ -47,9 +52,16 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
-    func setNavigatorName() {
-        if let item = parentObject {
-            navigationItem.title = item.getName()
+    func setNaviLabel() {
+        if let naviBar = navigationController?.navigationBar {
+            let frame = CGRect(x: 0, y: 0, width: naviBar.frame.width, height: naviBar.frame.height)
+            let label = UILabel(frame: frame)
+            label.lineBreakMode = .ByTruncatingHead
+            label.textAlignment = .Center
+            label.font = UIFont.boldSystemFontOfSize(17.0)
+            navigationItem.titleView = label
+            label.text = formerPath + "/" + (parentObject?.getName())!
+            formerPath = label.text!
         }
     }
     
@@ -78,6 +90,7 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
         if restObject.getLink(LinkRel.objects.rawValue) != nil {
             let nextViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SysObjectCollectionView") as! SysObjectViewController
             nextViewController.parentObject = restObject
+            nextViewController.formerPath = formerPath
             self.navigationController!.pushViewController(nextViewController, animated: true)
         } else {
             let nextViewController = self.storyboard?.instantiateViewControllerWithIdentifier("InfoView") as! InfoViewController

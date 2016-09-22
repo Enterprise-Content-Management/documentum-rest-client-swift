@@ -63,7 +63,8 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
         
         let attrDic = constructAttrDic()
         aiHelper.startActivityIndicator()
-        let type = typePickData![picker.selectedRowInComponent(0)]
+        let chosedType = typePickData![picker.selectedRowInComponent(0)]
+        let type = RestObject.getDmType(chosedType)
 
         if isUploadable && chosenData != nil {
             let url = updatePostUrl()
@@ -72,7 +73,7 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
             url, metadata: json, file: self.chosenData!, type: self.chosenType!
             ) { result, error in
                 if result != nil {
-                    print("Successfully create a new \(type).")
+                    print("Successfully create a new \(chosedType).")
                     self.goBackAndRefresh()
                 }
             }
@@ -80,7 +81,7 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
             let requestBody = JsonUtility.getUpdateRequestBody(type, attrDic: attrDic)
             RestService.createWithAuth(self.postUrl!, requestBody: requestBody){ result, error in
                 if result != nil {
-                    print("Successfully create a new \(type).")
+                    print("Successfully create a new \(chosedType).")
                     self.goBackAndRefresh()
                 }
                 if let error = error {

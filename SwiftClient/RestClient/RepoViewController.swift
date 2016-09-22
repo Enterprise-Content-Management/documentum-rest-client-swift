@@ -18,8 +18,11 @@ class RepoViewController: ListViewController {
         super.viewDidLoad()
     
         setFootViewWithAi(footView)
+    
+        loadData()
         
-        self.loadData()
+        let rootUrl = DbUtil.getValueFromTable(attrName: DbUtil.ATTR_ROOTURL)!
+        navigationItem.title = rootUrl.substringFromIndex(rootUrl.startIndex.advancedBy(5)) + "/repositories"
         
         // Set side menu toggle
         if self.revealViewController() != nil {

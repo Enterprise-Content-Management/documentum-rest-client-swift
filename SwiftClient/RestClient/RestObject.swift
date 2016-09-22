@@ -111,6 +111,19 @@ class RestObject {
             default: return RestObjectType.sysObject.rawValue
         }
     }
+    
+    static func getDmType(type: String) -> String {
+        switch type {
+        case RestObjectType.cabinet.rawValue:
+            return "dm_cabinet"
+        case RestObjectType.folder.rawValue:
+            return "dm_folder"
+        case RestObjectType.document.rawValue:
+            return "dm_document"
+        default:
+            return "dm_sysobject"
+        }
+    }
 }
 
 
