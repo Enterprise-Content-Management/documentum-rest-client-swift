@@ -128,6 +128,7 @@ class MembersViewController: ListViewController, UIGestureRecognizerDelegate, UI
         
         if object is Group {
             cell.accessoryType = .DisclosureIndicator
+            
         } else if object is User {
             cell.accessoryType = .None
         }

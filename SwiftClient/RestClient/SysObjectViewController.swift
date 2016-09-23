@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
+class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet var footView: UILabel!
@@ -16,6 +16,7 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
     var parentObject: RestObject?
     var thisUrl: String?
     var formerPath: String = ""
+    var isActive: Bool = false
     
     var addableTypes = [
         RestObjectType.cabinet.rawValue,
@@ -26,12 +27,9 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if navigationItem.title == nil {
-            navigationItem.title = "/" + (parentObject?.getName())!
-        }
-    
         setFootViewWithAi(footView)
         setNaviLabel()
+        setSearchBar()
         
         loadData()
         
@@ -58,11 +56,17 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
             let label = UILabel(frame: frame)
             label.lineBreakMode = .ByTruncatingHead
             label.textAlignment = .Center
-            label.font = UIFont.boldSystemFontOfSize(17.0)
+            label.font = UIFont.boldSystemFontOfSize(18.0)
             navigationItem.titleView = label
             label.text = formerPath + "/" + (parentObject?.getName())!
             formerPath = label.text!
         }
+    }
+    
+    func setSearchBar() {
+        // Set search controller
+        searchController.searchBar.delegate = self
+        searchController.searchBar.autocapitalizationType = .None
     }
     
     // MARK: Gesture control
@@ -273,5 +277,61 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
     
     func dismissPopOver() {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // - MARK: Search control
+    override func isSearchActive() -> Bool {
+        return isActive
+    }
+    
+    override func filterContentForSearchText(searchText: String, scope: String) {
+        // do nothing to work around this function
+    }
+
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        filteredObjects.removeAll()
+        isActive = true
+        tableView.reloadData()
+    }
+   
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        let searchUrl = Context.repo.getLink(LinkRel.search.rawValue)!.characters.split("{").map(String.init)[0]
+        var pathPieces = formerPath.characters.split("/").map(String.init)
+        pathPieces.removeFirst(1)
+        var locations = pathPieces.joinWithSeparator("/")
+        if !pathPieces.isEmpty {
+            locations = "/" + locations
+        }
+        let q = searchBar.text! + "*"
+        let params = ["locations": locations, "q": q, "inline": "true"] as [String: String]
+        RestService.getResponseWithAuthAndParam(searchUrl, params: params) { response, error in
+            if let error = error {
+                ErrorAlert.show(error.message, controller: self, dismissViewController: false)
+            } else if let array = response {
+                for entry in array {
+                    let dic = entry as! NSDictionary
+                    let object = self.constructSearchResultObject(dic)
+                    self.filteredObjects.append(object)
+                }
+                    self.tableView.reloadData()
+            }
+        }
+    }
+
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        isActive = false
+        tableView.reloadData()
+    }
+    
+    private func constructSearchResultObject(dic: NSDictionary) -> RestObject {
+        let name = dic["title"] as! String
+        let linkDic = (dic["links"] as! NSArray)[0] as! NSDictionary
+        let id = linkDic["href"] as! String
+        let contentDic = dic["content"] as! NSDictionary
+        let propertiesDic = contentDic["properties"] as! NSDictionary
+        let type = propertiesDic["r_object_type"] as! String
+        let result = RestObject(id: id, name: name)
+        result.setTypeWithDmType(type)
+        return result
     }
 }

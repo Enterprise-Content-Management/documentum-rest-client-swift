@@ -65,9 +65,9 @@ class ListViewController: UITableViewController, UISearchResultsUpdating {
     }
     
     // Clear all stored data
-    private func clearAll() {
-        self.objects.removeAll()
-        self.filteredObjects.removeAll()
+    internal func clearAll() {
+        objects.removeAll()
+        filteredObjects.removeAll()
     }
     
     // MARK: - UI 
@@ -90,8 +90,8 @@ class ListViewController: UITableViewController, UISearchResultsUpdating {
     }
     
     private func initSearchBar() {
-        self.searchController.searchResultsUpdater = self
-        self.searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
     }
@@ -100,18 +100,6 @@ class ListViewController: UITableViewController, UISearchResultsUpdating {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(ListViewController.refreshData), forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl = refreshControl
-    }
-    
-    // MARK: - Search handling
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        self.filterContentForSearchText(searchController.searchBar.text!)
-    }
-    
-    internal func filterContentForSearchText(searchText: String, scope: String = "All") {
-        self.filteredObjects = objects.filter { object in
-            return object.getName().lowercaseString.containsString(searchText.lowercaseString)
-        }
-        tableView.reloadData()
     }
     
     internal func isSearchActive() -> Bool {
@@ -274,5 +262,17 @@ class ListViewController: UITableViewController, UISearchResultsUpdating {
                 infoViewController.object = objects[indexPath.row]
             }
         }
+    }
+    
+    // MARK: - Search handling
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredObjects = objects.filter { object in
+            return object.getName().lowercaseString.containsString(searchText.lowercaseString)
+        }
+        tableView.reloadData()
     }
 }
