@@ -9,8 +9,5 @@
 import UIKit
 
 class Cabinet : RestObject {
-    override init(id: String, name: String) {
-        super.init(id: id, name: name)
-        setType(RestObjectType.cabinet.rawValue)
-    }
+
 }

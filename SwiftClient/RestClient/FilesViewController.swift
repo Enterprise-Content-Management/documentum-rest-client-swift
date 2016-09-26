@@ -70,9 +70,8 @@ class FilesViewController: ListViewController {
             file = self.files[indexPath.row]
         }
         
-        cell.fileNameLabel.text = file.fileName
-        cell.filePathLabel.text = file.filePath
-        
+        cell.initCell(file.fileName, path: file.filePath)
+
         return cell
     }
 

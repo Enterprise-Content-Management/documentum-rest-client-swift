@@ -32,7 +32,7 @@ class AddUserViewController: UITableViewController {
             let postUrl = Context.repo.getLink(LinkRel.users.rawValue)!
             RestService.createWithAuth(postUrl, requestBody: requestBody){ result, error in
                 if result != nil {
-                    let user = User(dic: result!)
+                    let user = User(singleDic: result!)
                     print("Successfully create a new USER \(user.getName()).")
                     self.aiHelper.stopActivityIndicator()
                     self.navigationController?.dismissViewControllerAnimated(true, completion: nil)

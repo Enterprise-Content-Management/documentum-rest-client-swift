@@ -73,15 +73,7 @@ class RestCollectionService {
     
     // Should be overwrite to construct different kind of rest objects
     func constructRestObject(dic: Dictionary<String, AnyObject>) -> RestObject {
-        let restObject = RestObject(
-            id: dic["id"] as! String,
-            name: dic["title"]! as! String)
-        
-        let content = dic["content"] as! Dictionary<String, AnyObject>
-        let links = content["links"] as! NSArray
-        restObject.constructLinks(links)
-        
-        return restObject
+        return RestObject(entryDic: dic)
     }
     
     internal func getContent(dic: Dictionary<String, AnyObject>, contentName: String) -> AnyObject {

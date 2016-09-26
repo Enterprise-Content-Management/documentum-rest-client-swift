@@ -96,25 +96,26 @@ class ProfileViewController: UITableViewController {
         let section = indexPath.section
         let row = indexPath.row
         let dic: Dictionary<String, String>
+        let cellStyle: InfoItemTableViewCell.InfoItemCellStyle
         
         switch section {
         case 0:
             dic = currentUser.basic
+            cellStyle = .Basic
         case 1:
-            dic = currentUser.properties
-            cell.infoNameLabel.font = cell.infoNameLabel.font.fontWithSize(14)
+            dic = currentUser.properties as! Dictionary<String, String>
+            cellStyle = .Infomation
         case 2:
             dic = currentUser.links
-            cell.infoNameLabel.font = cell.infoNameLabel.font.fontWithSize(14)
-            cell.infoValueLabel.font = cell.infoValueLabel.font?.fontWithSize(12)
+            cellStyle = .Link
         default:
             dic = [:]
+            cellStyle = .Basic
         }
         
         let index = dic.startIndex.advancedBy(row)
         let key = dic.keys[index]
-        cell.infoNameLabel.text = key
-        cell.infoValueLabel.text = dic[key]
+        cell.initCell(key, value: dic[key]!, style: cellStyle)
         
         return cell
     }

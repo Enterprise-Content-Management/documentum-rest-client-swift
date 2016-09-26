@@ -183,7 +183,7 @@ class FileViewController: UIViewController {
             ) { dic, error in
                 if dic != nil {
                     print("Successfully check out and check in for file \((self.object?.getName())!).")
-                    let object = RestObject(dic: dic!)
+                    let object = RestObject(singleDic: dic!)
                     self.aiHelper.stopActivityIndicator()
                     self.navigationController?.popViewControllerAnimated(true)
                     let infoViewController = self.navigationController?.topViewController as! InfoViewController

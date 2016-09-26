@@ -11,52 +11,86 @@ import UIKit
 class RestObject {
     
     var basic: Dictionary<String, String> = [
-        "id": "",
-        "type": "",
-        "name": ""
+        ObjectProperties.ID: "",
+        ObjectProperties.TYPE: "",
+        ObjectProperties.NAME: "",
+        ObjectProperties.PUBLISHED: "",
+        ObjectProperties.UPDATED: ""
     ]
+    
+    let jsonDic: NSDictionary
     var links: Dictionary<String, String> = [:]
+    var properties: NSDictionary = [:]
     
-    init(id: String, name: String) {
-        basic["id"] = id
-        basic["name"] = name
-    }
-    
-    // Only used in RestService.getRestObject
-    init(dic: NSDictionary) {
-        let links = dic["links"] as! NSArray
-        constructLinks(links)
-        let id = getLink("self")
-        basic["id"] = id
-        let props = dic["properties"] as! NSDictionary
-        if let type = props["r_object_type"] as? String {
-            basic["type"] = RestObject.getShowType(type)
+    init(entryDic: NSDictionary) {
+        jsonDic = entryDic
+        basic[ObjectProperties.ID] = entryDic[ObjectProperties.ID] as? String
+        basic[ObjectProperties.NAME] = entryDic["title"]! as? String
+        
+        let content = entryDic["content"] as! Dictionary<String, AnyObject>
+        
+        if let dmType = content[ObjectProperties.TYPE] as? String {
+            setTypeWithDmType(dmType)
+        } else if content["servers"] != nil {
+            setType(RestObjectType.repository.rawValue)
         }
-        basic["name"] = props["object_name"] as? String
+        
+        if let propertiesDic = content[ObjectProperties.PROPERTIES] as? NSDictionary {
+            properties = propertiesDic
+        }
+        
+        let links = content[ObjectProperties.LINKS] as! NSArray
+        constructLinks(links)
+    }
+
+    init(singleDic: NSDictionary) {
+        jsonDic = singleDic
+        let links = singleDic[ObjectProperties.LINKS] as! NSArray
+        constructLinks(links)
+        let id = getLink(LinkRel.selfRel.rawValue)
+        basic[ObjectProperties.ID] = id
+        properties = singleDic["properties"] as! NSDictionary
+        if let type = properties[ObjectProperties.R_OBJECT_TYPE] as? String {
+            basic[ObjectProperties.TYPE] = RestObject.getShowType(type)
+        }
+        basic[ObjectProperties.NAME] = properties[ObjectProperties.OBJECT_NAME] as? String
     }
     
     func setType(type: String) {
-        basic["type"] = type
+        basic[ObjectProperties.TYPE] = type
     }
     
     func setTypeWithDmType(dmType: String) {
-        basic["type"] = RestObject.getShowType(dmType)
+        basic[ObjectProperties.TYPE] = RestObject.getShowType(dmType)
+    }
+    
+    func setDates(creationDate: String, modifiedDate: String) {
+        basic[ObjectProperties.PUBLISHED] = creationDate
+        basic[ObjectProperties.UPDATED] = modifiedDate
     }
     
     func getName() -> String {
-        return basic["name"]!
+        return basic[ObjectProperties.NAME]!
     }
     
     func getId() -> String {
-        return basic["id"]!
+        return basic[ObjectProperties.NAME]!
     }
     
     func getType() -> String {
-        return basic["type"]!
+        return basic[ObjectProperties.PUBLISHED]!
     }
     
     func getNameWithType() -> String {
-        return basic["type"]! + " " + basic["name"]!
+        return basic[ObjectProperties.TYPE]! + " " + basic[ObjectProperties.NAME]!
+    }
+    
+    func getCreationDate() -> String {
+        return basic[ObjectProperties.PUBLISHED]!
+    }
+    
+    func getModifiedDate() -> String {
+        return basic[ObjectProperties.UPDATED]!
     }
     
     func setLink(rel: String, href: String) -> Dictionary<String, String> {
@@ -99,6 +133,15 @@ class RestObject {
         }
     }
     
+    func getProperty(propertyName: String) -> String? {
+        let value = properties.valueForKey(propertyName)
+        if value is NSInteger {
+            return String(value)
+        } else {
+            return value as? String
+        }
+    }
+    
     static func getShowType(type: String) -> String {
         switch type {
             case "Repository": return RestObjectType.repository.rawValue
@@ -126,7 +169,6 @@ class RestObject {
     }
 }
 
-
 enum RestObjectType : String {
     case repository = "Repository"
     case document = "Document"
@@ -135,5 +177,19 @@ enum RestObjectType : String {
     case sysObject = "SysObject"
     case group = "Group"
     case user = "User"
+}
+
+class ObjectProperties {
+    static let ID = "id"
+    static let TYPE = "type"
+    static let NAME = "name"
+    static let PUBLISHED = "published"
+    static let UPDATED = "updated"
+    static let LINKS = "links"
+    static let R_OBJECT_TYPE = "r_object_type"
+    static let OBJECT_NAME = "object_name"
+    static let PROPERTIES = "properties"
+    static let OWNER_NAME = "owner_name"
+    static let USER_NAME = "user_name"
 }
 

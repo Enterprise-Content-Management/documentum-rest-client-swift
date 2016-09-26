@@ -10,8 +10,4 @@ import UIKit
 
 class Folder : RestObject {
     
-    override init(id: String, name: String) {
-        super.init(id: id, name: name)
-        setType(RestObjectType.folder.rawValue)
-    }
 }

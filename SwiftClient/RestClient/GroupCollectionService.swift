@@ -19,17 +19,9 @@ class GroupCollectionService: RestCollectionService {
         let name = getContent(dic, contentName: "name") as! String
         let restObject: RestObject
         if name == "group" {
-            restObject = Group(
-                id: dic["id"] as! String,
-                name: dic["title"]! as! String,
-                owner: getOwner(dic))
-            restObject.setType(RestObjectType.group.rawValue)
-            let content = dic["content"] as! Dictionary<String, AnyObject>
-            let links = content["links"] as! NSArray
-            restObject.constructLinks(links)
+            restObject = Group(entryDic: dic)
         } else {
-            let contentDic = dic["content"] as! Dictionary<String, AnyObject>
-            restObject = User(dic: contentDic)
+            restObject = User(entryDic: dic)
         }
         setRemoveMemberLink(restObject, dic: dic)
         return restObject

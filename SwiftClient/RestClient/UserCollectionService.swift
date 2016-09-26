@@ -18,7 +18,7 @@ class UserCollectionService: RestCollectionService {
     override func constructRestObject(dic: Dictionary<String, AnyObject>) -> RestObject {
         let restObject: RestObject
         let contentDic = dic["content"] as! Dictionary<String, AnyObject>
-        restObject = User(dic: contentDic)
+        restObject = User(singleDic: contentDic)
         return restObject
     }
 

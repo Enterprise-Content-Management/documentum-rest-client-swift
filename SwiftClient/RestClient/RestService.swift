@@ -114,7 +114,7 @@ class RestService {
     
     private static func getEntityOnSuccess(json: JSON, completionHandler: (RestObject?, Error?) -> ()) {
         let dictionary = json.object as! Dictionary<String, AnyObject>
-        let object = RestObject(dic: dictionary)
+        let object = RestObject(singleDic: dictionary)
         completionHandler(object, nil)
     }
     
@@ -135,7 +135,7 @@ class RestService {
     
     private static func getUserOnSuccess(json: JSON, completionHandler: (User?, Error?) -> ()) {
         let dictionary = json.object as! Dictionary<String, AnyObject>
-        let object = User(dic: dictionary)
+        let object = User(singleDic: dictionary)
         object.basic["definition"] = dictionary["definition"] as? String
         completionHandler(object, nil)
     }

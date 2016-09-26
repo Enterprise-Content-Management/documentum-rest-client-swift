@@ -9,16 +9,16 @@
 import UIKit
 
 class Group: RestObject {
-    var owner: String
+    var owner: String!
     
-    override init(id: String, name: String) {
-        owner = ""
-        super.init(id: id, name: name)
+    override init(singleDic: NSDictionary) {
+        super.init(singleDic: singleDic)
+        owner = properties[ObjectProperties.OWNER_NAME] as! String
     }
     
-    convenience init(id: String, name: String, owner: String) {
-        self.init(id: id, name: name)
-        self.owner = owner
+    override init(entryDic: NSDictionary) {
+        super.init(entryDic: entryDic)
+        owner = properties[ObjectProperties.OWNER_NAME] as! String
     }
     
     func getOwner() -> String {

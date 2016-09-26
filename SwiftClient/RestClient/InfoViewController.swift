@@ -135,11 +135,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCellWithIdentifier("InfoItemTableViewCell", forIndexPath: indexPath) as! InfoItemTableViewCell
         let cellInfo = self.info[indexPath.section].1[indexPath.row]
         
-        cell.infoNameLabel.text = cellInfo.0
-        cell.infoValueLabel.text = cellInfo.1
-        
-        cell.infoNameLabel.lineBreakMode = .ByWordWrapping
-        
+        cell.initCell(cellInfo.0, value: cellInfo.1)        
         return cell
     }
     

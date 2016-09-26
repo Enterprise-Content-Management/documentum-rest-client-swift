@@ -10,15 +10,5 @@ import UIKit
 
 class SysObject: RestObject {
     
-    override init(id: String, name: String) {
-        super.init(id: id, name: name)
-        setType(RestObjectType.sysObject.rawValue)
-    }
-    
-    convenience init(id: String, name: String, type: String) {
-        self.init(id: id, name: name)
-        self.setType(type)
-    }
-    
 }
 

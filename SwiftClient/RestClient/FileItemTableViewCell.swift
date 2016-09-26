@@ -12,4 +12,8 @@ class FileItemTableViewCell: UITableViewCell {
     @IBOutlet weak var fileNameLabel: UILabel!
     @IBOutlet weak var filePathLabel: UILabel!
     
+    func initCell(name: String, path: String) {
+        fileNameLabel.text = name
+        fileNameLabel.text = path
+    }
 }

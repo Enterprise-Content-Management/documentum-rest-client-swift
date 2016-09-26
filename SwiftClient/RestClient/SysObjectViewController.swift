@@ -310,7 +310,7 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
             } else if let array = response {
                 for entry in array {
                     let dic = entry as! NSDictionary
-                    let object = self.constructSearchResultObject(dic)
+                    let object = RestObject(entryDic: dic)
                     self.filteredObjects.append(object)
                 }
                     self.tableView.reloadData()
@@ -321,17 +321,5 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         isActive = false
         tableView.reloadData()
-    }
-    
-    private func constructSearchResultObject(dic: NSDictionary) -> RestObject {
-        let name = dic["title"] as! String
-        let linkDic = (dic["links"] as! NSArray)[0] as! NSDictionary
-        let id = linkDic["href"] as! String
-        let contentDic = dic["content"] as! NSDictionary
-        let propertiesDic = contentDic["properties"] as! NSDictionary
-        let type = propertiesDic["r_object_type"] as! String
-        let result = RestObject(id: id, name: name)
-        result.setTypeWithDmType(type)
-        return result
     }
 }
