@@ -7,4 +7,5 @@ target "RestClient" do
     pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
     pod 'SQLite.swift', :git => 'https://github.com/stephencelis/SQLite.swift.git'
     pod 'SWRevealViewController', :git => 'https://github.com/John-Lluch/SWRevealViewController.git'
+    pod 'FontAwesome.swift'
 end

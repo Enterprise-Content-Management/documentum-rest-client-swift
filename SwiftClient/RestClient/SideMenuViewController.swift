@@ -23,8 +23,7 @@ class SideMenuViewController: UITableViewController {
     
     private func showGroupControll() -> Bool {
         if currentUser != nil {
-            let userPrivileges = currentUser.getProperty("user_privileges")!
-            return Int(userPrivileges)! >= 8
+            return currentUser.getProperty("user_privileges") as! NSInteger >= 8
         } else {
             return false
         }

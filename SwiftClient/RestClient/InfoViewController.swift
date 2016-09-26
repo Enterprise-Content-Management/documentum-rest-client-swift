@@ -92,9 +92,11 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         info.removeAll()
         
         var basicArray = [] as Array<(String, String)>
-        basicArray.append(getBasicPair("id"))
-        basicArray.append(getBasicPair("type"))
-        basicArray.append(getBasicPair("name"))
+        basicArray.append(getBasicPair(ObjectProperties.ID))
+        basicArray.append(getBasicPair(ObjectProperties.TYPE))
+        basicArray.append(getBasicPair(ObjectProperties.NAME))
+        basicArray.append(getBasicPair(ObjectProperties.UPDATED))
+        basicArray.append(getBasicPair(ObjectProperties.PUBLISHED))
         info.append(("Basic", basicArray))
 
         // Unshown links

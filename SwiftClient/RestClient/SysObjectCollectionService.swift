@@ -48,14 +48,4 @@ class SysObjectCollectionService : RestCollectionService {
         RestService.deleteWithAuth(url, completionHandler: completionHandler)
     }
     
-    override func constructRestObject(dic: Dictionary<String, AnyObject>) -> RestObject {
-        let sysObject = super.constructRestObject(dic)
-        sysObject.setTypeWithDmType(self.getTypeFromContent(dic))
-        return sysObject
-    }
-    
-    private func getTypeFromContent(dic: Dictionary<String, AnyObject>) -> String {
-        return getProperty(dic, propertyName: "r_object_type")
-    }
-    
 }

@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import FontAwesome_swift
 
 class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet var footView: UILabel!
+    @IBOutlet weak var ellipsisButton: UIBarButtonItem!
     
     var parentObject: RestObject?
     var thisUrl: String?
@@ -30,6 +32,7 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
         setFootViewWithAi(footView)
         setNaviLabel()
         setSearchBar()
+        setBarButtons()
         
         loadData()
         
@@ -50,7 +53,7 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
-    func setNaviLabel() {
+    private func setNaviLabel() {
         if let naviBar = navigationController?.navigationBar {
             let frame = CGRect(x: 0, y: 0, width: naviBar.frame.width, height: naviBar.frame.height)
             let label = UILabel(frame: frame)
@@ -63,10 +66,19 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
         }
     }
     
-    func setSearchBar() {
+    private func setSearchBar() {
         // Set search controller
         searchController.searchBar.delegate = self
         searchController.searchBar.autocapitalizationType = .None
+    }
+    
+    func setBarButtons() {
+        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+        ellipsisButton.setTitleTextAttributes(attributes, forState: .Normal)
+        ellipsisButton.title = String.fontAwesomeIconWithName(.EllipsisV)
+        
+        menuButton.setTitleTextAttributes(attributes, forState: .Normal)
+        menuButton.title = String.fontAwesomeIconWithName(.Bars)
     }
     
     // MARK: Gesture control
@@ -295,6 +307,7 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
     }
    
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        aiHelper.startActivityIndicator()
         let searchUrl = Context.repo.getLink(LinkRel.search.rawValue)!.characters.split("{").map(String.init)[0]
         var pathPieces = formerPath.characters.split("/").map(String.init)
         pathPieces.removeFirst(1)
@@ -313,8 +326,9 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
                     let object = RestObject(entryDic: dic)
                     self.filteredObjects.append(object)
                 }
-                    self.tableView.reloadData()
+                self.tableView.reloadData()
             }
+            self.aiHelper.stopActivityIndicator()
         }
     }
 

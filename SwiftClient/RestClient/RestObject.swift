@@ -26,21 +26,18 @@ class RestObject {
         jsonDic = entryDic
         basic[ObjectProperties.ID] = entryDic[ObjectProperties.ID] as? String
         basic[ObjectProperties.NAME] = entryDic["title"]! as? String
+        basic[ObjectProperties.UPDATED] = entryDic[ObjectProperties.UPDATED] as? String
+        basic[ObjectProperties.PUBLISHED] = entryDic[ObjectProperties.PUBLISHED] as? String
         
         let content = entryDic["content"] as! Dictionary<String, AnyObject>
-        
-        if let dmType = content[ObjectProperties.TYPE] as? String {
-            setTypeWithDmType(dmType)
-        } else if content["servers"] != nil {
-            setType(RestObjectType.repository.rawValue)
-        }
-        
         if let propertiesDic = content[ObjectProperties.PROPERTIES] as? NSDictionary {
             properties = propertiesDic
         }
         
         let links = content[ObjectProperties.LINKS] as! NSArray
         constructLinks(links)
+        
+        setTypeByDic(content)
     }
 
     init(singleDic: NSDictionary) {
@@ -56,6 +53,22 @@ class RestObject {
         basic[ObjectProperties.NAME] = properties[ObjectProperties.OBJECT_NAME] as? String
     }
     
+    private func setTypeByDic(contentDic: NSDictionary) {
+        if let dmType = contentDic[ObjectProperties.TYPE] as? String {
+            setTypeWithDmType(dmType)
+        } else if contentDic["servers"] != nil {
+            setType(RestObjectType.repository.rawValue)
+        } else if let name = contentDic["name"] as? String {
+            if name.capitalizedString == RestObjectType.group.rawValue {
+                setType(RestObjectType.group.rawValue)
+            } else if name.capitalizedString == RestObjectType.user.rawValue {
+                setType(RestObjectType.user.rawValue)
+            }
+        }
+    }
+    
+    // MARK: - Getters and Setters
+    
     func setType(type: String) {
         basic[ObjectProperties.TYPE] = type
     }
@@ -64,9 +77,12 @@ class RestObject {
         basic[ObjectProperties.TYPE] = RestObject.getShowType(dmType)
     }
     
-    func setDates(creationDate: String, modifiedDate: String) {
-        basic[ObjectProperties.PUBLISHED] = creationDate
-        basic[ObjectProperties.UPDATED] = modifiedDate
+    func setPublished(published: String) {
+        basic[ObjectProperties.PUBLISHED] = published
+    }
+    
+    func setUpdated(updated: String) {
+        basic[ObjectProperties.UPDATED] = updated
     }
     
     func getName() -> String {
@@ -78,18 +94,18 @@ class RestObject {
     }
     
     func getType() -> String {
-        return basic[ObjectProperties.PUBLISHED]!
+        return basic[ObjectProperties.TYPE]!
     }
     
     func getNameWithType() -> String {
         return basic[ObjectProperties.TYPE]! + " " + basic[ObjectProperties.NAME]!
     }
     
-    func getCreationDate() -> String {
+    func getPublished() -> String {
         return basic[ObjectProperties.PUBLISHED]!
     }
     
-    func getModifiedDate() -> String {
+    func getUpdated() -> String {
         return basic[ObjectProperties.UPDATED]!
     }
     
@@ -133,13 +149,8 @@ class RestObject {
         }
     }
     
-    func getProperty(propertyName: String) -> String? {
-        let value = properties.valueForKey(propertyName)
-        if value is NSInteger {
-            return String(value)
-        } else {
-            return value as? String
-        }
+    func getProperty(propertyName: String) -> AnyObject? {
+        return properties.valueForKey(propertyName)
     }
     
     static func getShowType(type: String) -> String {

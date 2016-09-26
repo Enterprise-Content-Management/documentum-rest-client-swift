@@ -1,3 +1,4 @@
+
 Documentum REST iOS Client Samples in Swift
 =========
 
@@ -43,9 +44,9 @@ Run below command to install `CocoaPods`.
 4. Double click on the project file `RestClient.xcworkspace` to open the project as `cocoapods` project structure.
 
 5. Find the configuration file `database.db` under location `documentum-rest-client-swift/SwiftClient`. 
-  * It contains the default connection parameters for Documentum REST Services access. 
-  * You can change the default values to accommodate to your Documentum REST Services deployment. 
-  * You can also manually fill the connection parameters in the test launcher.
+* It contains the default connection parameters for Documentum REST Services access. 
+* You can change the default values to accommodate to your Documentum REST Services deployment. 
+    * You can also manually fill the connection parameters in the test launcher.
 
 6. Build the project with **Xcode** by clicking the **Build** button or pressing **⌘R** on the IDE to launch the test.
 
