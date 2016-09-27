@@ -9,24 +9,21 @@
 import UIKit
 
 class CheckBox : UIButton {
-    // Images
-    let checkedImage = UIImage(named: "boxChecked")! as UIImage
-    let uncheckedImage = UIImage(named: "boxNoCheck")! as UIImage
     
     // Bool property
     var isChecked: Bool = false {
-        didSet{
+        didSet {
             if isChecked == true {
-                self.setImage(checkedImage, forState: .Normal)
+                IconHelper.setIconForButton(self, iconName: .CheckSquareO, size: 20)
             } else {
-                self.setImage(uncheckedImage, forState: .Normal)
+                IconHelper.setIconForButton(self, iconName: .SquareO, size: 20)
             }
         }
     }
     
     override func awakeFromNib() {
-        self.addTarget(self, action: #selector(CheckBox.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        self.isChecked = false
+        addTarget(self, action: #selector(CheckBox.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        isChecked = false
     }
     
     func buttonClicked(sender: UIButton) {

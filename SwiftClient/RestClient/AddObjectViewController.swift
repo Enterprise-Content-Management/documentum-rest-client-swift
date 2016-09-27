@@ -28,6 +28,8 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
     @IBOutlet var picker: UIPickerView!
     @IBOutlet var fileNameTextView: UITextView!
     @IBOutlet var filePathLabel: UILabel!
+    @IBOutlet weak var pictureButton: UIButton!
+    @IBOutlet weak var fileButton: UIButton!
     
     @IBOutlet var chooseDataTableCell: UITableViewCell!
     
@@ -35,6 +37,7 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
         super.viewDidLoad()
         
         manageUploadCell()
+        setUI()
         
         picker.dataSource = self
         picker.delegate = self
@@ -47,6 +50,13 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
         
         aiHelper.addActivityIndicator(self.view)
         view.bringSubviewToFront(tableView)
+    }
+    
+    private func setUI() {
+        filePathLabel.lineBreakMode = .ByTruncatingHead
+
+        IconHelper.setIconForButton(pictureButton, iconName: .FileImageO)
+        IconHelper.setIconForButton(fileButton, iconName: .FileTextO)
     }
     
     private func constructAttrDic() -> Dictionary<String, String> {

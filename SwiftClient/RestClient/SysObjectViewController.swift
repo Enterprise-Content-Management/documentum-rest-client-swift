@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FontAwesome_swift
 
 class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate, UISearchBarDelegate {
 
@@ -74,12 +73,8 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
     }
     
     func setBarButtons() {
-        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
-        ellipsisButton.setTitleTextAttributes(attributes, forState: .Normal)
-        ellipsisButton.title = String.fontAwesomeIconWithName(.EllipsisV)
-        
-        menuButton.setTitleTextAttributes(attributes, forState: .Normal)
-        menuButton.title = String.fontAwesomeIconWithName(.Bars)
+        IconHelper.setIconForBarButton(ellipsisButton, iconName: .EllipsisV)
+        IconHelper.setIconForBarButton(menuButton, iconName: .Bars)
     }
     
     // MARK: Gesture control

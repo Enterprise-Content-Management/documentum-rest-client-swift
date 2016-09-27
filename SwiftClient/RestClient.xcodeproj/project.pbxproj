@@ -27,7 +27,7 @@
 		1E46DE971D702FE9005C492A /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E46DE961D702FE9005C492A /* Group.swift */; };
 		1E46DE991D73D2E9005C492A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E46DE981D73D2E9005C492A /* CoreLocation.framework */; };
 		1E596D041D26534F00BD13F9 /* SwitchableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E596D031D26534F00BD13F9 /* SwitchableTableViewCell.swift */; };
-		1E6150331D991A7C00BD10B4 /* EllipsisVerticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6150321D991A7C00BD10B4 /* EllipsisVerticle.swift */; };
+		1E6150351D9A3CBD00BD10B4 /* IconHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6150341D9A3CBD00BD10B4 /* IconHelper.swift */; };
 		1E6299CE1CABAEF800A59B47 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6299CD1CABAEF800A59B47 /* Repository.swift */; };
 		1E6299D01CABB08100A59B47 /* RepositoryCollectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6299CF1CABB08100A59B47 /* RepositoryCollectionService.swift */; };
 		1E6299DB1CACD58400A59B47 /* Cabinet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6299DA1CACD58400A59B47 /* Cabinet.swift */; };
@@ -133,7 +133,7 @@
 		1E46DE961D702FE9005C492A /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		1E46DE981D73D2E9005C492A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1E596D031D26534F00BD13F9 /* SwitchableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchableTableViewCell.swift; sourceTree = "<group>"; };
-		1E6150321D991A7C00BD10B4 /* EllipsisVerticle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EllipsisVerticle.swift; sourceTree = "<group>"; };
+		1E6150341D9A3CBD00BD10B4 /* IconHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconHelper.swift; sourceTree = "<group>"; };
 		1E6299CD1CABAEF800A59B47 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		1E6299CF1CABB08100A59B47 /* RepositoryCollectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryCollectionService.swift; sourceTree = "<group>"; };
 		1E6299DA1CACD58400A59B47 /* Cabinet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cabinet.swift; sourceTree = "<group>"; };
@@ -231,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				1E397B791D17D020005DB494 /* ActivityIndicatorHelper.swift */,
+				1E6150341D9A3CBD00BD10B4 /* IconHelper.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -480,7 +481,6 @@
 			isa = PBXGroup;
 			children = (
 				1ED776051D251D4A0039CDA4 /* CheckBox.swift */,
-				1E6150321D991A7C00BD10B4 /* EllipsisVerticle.swift */,
 			);
 			name = button;
 			sourceTree = "<group>";
@@ -722,7 +722,6 @@
 				1E167A5B1CAA5428000459E3 /* RepoViewController.swift in Sources */,
 				1E596D041D26534F00BD13F9 /* SwitchableTableViewCell.swift in Sources */,
 				1E6299E11CAD1B3300A59B47 /* ListViewController.swift in Sources */,
-				1E6150331D991A7C00BD10B4 /* EllipsisVerticle.swift in Sources */,
 				1E6299DB1CACD58400A59B47 /* Cabinet.swift in Sources */,
 				1EAB83A91D0524B9002AA4BC /* BundleFile.swift in Sources */,
 				1E82F3811CF4386B001720BE /* JsonUtility.swift in Sources */,
@@ -750,6 +749,7 @@
 				1EAB83A51D051AA9002AA4BC /* FilesViewController.swift in Sources */,
 				1ED776001D24EF4B0039CDA4 /* ProfileViewController.swift in Sources */,
 				1E6299ED1CAE197C00A59B47 /* SysObjectCollectionService.swift in Sources */,
+				1E6150351D9A3CBD00BD10B4 /* IconHelper.swift in Sources */,
 				1EDF74391D23A95B00EB6ADC /* DbUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

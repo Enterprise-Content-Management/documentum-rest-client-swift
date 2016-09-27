@@ -34,9 +34,7 @@ class RepoViewController: ListViewController {
     }
     
     func setBarButtons() {
-        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
-        menuButton.setTitleTextAttributes(attributes, forState: .Normal)
-        menuButton.title = String.fontAwesomeIconWithName(.Bars)
+        IconHelper.setIconForBarButton(menuButton, iconName: .Bars)
     }
     
     // MARK: Rest service control

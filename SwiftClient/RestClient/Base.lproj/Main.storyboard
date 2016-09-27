@@ -40,7 +40,9 @@
                                     <constraint firstAttribute="height" constant="20" id="Lal-BA-ihc"/>
                                     <constraint firstAttribute="width" constant="20" id="b3O-0h-Dqw"/>
                                 </constraints>
-                                <state key="normal" image="boxNoCheck"/>
+                                <state key="normal">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zB8-gz-FgC" customClass="CheckBox" customModule="RestClient" customModuleProvider="target">
                                 <rect key="frame" x="150" y="349" width="20" height="20"/>
@@ -48,7 +50,9 @@
                                     <constraint firstAttribute="width" constant="20" id="DJV-Ka-eP7"/>
                                     <constraint firstAttribute="height" constant="20" id="ay3-rR-9jQ"/>
                                 </constraints>
-                                <state key="normal" image="boxNoCheck"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto log in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AOi-ss-ir9">
                                 <rect key="frame" x="178" y="307" width="82" height="21"/>
@@ -192,17 +196,17 @@
             <objects>
                 <tableViewController storyboardIdentifier="SysObjectMoreMenu" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ODO-Ve-jGn" customClass="PopOverMenuForSysObjectController" customModule="RestClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SysObjectMoreMenu" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="kb6-to-stp">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
                             <tableViewSection id="4dD-Lb-OcS">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="9BR-Gm-G8T">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9BR-Gm-G8T" id="lKr-nU-XWZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="120" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TPL-Tt-JhU">
@@ -223,10 +227,12 @@
                             <outlet property="delegate" destination="ODO-Ve-jGn" id="4gc-6H-8cG"/>
                         </connections>
                     </tableView>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="120" height="120"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lTn-VR-skn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1648" y="-512"/>
+            <point key="canvasLocation" x="2041" y="71"/>
         </scene>
         <!--Sys Object View Controller-->
         <scene sceneID="oWT-Wu-SnY">
@@ -493,9 +499,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="chooseDataTableCell" destination="nSq-XI-x4x" id="0sj-36-To7"/>
+                        <outlet property="fileButton" destination="AvG-st-QBH" id="U5A-uR-oQn"/>
                         <outlet property="fileNameTextView" destination="zs6-Pk-wH6" id="Eg8-j7-2ap"/>
                         <outlet property="filePathLabel" destination="Gse-p0-GeU" id="oWS-xY-LCM"/>
                         <outlet property="picker" destination="K9X-Qg-pd5" id="Fo3-fR-keQ"/>
+                        <outlet property="pictureButton" destination="TLt-TG-CNg" id="Y4t-zO-nWB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nVv-Q0-33D" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1997,12 +2005,11 @@
     </scenes>
     <resources>
         <image name="DefaultImage" width="259" height="194"/>
-        <image name="boxNoCheck" width="300" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="HNc-75-1Qr"/>
         <segue reference="VME-v3-9w8"/>
         <segue reference="QzR-fx-18B"/>
+        <segue reference="GRc-n3-ZvH"/>
         <segue reference="x3M-E8-dl5"/>
     </inferredMetricsTieBreakers>
 </document>

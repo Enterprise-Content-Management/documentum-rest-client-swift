@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import FontAwesome_swift
 
 class SideMenuViewController: UITableViewController {
     
     var currentUser: User!
     
-    let logoutIndex = NSIndexPath(forRow: 1, inSection: 0)
+    let logoutIndex = NSIndexPath(forRow: 1, inSection: 1)
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -72,7 +71,7 @@ class SideMenuViewController: UITableViewController {
         
         label.backgroundColor = UIColor.clearColor()
         label.addSubview(subLabel)
-        subLabel.tintColor = UIColor.grayColor()
+        subLabel.textColor = UIColor.grayColor()
         subLabel.font = UIFont.fontAwesomeOfSize(25)
         
         switch section {
