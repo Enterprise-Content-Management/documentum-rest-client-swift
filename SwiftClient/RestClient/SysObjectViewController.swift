@@ -70,6 +70,7 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
         // Set search controller
         searchController.searchBar.delegate = self
         searchController.searchBar.autocapitalizationType = .None
+        searchController.searchBar.placeholder = "Find SysObjects under this path that start with..."
     }
     
     func setBarButtons() {
@@ -175,7 +176,7 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
         popUpMenu(sender)
     }
     
-    // MARK: Shift control & Action sheet
+    // MARK: - Shift control & Action sheet
     // Handle shift operation on single item
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let type = objects[indexPath.row].getType()
@@ -260,7 +261,7 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
         }
     }
     
-    // - MARK: Popover control
+    // MARK: Popover control
     
     func popUpMenu(sender: UIBarButtonItem) {
         let menuView = UIUtil.getViewController("SysObjectMoreMenu") as! PopOverMenuForSysObjectController
@@ -291,7 +292,7 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    // - MARK: Search control
+    // MARK: - Search control
     override func isSearchActive() -> Bool {
         return isActive
     }

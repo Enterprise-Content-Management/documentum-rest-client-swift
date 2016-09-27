@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FontAwesome_swift
 
 class SideMenuViewController: UITableViewController {
     
@@ -17,6 +18,10 @@ class SideMenuViewController: UITableViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.preferredContentSize = CGSize(width: 250, height: 600)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
     // MARK: - Admin controll
@@ -47,6 +52,41 @@ class SideMenuViewController: UITableViewController {
         } else {
             return super.tableView(tableView, titleForHeaderInSection: section)
         }
+    }
+    
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if hideGroupSection(section) {
+            return nil
+        }
+        let subY: CGFloat
+        if section == 0 {
+            subY = 25
+        } else {
+            subY = 5
+        }
+        
+        let frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.sectionHeaderHeight)
+        let subFrame = CGRect(x: 15, y: subY, width: tableView.frame.width / 4, height: 25)
+        let label = UILabel(frame: frame)
+        let subLabel = UILabel(frame: subFrame)
+        
+        label.backgroundColor = UIColor.clearColor()
+        label.addSubview(subLabel)
+        subLabel.tintColor = UIColor.grayColor()
+        subLabel.font = UIFont.fontAwesomeOfSize(25)
+        
+        switch section {
+        case 0:
+            subLabel.text = String.fontAwesomeIconWithName(.Gear)
+        case 1:
+            subLabel.text = String.fontAwesomeIconWithName(.User)
+        case 2:
+            subLabel.text = String.fontAwesomeIconWithName(.UserSecret)
+        default:
+            return nil
+        }
+        
+        return label
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

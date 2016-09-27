@@ -18,6 +18,7 @@ class RepoViewController: ListViewController {
         super.viewDidLoad()
     
         setFootViewWithAi(footView)
+        setBarButtons()
     
         loadData()
         
@@ -30,6 +31,12 @@ class RepoViewController: ListViewController {
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
+    }
+    
+    func setBarButtons() {
+        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+        menuButton.setTitleTextAttributes(attributes, forState: .Normal)
+        menuButton.title = String.fontAwesomeIconWithName(.Bars)
     }
     
     // MARK: Rest service control
