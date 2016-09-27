@@ -72,6 +72,7 @@ enum LinkRel: String {
     case parentLinks = "http://identifiers.emc.com/linkrel/parent-links"
     case childLinks = "http://identifiers.emc.com/linkrel/child-links"
     case search = "http://identifiers.emc.com/linkrel/search"
+    case dql = "http://identifiers.emc.com/linkrel/dql"
     
     static func getLink(linkRel: String, links: NSArray) -> String? {
         var downloadUrl: String?

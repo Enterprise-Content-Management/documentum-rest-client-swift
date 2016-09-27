@@ -9,7 +9,17 @@
 import UIKit
 
 class PopOverMenuForSysObjectController: UITableViewController {
+    var dismissSelf: Bool = false
     var parentObject: RestObject!
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        if dismissSelf {
+            dismissSelf = false
+            dismissViewControllerAnimated(false, completion: nil)
+        }
+    }
     
     @IBAction func onClickMisc(sender: UIButton) {
         self.dismissViewControllerAnimated(true) {
@@ -65,5 +75,9 @@ class PopOverMenuForSysObjectController: UITableViewController {
         MiscService.linkTo(object, thisController: topController) {
             topController.refreshData()
         }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        dismissSelf = true
     }
 }

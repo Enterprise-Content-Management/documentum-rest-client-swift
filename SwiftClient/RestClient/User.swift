@@ -9,8 +9,5 @@
 import UIKit
 
 class User: RestObject {
-    
-    override func getName() -> String {
-        return properties[ObjectProperties.USER_NAME]! as! String
-    }
+
 }

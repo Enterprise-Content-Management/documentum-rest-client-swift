@@ -11,11 +11,11 @@ import UIKit
 class RestObject {
     
     var basic: Dictionary<String, String> = [
-        ObjectProperties.ID: "",
-        ObjectProperties.TYPE: "",
-        ObjectProperties.NAME: "",
-        ObjectProperties.PUBLISHED: "",
-        ObjectProperties.UPDATED: ""
+        ObjectProperties.ID.rawValue: "",
+        ObjectProperties.TYPE.rawValue: "",
+        ObjectProperties.NAME.rawValue: "",
+        ObjectProperties.PUBLISHED.rawValue: "",
+        ObjectProperties.UPDATED.rawValue: ""
     ]
     
     let jsonDic: NSDictionary
@@ -24,17 +24,17 @@ class RestObject {
     
     init(entryDic: NSDictionary) {
         jsonDic = entryDic
-        basic[ObjectProperties.ID] = entryDic[ObjectProperties.ID] as? String
-        basic[ObjectProperties.NAME] = entryDic["title"]! as? String
-        basic[ObjectProperties.UPDATED] = entryDic[ObjectProperties.UPDATED] as? String
-        basic[ObjectProperties.PUBLISHED] = entryDic[ObjectProperties.PUBLISHED] as? String
+        setBasic(.ID, value: entryDic[ObjectProperties.ID.rawValue] as! String)
+        setBasic(.NAME, value: entryDic["title"]! as! String)
+        setUpdated(entryDic[ObjectProperties.UPDATED.rawValue] as! String)
+        setPublished(entryDic[ObjectProperties.PUBLISHED.rawValue] as! String)
         
         let content = entryDic["content"] as! Dictionary<String, AnyObject>
-        if let propertiesDic = content[ObjectProperties.PROPERTIES] as? NSDictionary {
+        if let propertiesDic = content[ObjectProperties.PROPERTIES.rawValue] as? NSDictionary {
             properties = propertiesDic
         }
         
-        let links = content[ObjectProperties.LINKS] as! NSArray
+        let links = content[ObjectProperties.LINKS.rawValue] as! NSArray
         constructLinks(links)
         
         setTypeByDic(content)
@@ -42,19 +42,46 @@ class RestObject {
 
     init(singleDic: NSDictionary) {
         jsonDic = singleDic
-        let links = singleDic[ObjectProperties.LINKS] as! NSArray
+        let links = singleDic[ObjectProperties.LINKS.rawValue] as! NSArray
         constructLinks(links)
-        let id = getLink(LinkRel.selfRel.rawValue)
-        basic[ObjectProperties.ID] = id
+        setBasic(.ID, value: getLink(LinkRel.selfRel.rawValue)!)
         properties = singleDic["properties"] as! NSDictionary
-        if let type = properties[ObjectProperties.R_OBJECT_TYPE] as? String {
-            basic[ObjectProperties.TYPE] = RestObject.getShowType(type)
+        
+        if let type = getProperty(.R_OBJECT_TYPE) as? String {
+            setType(RestObject.getShowType(type))
         }
-        basic[ObjectProperties.NAME] = properties[ObjectProperties.OBJECT_NAME] as? String
+        if let name = getProperty(.OBJECT_NAME) as? String {
+            setBasic(.NAME, value: name)
+        } else if let name = getProperty(.USER_NAME) as? String {
+            setBasic(.NAME, value: name)
+        }
+        
+        if let published = getProperty(.R_CREATION_DATE) as? String {
+            setPublished(published)
+        }
+        
+        setUpdated(getProperty(.R_MODIFY_DATE) as! String)
+    }
+    
+    init(searchDic: NSDictionary) {
+        jsonDic = searchDic
+        
+        setUpdated(searchDic[ObjectProperties.UPDATED.rawValue] as! String)
+        setPublished(searchDic[ObjectProperties.PUBLISHED.rawValue] as! String)
+        
+        let links = searchDic[ObjectProperties.LINKS.rawValue] as! NSArray
+        constructLinks(links)
+        let content = searchDic["content"] as! Dictionary<String, AnyObject>
+        properties = content[ObjectProperties.PROPERTIES.rawValue] as! NSDictionary
+        
+        setBasic(.ID, value: getLink(LinkRel.edit.rawValue)!)
+        setBasic(.NAME, value: getProperty(.OBJECT_NAME) as! String)
+        
+        setTypeByDic(content)
     }
     
     private func setTypeByDic(contentDic: NSDictionary) {
-        if let dmType = contentDic[ObjectProperties.TYPE] as? String {
+        if let dmType = contentDic[ObjectProperties.TYPE.rawValue] as? String {
             setTypeWithDmType(dmType)
         } else if contentDic["servers"] != nil {
             setType(RestObjectType.repository.rawValue)
@@ -68,45 +95,52 @@ class RestObject {
     }
     
     // MARK: - Getters and Setters
+    private func setBasic(name: ObjectProperties, value: String) {
+        basic[name.rawValue] = value
+    }
+    
+    private func getBasic(name: ObjectProperties) -> String {
+        return basic[name.rawValue]!
+    }
     
     func setType(type: String) {
-        basic[ObjectProperties.TYPE] = type
+        setBasic(.TYPE, value: type)
     }
     
     func setTypeWithDmType(dmType: String) {
-        basic[ObjectProperties.TYPE] = RestObject.getShowType(dmType)
+        setBasic(.TYPE, value: RestObject.getShowType(dmType))
     }
     
     func setPublished(published: String) {
-        basic[ObjectProperties.PUBLISHED] = published
+        setBasic(.PUBLISHED, value: published)
     }
     
     func setUpdated(updated: String) {
-        basic[ObjectProperties.UPDATED] = updated
+        setBasic(.UPDATED, value: updated)
     }
     
     func getName() -> String {
-        return basic[ObjectProperties.NAME]!
+        return getBasic(.NAME)
     }
     
     func getId() -> String {
-        return basic[ObjectProperties.NAME]!
+        return getBasic(.ID)
     }
     
     func getType() -> String {
-        return basic[ObjectProperties.TYPE]!
+        return getBasic(.TYPE)
     }
     
     func getNameWithType() -> String {
-        return basic[ObjectProperties.TYPE]! + " " + basic[ObjectProperties.NAME]!
+        return getBasic(.TYPE) + " " + getBasic(.NAME)
     }
     
     func getPublished() -> String {
-        return basic[ObjectProperties.PUBLISHED]!
+        return getBasic(.PUBLISHED)
     }
     
     func getUpdated() -> String {
-        return basic[ObjectProperties.UPDATED]!
+        return getBasic(.UPDATED)
     }
     
     func setLink(rel: String, href: String) -> Dictionary<String, String> {
@@ -153,6 +187,10 @@ class RestObject {
         return properties.valueForKey(propertyName)
     }
     
+    func getProperty(propertyName: ObjectProperties) -> AnyObject? {
+        return getProperty(propertyName.rawValue)
+    }
+    
     static func getShowType(type: String) -> String {
         switch type {
             case "Repository": return RestObjectType.repository.rawValue
@@ -190,17 +228,19 @@ enum RestObjectType : String {
     case user = "User"
 }
 
-class ObjectProperties {
-    static let ID = "id"
-    static let TYPE = "type"
-    static let NAME = "name"
-    static let PUBLISHED = "published"
-    static let UPDATED = "updated"
-    static let LINKS = "links"
-    static let R_OBJECT_TYPE = "r_object_type"
-    static let OBJECT_NAME = "object_name"
-    static let PROPERTIES = "properties"
-    static let OWNER_NAME = "owner_name"
-    static let USER_NAME = "user_name"
+enum ObjectProperties: String {
+    case ID = "id"
+    case TYPE = "type"
+    case NAME = "name"
+    case PUBLISHED = "published"
+    case UPDATED = "updated"
+    case LINKS = "links"
+    case R_OBJECT_TYPE = "r_object_type"
+    case OBJECT_NAME = "object_name"
+    case PROPERTIES = "properties"
+    case OWNER_NAME = "owner_name"
+    case USER_NAME = "user_name"
+    case R_MODIFY_DATE = "r_modify_date"
+    case R_CREATION_DATE = "r_creation_date"
 }
 

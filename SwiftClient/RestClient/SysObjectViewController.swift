@@ -93,7 +93,7 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
         super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
         
         let restObject: RestObject
-        if self.searchController.active {
+        if self.searchController.active {  // isActive?
             restObject = self.filteredObjects[indexPath.row]
         } else {
             restObject = self.objects[indexPath.row]
@@ -260,7 +260,7 @@ class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, 
     
     func popUpMenu(sender: UIBarButtonItem) {
         let menuView = UIUtil.getViewController("SysObjectMoreMenu") as! PopOverMenuForSysObjectController
-        menuView.preferredContentSize = CGSizeMake(120, 44)
+        menuView.preferredContentSize = CGSizeMake(120, 87)
         menuView.modalPresentationStyle = .Popover
         menuView.parentObject = parentObject!
         

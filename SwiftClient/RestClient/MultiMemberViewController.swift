@@ -103,6 +103,10 @@ class MultiMemberViewController: ListViewController {
     }
     
     // MARK: - Button control
+
+    @IBAction func onClickCancel(sender: UIBarButtonItem) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     @IBAction func onClickAdd(sender: UIBarButtonItem) {
         let selectedObjects = getSelectedObjects()

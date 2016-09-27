@@ -92,11 +92,11 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         info.removeAll()
         
         var basicArray = [] as Array<(String, String)>
-        basicArray.append(getBasicPair(ObjectProperties.ID))
-        basicArray.append(getBasicPair(ObjectProperties.TYPE))
-        basicArray.append(getBasicPair(ObjectProperties.NAME))
-        basicArray.append(getBasicPair(ObjectProperties.UPDATED))
-        basicArray.append(getBasicPair(ObjectProperties.PUBLISHED))
+        basicArray.append(getBasicPair(.ID))
+        basicArray.append(getBasicPair(.TYPE))
+        basicArray.append(getBasicPair(.NAME))
+        basicArray.append(getBasicPair(.UPDATED))
+        basicArray.append(getBasicPair(.PUBLISHED))
         info.append(("Basic", basicArray))
 
         // Unshown links
@@ -110,6 +110,10 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     private func getBasicPair(key: String) -> (String, String) {
         return (key, object.basic[key]!)
+    }
+    
+    private func getBasicPair(key: ObjectProperties) -> (String, String) {
+        return (key.rawValue, object.basic[key.rawValue]!)
     }
     
     private func refreshTable() {

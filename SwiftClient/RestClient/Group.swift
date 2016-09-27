@@ -13,12 +13,12 @@ class Group: RestObject {
     
     override init(singleDic: NSDictionary) {
         super.init(singleDic: singleDic)
-        owner = properties[ObjectProperties.OWNER_NAME] as! String
+        owner = getProperty(.OWNER_NAME) as! String
     }
     
     override init(entryDic: NSDictionary) {
         super.init(entryDic: entryDic)
-        owner = properties[ObjectProperties.OWNER_NAME] as! String
+        owner = getProperty(.OWNER_NAME) as! String
     }
     
     func getOwner() -> String {
