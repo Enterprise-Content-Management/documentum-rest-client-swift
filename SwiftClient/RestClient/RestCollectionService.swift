@@ -10,9 +10,6 @@ import UIKit
 
 class RestCollectionService {
     
-    // Properties for dramatical load data
-    let itemsPerPage = 20
-    
     // Must be defined in subClass
     var url: String!
     
@@ -21,7 +18,7 @@ class RestCollectionService {
     }
     
     internal func getParams(pageNo: NSInteger) -> [String: String] {
-        var params = RestUriBuilder.pageParam(itemsPerPage, pageNo: pageNo)
+        var params = RestUriBuilder.pageParam(RestService.itemsPerPage, pageNo: pageNo)
         let inlineParam = RestUriBuilder.inlineParam()
         for param in inlineParam {
             params[param.0] = param.1
@@ -64,7 +61,7 @@ class RestCollectionService {
                         let restObject = self.constructRestObject(dic)
                         restObjects.append(restObject)
                     }
-                    isLastPage = entries.count < self.itemsPerPage
+                    isLastPage = entries.count < RestService.itemsPerPage
                 }
                 completionHandler(restObjects, isLastPage)
             }

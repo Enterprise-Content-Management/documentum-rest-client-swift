@@ -1,5 +1,5 @@
 //
-//  ListViewController.swift
+//  AbstractCollectionViewController.swift
 //  RestClient
 //
 //  Created by Song, Michyo on 3/31/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListViewController: UITableViewController, UISearchResultsUpdating {
+class AbstractCollectionViewController: UITableViewController, UISearchResultsUpdating {
     var objects = [RestObject]()
     var filteredObjects = [RestObject]()
     
@@ -98,7 +98,7 @@ class ListViewController: UITableViewController, UISearchResultsUpdating {
     
     private func initRefreshControl() {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(ListViewController.refreshData), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(AbstractCollectionViewController.refreshData), forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl = refreshControl
     }
     

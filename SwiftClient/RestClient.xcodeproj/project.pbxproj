@@ -26,6 +26,8 @@
 		1E46DE951D702FA6005C492A /* MembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E46DE941D702FA6005C492A /* MembersViewController.swift */; };
 		1E46DE971D702FE9005C492A /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E46DE961D702FE9005C492A /* Group.swift */; };
 		1E46DE991D73D2E9005C492A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E46DE981D73D2E9005C492A /* CoreLocation.framework */; };
+		1E4951291D9B6C7C00D1877A /* ProductInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4951281D9B6C7C00D1877A /* ProductInfoViewController.swift */; };
+		1E49512C1D9B6F7100D1877A /* AbstractRestObjectInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E49512B1D9B6F7100D1877A /* AbstractRestObjectInfoViewController.swift */; };
 		1E596D041D26534F00BD13F9 /* SwitchableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E596D031D26534F00BD13F9 /* SwitchableTableViewCell.swift */; };
 		1E6150351D9A3CBD00BD10B4 /* IconHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6150341D9A3CBD00BD10B4 /* IconHelper.swift */; };
 		1E6150371D9A524400BD10B4 /* DqlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6150361D9A524400BD10B4 /* DqlViewController.swift */; };
@@ -33,7 +35,7 @@
 		1E6299D01CABB08100A59B47 /* RepositoryCollectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6299CF1CABB08100A59B47 /* RepositoryCollectionService.swift */; };
 		1E6299DB1CACD58400A59B47 /* Cabinet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6299DA1CACD58400A59B47 /* Cabinet.swift */; };
 		1E6299DD1CACD5D500A59B47 /* RestObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6299DC1CACD5D500A59B47 /* RestObject.swift */; };
-		1E6299E11CAD1B3300A59B47 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6299E01CAD1B3300A59B47 /* ListViewController.swift */; };
+		1E6299E11CAD1B3300A59B47 /* AbstractCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6299E01CAD1B3300A59B47 /* AbstractCollectionViewController.swift */; };
 		1E6299E31CAD1F7E00A59B47 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6299E21CAD1F7E00A59B47 /* InfoViewController.swift */; };
 		1E6299E71CAE147C00A59B47 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6299E61CAE147C00A59B47 /* Folder.swift */; };
 		1E6299EB1CAE18D700A59B47 /* SysObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6299EA1CAE18D700A59B47 /* SysObject.swift */; };
@@ -133,6 +135,8 @@
 		1E46DE941D702FA6005C492A /* MembersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembersViewController.swift; sourceTree = "<group>"; };
 		1E46DE961D702FE9005C492A /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		1E46DE981D73D2E9005C492A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		1E4951281D9B6C7C00D1877A /* ProductInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductInfoViewController.swift; sourceTree = "<group>"; };
+		1E49512B1D9B6F7100D1877A /* AbstractRestObjectInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractRestObjectInfoViewController.swift; sourceTree = "<group>"; };
 		1E596D031D26534F00BD13F9 /* SwitchableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchableTableViewCell.swift; sourceTree = "<group>"; };
 		1E6150341D9A3CBD00BD10B4 /* IconHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconHelper.swift; sourceTree = "<group>"; };
 		1E6150361D9A524400BD10B4 /* DqlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DqlViewController.swift; sourceTree = "<group>"; };
@@ -140,7 +144,7 @@
 		1E6299CF1CABB08100A59B47 /* RepositoryCollectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryCollectionService.swift; sourceTree = "<group>"; };
 		1E6299DA1CACD58400A59B47 /* Cabinet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cabinet.swift; sourceTree = "<group>"; };
 		1E6299DC1CACD5D500A59B47 /* RestObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestObject.swift; sourceTree = "<group>"; };
-		1E6299E01CAD1B3300A59B47 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		1E6299E01CAD1B3300A59B47 /* AbstractCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractCollectionViewController.swift; sourceTree = "<group>"; };
 		1E6299E21CAD1F7E00A59B47 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		1E6299E61CAE147C00A59B47 /* Folder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		1E6299EA1CAE18D700A59B47 /* SysObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SysObject.swift; sourceTree = "<group>"; };
@@ -238,6 +242,15 @@
 			name = util;
 			sourceTree = "<group>";
 		};
+		1E49512A1D9B6F1E00D1877A /* abstract */ = {
+			isa = PBXGroup;
+			children = (
+				1E6299E01CAD1B3300A59B47 /* AbstractCollectionViewController.swift */,
+				1E49512B1D9B6F7100D1877A /* AbstractRestObjectInfoViewController.swift */,
+			);
+			name = abstract;
+			sourceTree = "<group>";
+		};
 		1E6299C81CABACDC00A59B47 /* base */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +312,7 @@
 		1E6299D31CABCF0F00A59B47 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				1E49512A1D9B6F1E00D1877A /* abstract */,
 				1EC2F8F31D20F94E0041CEEB /* menu */,
 				1EAB83A31CFE8942002AA4BC /* auth */,
 				1EAB83A21CFE8932002AA4BC /* crud */,
@@ -416,7 +430,6 @@
 		1EAB83A01CFE8911002AA4BC /* collection */ = {
 			isa = PBXGroup;
 			children = (
-				1E6299E01CAD1B3300A59B47 /* ListViewController.swift */,
 				1E167A5A1CAA5428000459E3 /* RepoViewController.swift */,
 				1E45CC5D1CFC250F001C0C63 /* SysObjectViewController.swift */,
 				1EAB83A41D051AA9002AA4BC /* FilesViewController.swift */,
@@ -432,6 +445,8 @@
 				1E6299E21CAD1F7E00A59B47 /* InfoViewController.swift */,
 				1EAB839E1CFE8786002AA4BC /* PreviewViewController.swift */,
 				1EAB83AA1D05477E002AA4BC /* FileViewController.swift */,
+				1ED775FF1D24EF4B0039CDA4 /* ProfileViewController.swift */,
+				1E4951281D9B6C7C00D1877A /* ProductInfoViewController.swift */,
 			);
 			name = single;
 			sourceTree = "<group>";
@@ -461,7 +476,6 @@
 			children = (
 				1EC2F8F41D20F9660041CEEB /* SideMenuViewController.swift */,
 				1EDF74301D2373FE00EB6ADC /* SettingViewController.swift */,
-				1ED775FF1D24EF4B0039CDA4 /* ProfileViewController.swift */,
 				1E06D7D01D79791900BB413C /* PopOverMenuForGroupsViewController.swift */,
 				1E01D65F1D89346D0014A005 /* PopOverMenuForSysObjectController.swift */,
 			);
@@ -709,6 +723,7 @@
 				1E397B781D178505005DB494 /* UpdateViewController.swift in Sources */,
 				1E9FD0541D7D25FE00403DE7 /* UserCollectionService.swift in Sources */,
 				1E6299EF1CAE58EA00A59B47 /* RestCollectionService.swift in Sources */,
+				1E4951291D9B6C7C00D1877A /* ProductInfoViewController.swift in Sources */,
 				1EAB83AB1D05477E002AA4BC /* FileViewController.swift in Sources */,
 				1E665CC91CAA2F7B00EF3774 /* ItemTableViewCell.swift in Sources */,
 				1E46C9FC1D2BB4E5003172F7 /* Error.swift in Sources */,
@@ -725,7 +740,7 @@
 				1E167A5B1CAA5428000459E3 /* RepoViewController.swift in Sources */,
 				1E6150371D9A524400BD10B4 /* DqlViewController.swift in Sources */,
 				1E596D041D26534F00BD13F9 /* SwitchableTableViewCell.swift in Sources */,
-				1E6299E11CAD1B3300A59B47 /* ListViewController.swift in Sources */,
+				1E6299E11CAD1B3300A59B47 /* AbstractCollectionViewController.swift in Sources */,
 				1E6299DB1CACD58400A59B47 /* Cabinet.swift in Sources */,
 				1EAB83A91D0524B9002AA4BC /* BundleFile.swift in Sources */,
 				1E82F3811CF4386B001720BE /* JsonUtility.swift in Sources */,
@@ -752,6 +767,7 @@
 				1EDF74311D2373FE00EB6ADC /* SettingViewController.swift in Sources */,
 				1EAB83A51D051AA9002AA4BC /* FilesViewController.swift in Sources */,
 				1ED776001D24EF4B0039CDA4 /* ProfileViewController.swift in Sources */,
+				1E49512C1D9B6F7100D1877A /* AbstractRestObjectInfoViewController.swift in Sources */,
 				1E6299ED1CAE197C00A59B47 /* SysObjectCollectionService.swift in Sources */,
 				1E6150351D9A3CBD00BD10B4 /* IconHelper.swift in Sources */,
 				1EDF74391D23A95B00EB6ADC /* DbUtil.swift in Sources */,

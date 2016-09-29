@@ -119,7 +119,7 @@ class SideMenuViewController: UITableViewController {
         if segue.identifier == "ShowProfile" {
             let naviVC = segue.destinationViewController as! UINavigationController
             let profileViewController = naviVC.topViewController as! ProfileViewController
-            profileViewController.userUrl = Context.repo.getLink(LinkRel.currentUser.rawValue)
+            profileViewController.restObject = currentUser
         } else if segue.identifier == "ShowGroups" {
             let naviCV = segue.destinationViewController as! UINavigationController
             let groupsViewController = naviCV.topViewController as! MembersViewController

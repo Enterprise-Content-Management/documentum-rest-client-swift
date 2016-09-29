@@ -16,7 +16,7 @@ class IconHelper {
         button.setTitle(String.fontAwesomeIconWithName(iconName), forState: state)
     }
     
-    static func setIconForBarButton(button: UIBarButtonItem, iconName: FontAwesome, size: CGFloat = 20, state: UIControlState = .Normal) {
+    static func setIconForBarButton(button: UIBarButtonItem, iconName: FontAwesome, size: CGFloat = 22, state: UIControlState = .Normal) {
         let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(size)] as Dictionary!
         button.setTitleTextAttributes(attributes, forState: state)
         button.title = String.fontAwesomeIconWithName(iconName)

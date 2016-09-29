@@ -24,6 +24,8 @@ class InfoItemTableViewCell : UITableViewCell {
             setInfomationStyle()
         case .Link:
             setLinkStyle()
+        case .ProductInfo:
+            setProductInfoStyle()
         default:
             break
         }
@@ -38,9 +40,15 @@ class InfoItemTableViewCell : UITableViewCell {
         infoValueLabel.font = infoValueLabel.font?.fontWithSize(12)
     }
     
+    func setProductInfoStyle() {
+        infoNameLabel.font = infoNameLabel.font?.fontWithSize(15)
+        infoValueLabel.font = infoValueLabel.font?.fontWithSize(17)
+    }
+    
     enum InfoItemCellStyle {
         case Basic
         case Infomation
         case Link
+        case ProductInfo
     }
 }

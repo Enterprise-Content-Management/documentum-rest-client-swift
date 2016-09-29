@@ -20,6 +20,9 @@ class RestService {
     static let MIME_JPEG = "image/jpeg"
     static let MIME_TEXT = "text/plain"
     
+    // Properties for dramatical load data
+    static let itemsPerPage = 20
+    
     // MARK: - Util
     
     private static func setPreAuth(plainString: NSString = RestUriBuilder.getCurrentLoginAuthString()) -> [String : String] {
@@ -155,6 +158,17 @@ class RestService {
         })
     }
     
+    static func getProductInfo(url: String, completionHandler: (JSON?, Error?) -> ()) {
+        sendRequest(.GET, url: url, onSuccess: { json in
+                completionHandler(json, nil)
+            }
+            , onFailure: { json in
+                let error = Error(json: json)
+                completionHandler(nil, error)
+            }
+        )
+    }
+    
     // MARK: - CRUD control requests
     
     private static func getStringOnSuccess(message: String, completionHandler: (String?, Error?) -> ()) {
@@ -207,9 +221,11 @@ class RestService {
     }
     
     private static func getRepositoriesUrlOnSuccess(json: JSON, completionHandler: (String?, Error?) -> ()) {
-        let resources = json["resources"].dictionary
-        let repositories = resources![LinkRel.repositories.rawValue]?.dictionary
+        let resources = json["resources"].dictionary!
+        let repositories = resources[LinkRel.repositories.rawValue]?.dictionary
         let url = repositories!["href"]?.stringValue
+        let about = resources["about"]?.dictionary
+        Context.productInfoUrl = about!["href"]?.stringValue
         completionHandler(url, nil)
     }
     

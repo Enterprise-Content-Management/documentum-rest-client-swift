@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SysObjectViewController: ListViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate, UISearchBarDelegate {
+class SysObjectViewController: AbstractCollectionViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet var footView: UILabel!

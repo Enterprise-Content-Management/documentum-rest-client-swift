@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MembersViewController: ListViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
+class MembersViewController: AbstractCollectionViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
     @IBOutlet var footView: UILabel!
     
     // Only used by first time into Groups
@@ -154,7 +154,7 @@ class MembersViewController: ListViewController, UIGestureRecognizerDelegate, UI
             navigationController!.pushViewController(nextViewController, animated: true)
         } else {
             let nextViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
-            nextViewController.currentUser = restObject as! User
+            nextViewController.restObject = restObject
             navigationController!.pushViewController(nextViewController, animated: true)
         }
     }

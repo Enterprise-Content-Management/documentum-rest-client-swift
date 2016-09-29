@@ -11,4 +11,5 @@ import UIKit
 class Context {
     static var repo: RestObject!
     static var clickBoard: RestObject!
+    static var productInfoUrl: String!
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MultiMemberViewController: ListViewController {
+class MultiMemberViewController: AbstractCollectionViewController {
     @IBOutlet var footView: UILabel!
     
     var parentGroup: Group!

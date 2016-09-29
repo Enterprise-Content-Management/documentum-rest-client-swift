@@ -20,7 +20,7 @@ class RestObject {
     
     let jsonDic: NSDictionary
     var links: Dictionary<String, String> = [:]
-    var properties: NSDictionary = [:]
+    var properties: Dictionary<String, AnyObject> = [:]
     
     init(entryDic: NSDictionary) {
         jsonDic = entryDic
@@ -31,7 +31,7 @@ class RestObject {
         
         let content = entryDic["content"] as! Dictionary<String, AnyObject>
         if let propertiesDic = content[ObjectProperties.PROPERTIES.rawValue] as? NSDictionary {
-            properties = propertiesDic
+            properties = propertiesDic as! Dictionary<String, AnyObject>
         }
         
         let links = content[ObjectProperties.LINKS.rawValue] as! NSArray
@@ -45,10 +45,13 @@ class RestObject {
         let links = singleDic[ObjectProperties.LINKS.rawValue] as! NSArray
         constructLinks(links)
         setBasic(.ID, value: getLink(LinkRel.selfRel.rawValue)!)
-        properties = singleDic["properties"] as! NSDictionary
+        properties = singleDic["properties"] as! Dictionary<String, AnyObject>
         
-        if let type = getProperty(.R_OBJECT_TYPE) as? String {
-            setType(RestObject.getShowType(type))
+        if let type = singleDic["type"] as? String {
+            setTypeWithDmType(type)
+        }
+        else if let type = getProperty(.R_OBJECT_TYPE) as? String {
+            setTypeWithDmType(type)
         }
         if let name = getProperty(.OBJECT_NAME) as? String {
             setBasic(.NAME, value: name)
@@ -72,7 +75,7 @@ class RestObject {
         let links = searchDic[ObjectProperties.LINKS.rawValue] as! NSArray
         constructLinks(links)
         let content = searchDic["content"] as! Dictionary<String, AnyObject>
-        properties = content[ObjectProperties.PROPERTIES.rawValue] as! NSDictionary
+        properties = content[ObjectProperties.PROPERTIES.rawValue] as! Dictionary<String, AnyObject>
         
         setBasic(.ID, value: getLink(LinkRel.edit.rawValue)!)
         setBasic(.NAME, value: getProperty(.OBJECT_NAME) as! String)
@@ -184,7 +187,7 @@ class RestObject {
     }
     
     func getProperty(propertyName: String) -> AnyObject? {
-        return properties.valueForKey(propertyName)
+        return properties[propertyName]
     }
     
     func getProperty(propertyName: ObjectProperties) -> AnyObject? {

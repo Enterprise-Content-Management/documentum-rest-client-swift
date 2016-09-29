@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FilesViewController: ListViewController {
+class FilesViewController: AbstractCollectionViewController {
     
     var files = [BundleFile]()
     var filtedFiles = [BundleFile]()

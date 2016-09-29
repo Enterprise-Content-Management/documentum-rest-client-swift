@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RepoViewController: ListViewController {
+class RepoViewController: AbstractCollectionViewController {
     
     // MARK: Properties
     @IBOutlet weak var menuButton: UIBarButtonItem!
