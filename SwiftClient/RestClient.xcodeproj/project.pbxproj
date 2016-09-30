@@ -63,6 +63,9 @@
 		1EB101C61D7EACE5007138A9 /* AddGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB101C51D7EACE5007138A9 /* AddGroupViewController.swift */; };
 		1EC128501CEC1ACB0093E978 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC1284F1CEC1ACB0093E978 /* LoginViewController.swift */; };
 		1EC128541CF2B2580093E978 /* InfoItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC128531CF2B2580093E978 /* InfoItemTableViewCell.swift */; };
+		1EC132231D9E110E00D8A3A4 /* TopAlignTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC132221D9E110E00D8A3A4 /* TopAlignTextLabel.swift */; };
+		1EC132251D9E432500D8A3A4 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC132241D9E432500D8A3A4 /* Comment.swift */; };
+		1EC132271D9E468B00D8A3A4 /* CommentItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC132261D9E468B00D8A3A4 /* CommentItemTableViewCell.swift */; };
 		1EC2F8F51D20F9660041CEEB /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC2F8F41D20F9660041CEEB /* SideMenuViewController.swift */; };
 		1EC782F71D139B2100982FA2 /* RestServiceEnhance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC782F61D139B2100982FA2 /* RestServiceEnhance.swift */; };
 		1ED776001D24EF4B0039CDA4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED775FF1D24EF4B0039CDA4 /* ProfileViewController.swift */; };
@@ -178,6 +181,9 @@
 		1EB101C51D7EACE5007138A9 /* AddGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupViewController.swift; sourceTree = "<group>"; };
 		1EC1284F1CEC1ACB0093E978 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1EC128531CF2B2580093E978 /* InfoItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoItemTableViewCell.swift; sourceTree = "<group>"; };
+		1EC132221D9E110E00D8A3A4 /* TopAlignTextLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopAlignTextLabel.swift; sourceTree = "<group>"; };
+		1EC132241D9E432500D8A3A4 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		1EC132261D9E468B00D8A3A4 /* CommentItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentItemTableViewCell.swift; sourceTree = "<group>"; };
 		1EC2F8F41D20F9660041CEEB /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		1EC5398D1D41C1AD0024D789 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		1EC782F61D139B2100982FA2 /* RestServiceEnhance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestServiceEnhance.swift; sourceTree = "<group>"; };
@@ -284,6 +290,7 @@
 				1E6299EA1CAE18D700A59B47 /* SysObject.swift */,
 				1ED776011D25079F0039CDA4 /* User.swift */,
 				1E46DE961D702FE9005C492A /* Group.swift */,
+				1EC132241D9E432500D8A3A4 /* Comment.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -334,6 +341,7 @@
 		1E6299D51CABCF4800A59B47 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				1EC132211D9E10F900D8A3A4 /* label */,
 				1ED776041D251D3F0039CDA4 /* button */,
 				1ED776031D251D380039CDA4 /* cell */,
 			);
@@ -471,6 +479,14 @@
 			name = auth;
 			sourceTree = "<group>";
 		};
+		1EC132211D9E10F900D8A3A4 /* label */ = {
+			isa = PBXGroup;
+			children = (
+				1EC132221D9E110E00D8A3A4 /* TopAlignTextLabel.swift */,
+			);
+			name = label;
+			sourceTree = "<group>";
+		};
 		1EC2F8F31D20F94E0041CEEB /* menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,6 +506,7 @@
 				1EAB83A61D051F95002AA4BC /* FileItemTableViewCell.swift */,
 				1E596D031D26534F00BD13F9 /* SwitchableTableViewCell.swift */,
 				1EEFF0DB1D92733C002D40C7 /* MemberTableViewCell.swift */,
+				1EC132261D9E468B00D8A3A4 /* CommentItemTableViewCell.swift */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -726,6 +743,7 @@
 				1E4951291D9B6C7C00D1877A /* ProductInfoViewController.swift in Sources */,
 				1EAB83AB1D05477E002AA4BC /* FileViewController.swift in Sources */,
 				1E665CC91CAA2F7B00EF3774 /* ItemTableViewCell.swift in Sources */,
+				1EC132251D9E432500D8A3A4 /* Comment.swift in Sources */,
 				1E46C9FC1D2BB4E5003172F7 /* Error.swift in Sources */,
 				1E6299E31CAD1F7E00A59B47 /* InfoViewController.swift in Sources */,
 				1ED776061D251D4A0039CDA4 /* CheckBox.swift in Sources */,
@@ -733,6 +751,7 @@
 				1EC128501CEC1ACB0093E978 /* LoginViewController.swift in Sources */,
 				1E67BCB91D20C88400716A33 /* ErrorAlert.swift in Sources */,
 				1E9FD0521D7D259600403DE7 /* MultiMemberViewController.swift in Sources */,
+				1EC132271D9E468B00D8A3A4 /* CommentItemTableViewCell.swift in Sources */,
 				1EEB097B1D81422C007E65D7 /* Context.swift in Sources */,
 				1EAB839F1CFE8786002AA4BC /* PreviewViewController.swift in Sources */,
 				1EEFF0DC1D92733C002D40C7 /* MemberTableViewCell.swift in Sources */,
@@ -740,6 +759,7 @@
 				1E167A5B1CAA5428000459E3 /* RepoViewController.swift in Sources */,
 				1E6150371D9A524400BD10B4 /* DqlViewController.swift in Sources */,
 				1E596D041D26534F00BD13F9 /* SwitchableTableViewCell.swift in Sources */,
+				1EC132231D9E110E00D8A3A4 /* TopAlignTextLabel.swift in Sources */,
 				1E6299E11CAD1B3300A59B47 /* AbstractCollectionViewController.swift in Sources */,
 				1E6299DB1CACD58400A59B47 /* Cabinet.swift in Sources */,
 				1EAB83A91D0524B9002AA4BC /* BundleFile.swift in Sources */,

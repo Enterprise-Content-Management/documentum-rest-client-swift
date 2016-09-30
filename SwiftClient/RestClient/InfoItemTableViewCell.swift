@@ -30,7 +30,7 @@ class InfoItemTableViewCell : UITableViewCell {
             break
         }
     }
-    
+
     func setInfomationStyle() {
         infoNameLabel.font = infoNameLabel.font.fontWithSize(14)
     }

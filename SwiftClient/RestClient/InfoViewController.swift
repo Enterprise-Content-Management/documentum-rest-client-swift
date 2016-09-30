@@ -16,9 +16,10 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var previewButton: UIBarButtonItem!
     
     var object: RestObject!
-    var info: Array<(String, Array<(String, String)>)> = [
-        ("Basic", [])
-    ]
+    var comments: [Comment] = []
+    let sectionTitles = ["Basic", "Links", "Comments"]
+    var shownSections = [0, 2]
+    
     var needUpdate: Bool = false
 
     var mimeType: String = "unknown"
@@ -38,8 +39,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         setImage()
         unshowPreviewButton()
-        
-        loadDataForTable()
+
         view.bringSubviewToFront(groupedTableView)
     }
     
@@ -88,26 +88,6 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         previewButton.tintColor = nil
     }
     
-    func loadDataForTable() {
-        info.removeAll()
-        
-        var basicArray = [] as Array<(String, String)>
-        basicArray.append(getBasicPair(.ID))
-        basicArray.append(getBasicPair(.TYPE))
-        basicArray.append(getBasicPair(.NAME))
-        basicArray.append(getBasicPair(.UPDATED))
-        basicArray.append(getBasicPair(.PUBLISHED))
-        info.append(("Basic", basicArray))
-
-        // Unshown links
-//        let linkDic = object?.links
-//        var linkArray = [] as Array<(String, String)>
-//        for link in linkDic! {
-//            linkArray.append((RestObject.getRawLinkRel(link.0), link.1))
-//        }
-//        info.append(("Links", linkArray))
-    }
-    
     private func getBasicPair(key: String) -> (String, String) {
         return (key, object.basic[key]!)
     }
@@ -117,43 +97,90 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     private func refreshTable() {
-        let id = info[0].1[0].1
+        let id = object.getId()
         
         RestService.getRestObject(id) { restObject, error in
             if restObject != nil {
                 self.object = restObject!
-                self.loadDataForTable()
                 self.groupedTableView.reloadData()
             }
         }
     }
     
     // MARK: - Table view control
+    private func getDicForSection(section: Int) -> Dictionary<String, String> {
+        switch section {
+        case 0:
+           return object.basic
+        case 1:
+            return object.links
+        default:
+            return [:]
+        }
+    }
+    
+    private func showComments() -> Bool {
+        let type = object.getType()
+        let isSysObject = (type == RestObjectType.document.rawValue) || (type == RestObjectType.sysObject.rawValue)
+        return isSysObject && shownSections.contains(2)
+    }
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return self.info.count
+        return sectionTitles.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.info[section].1.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("InfoItemTableViewCell", forIndexPath: indexPath) as! InfoItemTableViewCell
-        let cellInfo = self.info[indexPath.section].1[indexPath.row]
-        
-        cell.initCell(cellInfo.0, value: cellInfo.1)        
-        return cell
+        if shownSections.contains(section) {
+            switch section {
+            case 2:
+                if showComments() {
+                    return comments.count
+                }
+            default:
+                return getDicForSection(section).count
+            }
+        }
+        return 0
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return info[section].0
+        if section == 2 && showComments() {
+            return sectionTitles[2]
+        }
+        if section != 2 && shownSections.contains(section) {
+            return sectionTitles[section]
+        }
+        return nil
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let section = indexPath.section
+
+        if section == 0 || section == 1 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("InfoItemTableViewCell", forIndexPath: indexPath) as! InfoItemTableViewCell
+            let dic = getDicForSection(section)
+            let key = dic.keys.sort()[indexPath.row]
+            cell.initCell(key, value: dic[key]!)
+            return cell
+        } else if section == 2 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("CommentItemTableViewCell", forIndexPath: indexPath) as! CommentItemTableViewCell
+            cell.initCell(comments[indexPath.row])
+            return cell
+        }
+        return UITableViewCell.init()
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 2 {
+            return 160
+        }
         return UITableViewAutomaticDimension
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 2 {
+            return 160
+        }
         return UITableViewAutomaticDimension
     }
     

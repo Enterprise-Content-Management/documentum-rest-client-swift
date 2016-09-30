@@ -17,6 +17,10 @@ class MemberTableViewCell: UITableViewCell {
         setName(name)
     }
     
+    func initCell(object: RestObject) {
+        initCell(object.getType(), name: object.getName())
+    }
+    
     func setThumbnailImage(photoName: String) {
         iconImageView.image = UIImage(named: photoName)
     }

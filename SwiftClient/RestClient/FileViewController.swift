@@ -188,7 +188,6 @@ class FileViewController: UIViewController {
                     self.navigationController?.popViewControllerAnimated(true)
                     let infoViewController = self.navigationController?.topViewController as! InfoViewController
                     infoViewController.object = object
-                    infoViewController.loadDataForTable()
                     infoViewController.groupedTableView.reloadData()
                 }
             }

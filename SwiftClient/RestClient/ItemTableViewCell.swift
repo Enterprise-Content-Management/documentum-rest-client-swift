@@ -21,4 +21,8 @@ class ItemTableViewCell: UITableViewCell {
         fileNameLabel.text = filename
         thumbnailPhotoImageView.image = UIImage(named: fileType)
     }
+    
+    func initCell(object: RestObject) {
+        initCell(object.getName(), fileType: object.getType())
+    }
 }

@@ -14,6 +14,11 @@ class FileItemTableViewCell: UITableViewCell {
     
     func initCell(name: String, path: String) {
         fileNameLabel.text = name
-        fileNameLabel.text = path
+        filePathLabel.text = path
+    }
+    
+    func initCell(file: BundleFile) {
+        fileNameLabel.text = file.fileName
+        filePathLabel.text = file.filePath
     }
 }

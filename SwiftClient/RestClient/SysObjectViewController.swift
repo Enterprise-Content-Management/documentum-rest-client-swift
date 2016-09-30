@@ -297,6 +297,7 @@ class SysObjectViewController: AbstractCollectionViewController, UIGestureRecogn
     }
 
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        footView.text = nil
         filteredObjects.removeAll()
         isActive = true
         tableView.reloadData()
@@ -323,6 +324,8 @@ class SysObjectViewController: AbstractCollectionViewController, UIGestureRecogn
                     self.filteredObjects.append(object)
                 }
                 self.tableView.reloadData()
+            } else {
+                self.footView.text = "- Nothing -"
             }
             self.aiHelper.stopActivityIndicator()
         }
