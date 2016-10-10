@@ -52,6 +52,7 @@
 		1E82F3831CF5AB94001720BE /* AddObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E82F3821CF5AB94001720BE /* AddObjectViewController.swift */; };
 		1E8AB7721DAA197300ADFD8B /* CommentCollectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8AB7711DAA197300ADFD8B /* CommentCollectionService.swift */; };
 		1E8AB7741DAB2ED700ADFD8B /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8AB7731DAB2ED700ADFD8B /* Utility.swift */; };
+		1E8AB7761DAB3AC800ADFD8B /* CommentFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8AB7751DAB3AC800ADFD8B /* CommentFootView.swift */; };
 		1E96A6B31D5DBF97008CEB47 /* UIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96A6B21D5DBF97008CEB47 /* UIUtil.swift */; };
 		1E9A6B0D1CAA848F00B97BC0 /* RestUriBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9A6B0C1CAA848F00B97BC0 /* RestUriBuilder.swift */; };
 		1E9FD0521D7D259600403DE7 /* MultiMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9FD0511D7D259600403DE7 /* MultiMemberViewController.swift */; };
@@ -172,6 +173,7 @@
 		1E82F3821CF5AB94001720BE /* AddObjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddObjectViewController.swift; sourceTree = "<group>"; };
 		1E8AB7711DAA197300ADFD8B /* CommentCollectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCollectionService.swift; sourceTree = "<group>"; };
 		1E8AB7731DAB2ED700ADFD8B /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		1E8AB7751DAB3AC800ADFD8B /* CommentFootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentFootView.swift; sourceTree = "<group>"; };
 		1E96A6B21D5DBF97008CEB47 /* UIUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtil.swift; sourceTree = "<group>"; };
 		1E9A6B0C1CAA848F00B97BC0 /* RestUriBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestUriBuilder.swift; sourceTree = "<group>"; };
 		1E9FD0511D7D259600403DE7 /* MultiMemberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiMemberViewController.swift; sourceTree = "<group>"; };
@@ -513,6 +515,7 @@
 				1E596D031D26534F00BD13F9 /* SwitchableTableViewCell.swift */,
 				1EEFF0DB1D92733C002D40C7 /* MemberTableViewCell.swift */,
 				1EC132261D9E468B00D8A3A4 /* CommentItemTableViewCell.swift */,
+				1E8AB7751DAB3AC800ADFD8B /* CommentFootView.swift */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -748,6 +751,7 @@
 				1E6299EF1CAE58EA00A59B47 /* RestCollectionService.swift in Sources */,
 				1E4951291D9B6C7C00D1877A /* ProductInfoViewController.swift in Sources */,
 				1EAB83AB1D05477E002AA4BC /* FileViewController.swift in Sources */,
+				1E8AB7761DAB3AC800ADFD8B /* CommentFootView.swift in Sources */,
 				1E665CC91CAA2F7B00EF3774 /* ItemTableViewCell.swift in Sources */,
 				1EC132251D9E432500D8A3A4 /* Comment.swift in Sources */,
 				1E46C9FC1D2BB4E5003172F7 /* Error.swift in Sources */,

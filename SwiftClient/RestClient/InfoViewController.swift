@@ -45,7 +45,9 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
         view.bringSubviewToFront(groupedTableView)
         
-        loadComments()
+        if showComments() {
+            loadComments()
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -115,6 +117,12 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Data
     
     func loadComments() {
+        comments.removeAll()
+        
+        let aiHelper = ActivityIndicatorHelper()
+        aiHelper.addActivityIndicator(groupedTableView)
+        aiHelper.startActivityIndicator()
+        
         let commentService = CommentCollectionService()
         commentService.url = object.getLink(LinkRel.comments.rawValue)!
         commentService.getEntries(commentPage, thisViewController: self) { comments, isLastPage in
@@ -129,6 +137,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
             dispatch_async(dispatch_get_main_queue(), {
                 () -> Void in
                 self.groupedTableView.reloadData()
+                aiHelper.stopActivityIndicator()
             })
         }
     }
@@ -177,6 +186,22 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return sectionTitles[section]
         }
         return nil
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == 2 && showComments() {
+            let cell = tableView.dequeueReusableCellWithIdentifier("CommentFootView") as! CommentFootView
+            cell.initCell()
+            return cell
+        }
+        return nil
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 2 && showComments() {
+            return CommentFootView.height
+        }
+        return tableView.sectionFooterHeight
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -276,5 +301,27 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
         return false
+    }
+    
+    // MARK: - Comments Misc
+    @IBAction func addNewComment(sender: UIButton) {
+        let commentController = UIAlertController(title: "Add new comment", message: "Please input your comment.", preferredStyle: .Alert)
+        commentController.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
+            textField.placeholder = "comment..."
+        }
+        let sendAction = UIAlertAction(title: "Send", style: .Default) { (action: UIAlertAction!) -> Void in
+            let content = commentController.textFields!.first!.text!
+            let commentsUrl = self.object.getLink(LinkRel.comments.rawValue)!
+            let requesBody = ["content-value": content]
+            RestService.createWithAuth(commentsUrl, requestBody: requesBody) { dic, error in
+                if dic != nil {
+                    self.loadComments()
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        commentController.addAction(sendAction)
+        commentController.addAction(cancelAction)
+        presentViewController(commentController, animated: true, completion: nil)
     }
 }
