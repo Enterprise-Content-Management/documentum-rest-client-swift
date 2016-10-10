@@ -14,15 +14,24 @@ class Comment: RestObject {
     
     override init(entryDic: NSDictionary) {
         super.init(entryDic: entryDic)
+        
+        setType(RestObjectType.comment.rawValue)
+        let singleDic = entryDic["content"] as! NSDictionary
+        commentContent = singleDic["content-value"] as! String
+        
         let authorDic = (entryDic["author"] as! NSArray)[0] as! Dictionary<String, String>
         author = Author(name: authorDic["name"], uri: authorDic["uri"])
-        commentContent = entryDic["summary"] as! String
     }
     
     override init(singleDic: NSDictionary) {
         super.init(singleDic: singleDic)
+
+        setType(RestObjectType.comment.rawValue)
+        setUpdated(singleDic["modified-date"] as! String)
+        setPublished(singleDic["creation-date"] as! String)
         
-        // TODO: need modify
+        author = Author(name: singleDic["owner-name"] as! String, uri: nil)
+        commentContent = singleDic["content-value"] as! String
     }
     
     func getAuthorName() -> String {
@@ -40,5 +49,5 @@ class Comment: RestObject {
 
 struct Author {
     var name: String!
-    var uri: String!
+    var uri: String?
 }

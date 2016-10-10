@@ -9,6 +9,8 @@
 import UIKit
 
 class CommentItemTableViewCell: UITableViewCell {
+    static let height: CGFloat = 107
+    
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var commentDateLabel: UILabel!
     @IBOutlet weak var commentContentLabel: TopAlignTextLabel!
@@ -19,7 +21,7 @@ class CommentItemTableViewCell: UITableViewCell {
     
     func initCell(name: String, date: String, content: String) {
         authorNameLabel.text = name
-        commentDateLabel.text = date
+        commentDateLabel.text = Utility.getReadableDate(date)!
         commentContentLabel.text = content
     }
 }

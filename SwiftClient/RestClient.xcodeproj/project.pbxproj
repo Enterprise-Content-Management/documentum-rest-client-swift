@@ -50,6 +50,8 @@
 		1E67BCB91D20C88400716A33 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E67BCB81D20C88400716A33 /* ErrorAlert.swift */; };
 		1E82F3811CF4386B001720BE /* JsonUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E82F3801CF4386B001720BE /* JsonUtility.swift */; };
 		1E82F3831CF5AB94001720BE /* AddObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E82F3821CF5AB94001720BE /* AddObjectViewController.swift */; };
+		1E8AB7721DAA197300ADFD8B /* CommentCollectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8AB7711DAA197300ADFD8B /* CommentCollectionService.swift */; };
+		1E8AB7741DAB2ED700ADFD8B /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8AB7731DAB2ED700ADFD8B /* Utility.swift */; };
 		1E96A6B31D5DBF97008CEB47 /* UIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96A6B21D5DBF97008CEB47 /* UIUtil.swift */; };
 		1E9A6B0D1CAA848F00B97BC0 /* RestUriBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9A6B0C1CAA848F00B97BC0 /* RestUriBuilder.swift */; };
 		1E9FD0521D7D259600403DE7 /* MultiMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9FD0511D7D259600403DE7 /* MultiMemberViewController.swift */; };
@@ -168,6 +170,8 @@
 		1E67BCB81D20C88400716A33 /* ErrorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
 		1E82F3801CF4386B001720BE /* JsonUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonUtility.swift; sourceTree = "<group>"; };
 		1E82F3821CF5AB94001720BE /* AddObjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddObjectViewController.swift; sourceTree = "<group>"; };
+		1E8AB7711DAA197300ADFD8B /* CommentCollectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCollectionService.swift; sourceTree = "<group>"; };
+		1E8AB7731DAB2ED700ADFD8B /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		1E96A6B21D5DBF97008CEB47 /* UIUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtil.swift; sourceTree = "<group>"; };
 		1E9A6B0C1CAA848F00B97BC0 /* RestUriBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestUriBuilder.swift; sourceTree = "<group>"; };
 		1E9FD0511D7D259600403DE7 /* MultiMemberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiMemberViewController.swift; sourceTree = "<group>"; };
@@ -276,6 +280,7 @@
 				1E06D7CC1D74356E00BB413C /* GroupCollectionService.swift */,
 				1E9FD0531D7D25FE00403DE7 /* UserCollectionService.swift */,
 				1E01D6611D893CD90014A005 /* MiscService.swift */,
+				1E8AB7711DAA197300ADFD8B /* CommentCollectionService.swift */,
 			);
 			name = resource;
 			sourceTree = "<group>";
@@ -415,6 +420,7 @@
 			isa = PBXGroup;
 			children = (
 				1E251A841D23B997006056F9 /* source */,
+				1E8AB7731DAB2ED700ADFD8B /* Utility.swift */,
 				1E82F3801CF4386B001720BE /* JsonUtility.swift */,
 				1EAB83AC1D056B79002AA4BC /* FileUtil.swift */,
 				1EDF74381D23A95B00EB6ADC /* DbUtil.swift */,
@@ -762,6 +768,7 @@
 				1EC132231D9E110E00D8A3A4 /* TopAlignTextLabel.swift in Sources */,
 				1E6299E11CAD1B3300A59B47 /* AbstractCollectionViewController.swift in Sources */,
 				1E6299DB1CACD58400A59B47 /* Cabinet.swift in Sources */,
+				1E8AB7741DAB2ED700ADFD8B /* Utility.swift in Sources */,
 				1EAB83A91D0524B9002AA4BC /* BundleFile.swift in Sources */,
 				1E82F3811CF4386B001720BE /* JsonUtility.swift in Sources */,
 				1E46DE971D702FE9005C492A /* Group.swift in Sources */,
@@ -769,6 +776,7 @@
 				1EC782F71D139B2100982FA2 /* RestServiceEnhance.swift in Sources */,
 				1E397B7A1D17D020005DB494 /* ActivityIndicatorHelper.swift in Sources */,
 				1EB101C61D7EACE5007138A9 /* AddGroupViewController.swift in Sources */,
+				1E8AB7721DAA197300ADFD8B /* CommentCollectionService.swift in Sources */,
 				1E82F3831CF5AB94001720BE /* AddObjectViewController.swift in Sources */,
 				1E01D6601D89346D0014A005 /* PopOverMenuForSysObjectController.swift in Sources */,
 				1E46DE951D702FA6005C492A /* MembersViewController.swift in Sources */,

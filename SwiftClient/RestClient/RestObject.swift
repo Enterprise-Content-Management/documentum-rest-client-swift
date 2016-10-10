@@ -229,6 +229,7 @@ enum RestObjectType : String {
     case sysObject = "SysObject"
     case group = "Group"
     case user = "User"
+    case comment = "Comment"
 }
 
 enum ObjectProperties: String {

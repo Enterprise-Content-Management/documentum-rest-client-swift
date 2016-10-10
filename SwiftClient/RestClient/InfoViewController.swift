@@ -16,7 +16,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var previewButton: UIBarButtonItem!
     
     var object: RestObject!
-    var comments: [Comment] = []
+    var comments: [RestObject] = []
     let sectionTitles = ["Basic", "Links", "Comments"]
     var shownSections = [0, 2]
     
@@ -25,6 +25,9 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var mimeType: String = "unknown"
     var objectId: String!
     var downloadUrl: String!
+    
+    var commentPage: Int = 1
+    var isCommentLastPage: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +44,8 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         unshowPreviewButton()
 
         view.bringSubviewToFront(groupedTableView)
+        
+        loadComments()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -107,6 +112,27 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
+    // MARK: - Data
+    
+    func loadComments() {
+        let commentService = CommentCollectionService()
+        commentService.url = object.getLink(LinkRel.comments.rawValue)!
+        commentService.getEntries(commentPage, thisViewController: self) { comments, isLastPage in
+            self.isCommentLastPage = isLastPage
+            for comment in comments {
+                self.comments.append(comment)
+            }
+            // set for ui
+            self.view?.bringSubviewToFront(self.groupedTableView)
+            
+            // refresh list view to show all items
+            dispatch_async(dispatch_get_main_queue(), {
+                () -> Void in
+                self.groupedTableView.reloadData()
+            })
+        }
+    }
+    
     // MARK: - Table view control
     private func getDicForSection(section: Int) -> Dictionary<String, String> {
         switch section {
@@ -164,7 +190,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return cell
         } else if section == 2 {
             let cell = tableView.dequeueReusableCellWithIdentifier("CommentItemTableViewCell", forIndexPath: indexPath) as! CommentItemTableViewCell
-            cell.initCell(comments[indexPath.row])
+            cell.initCell(comments[indexPath.row] as! Comment)
             return cell
         }
         return UITableViewCell.init()
@@ -172,14 +198,14 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 2 {
-            return 160
+            return CommentItemTableViewCell.height
         }
         return UITableViewAutomaticDimension
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 2 {
-            return 160
+            return CommentItemTableViewCell.height
         }
         return UITableViewAutomaticDimension
     }

@@ -74,4 +74,10 @@ class JsonUtility {
         let batchOpDic: NSDictionary = ["id": id, "description": description, "request": requestDic]
         return batchOpDic
     }
+    
+    static func parseDate(dateString: String) -> NSDate? {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'hh:mm:ss.SSSxxx"
+        return dateFormatter.dateFromString(dateString)
+    }
 }
