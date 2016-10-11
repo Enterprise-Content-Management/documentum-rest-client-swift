@@ -16,5 +16,6 @@ class CommentFootView: UITableViewCell {
     
     func initCell() {
         IconHelper.setIconForLabel(newCommentImageLabel, iconName: .CommentO, size: 18)
+        contentView.backgroundColor = UIColor.whiteColor()
     }
 }

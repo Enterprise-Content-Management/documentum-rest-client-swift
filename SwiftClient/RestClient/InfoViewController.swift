@@ -28,6 +28,8 @@ class InfoViewController: UITableViewController {
     var commentPage: Int = 1
     var isCommentLastPage: Bool = true
     
+    let aiHelper = ActivityIndicatorHelper()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,6 +40,7 @@ class InfoViewController: UITableViewController {
         unshowPreviewButton()
 
         view.bringSubviewToFront(tableView)
+        aiHelper.addActivityIndicator(tableView)
         
         if showComments() {
             loadComments()
@@ -109,8 +112,6 @@ class InfoViewController: UITableViewController {
     // MARK: - Data
     
     func loadComments() {
-        let aiHelper = ActivityIndicatorHelper()
-        aiHelper.addActivityIndicator(tableView)
         aiHelper.startActivityIndicator()
         
         let commentService = CommentCollectionService()
@@ -126,7 +127,7 @@ class InfoViewController: UITableViewController {
             dispatch_async(dispatch_get_main_queue(), {
                 () -> Void in
                 self.tableView.reloadData()
-                aiHelper.stopActivityIndicator()
+                self.aiHelper.stopActivityIndicator()
             })
         }
     }
@@ -181,7 +182,7 @@ class InfoViewController: UITableViewController {
         if section == 2 && showComments() {
             let cell = tableView.dequeueReusableCellWithIdentifier("CommentFootView") as! CommentFootView
             cell.initCell()
-            return cell
+            return cell.contentView
         }
         return nil
     }
@@ -243,6 +244,23 @@ class InfoViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Middle, animated: true)
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        if comments.isEmpty || indexPath.row >= comments.count {
+            return false
+        }
+        let comment = comments[indexPath.row] as! Comment
+        if indexPath.section == 2 && comment.getCanDelete() {
+            return true
+        }
+        return false
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            showDeleteDialog(indexPath)
+        }
     }
     
     // MARK: - Bar Button Control    
@@ -337,9 +355,9 @@ class InfoViewController: UITableViewController {
         presentViewController(commentController, animated: true, completion: nil)
     }
     
-    private func getRelatedObjectIndex(sender: UIButton) -> Int {
+    private func getRelatedObjectIndex(sender: UIButton) -> NSIndexPath {
         let cell = sender.superview?.superview as! CommentItemTableViewCell
-        return tableView.indexPathForCell(cell)!.row
+        return tableView.indexPathForCell(cell)!
     }
     
     @IBAction func onClickReply(sender: UIButton) {
@@ -353,7 +371,7 @@ class InfoViewController: UITableViewController {
         }
         let sendAction = UIAlertAction(title: "Send", style: .Default) { (action: UIAlertAction!) -> Void in
             let content = replyController.textFields!.first!.text!
-            let index = self.getRelatedObjectIndex(sender)
+            let index = self.getRelatedObjectIndex(sender).row
             let repliesUrl = self.comments[index].getLink(LinkRel.replies.rawValue)!
             let requestBody = ["content-value": content]
             RestService.createWithAuth(repliesUrl, requestBody: requestBody) { dic, error in
@@ -372,5 +390,58 @@ class InfoViewController: UITableViewController {
     }
 
     @IBAction func onClickDelete(sender: UIButton) {
+        showDeleteDialog(getRelatedObjectIndex(sender))
+    }
+    
+    private func showDeleteDialog(indexPath: NSIndexPath) {
+        let showingMessage: String = "Are you sure to delete this comment?"
+        let alertController = UIAlertController(
+            title: "Delete Warning",
+            message: showingMessage,
+            preferredStyle: .Alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancle", style: .Cancel) { (action: UIAlertAction!) in
+            self.cancelDelete(indexPath)
+        }
+        alertController.addAction(cancelAction)
+        
+        let okAction = UIAlertAction(title: "OK", style: .Default) { (action: UIAlertAction!) in
+            self.doDelete(indexPath)
+        }
+        alertController.addAction(okAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    private func doDelete(indexPath: NSIndexPath) {
+        aiHelper.startActivityIndicator()
+        let object = comments[indexPath.row] as RestObject
+        
+        if object.getLink(LinkRel.delete.rawValue) != nil {
+            let deletLink = object.getLink(LinkRel.delete.rawValue)!
+            RestService.deleteWithAuth(deletLink) { result, error in
+                if result != nil {
+                    print("Successfully delete this comment from cloud.")
+                    self.aiHelper.stopActivityIndicator()
+                    
+                    self.comments.removeAtIndex(indexPath.row)
+                    self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+                    
+                    let index = indexPath.row
+                    if object.getType() == RestObjectType.comment.rawValue && index < self.comments.count {
+                        let type = self.comments[index].getType()
+                        while(type == RestObjectType.reply.rawValue && index < self.comments.count) {
+                            self.comments.removeAtIndex(index)
+                            self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 2)], withRowAnimation: UITableViewRowAnimation.Fade)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func cancelDelete(indexPath: NSIndexPath) {
+        print("Cancel deletion.")
+        self.tableView.cellForRowAtIndexPath(indexPath)?.setEditing(false, animated: true)
     }
 }

@@ -897,7 +897,7 @@
                                     <outlet property="replyIconLabel" destination="VsX-eP-HcW" id="EVi-vy-80P"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentFootView" rowHeight="35" id="D5F-Fl-12B" customClass="CommentFootView" customModule="RestClient" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="CommentFootView" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentFootView" rowHeight="35" id="D5F-Fl-12B" customClass="CommentFootView" customModule="RestClient" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="292.5" width="600" height="35"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D5F-Fl-12B" id="Wpv-qL-p1I">
