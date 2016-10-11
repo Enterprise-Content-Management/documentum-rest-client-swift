@@ -45,7 +45,11 @@ class RestObject {
         let links = singleDic[ObjectProperties.LINKS.rawValue] as! NSArray
         constructLinks(links)
         setBasic(.ID, value: getLink(LinkRel.selfRel.rawValue)!)
-        properties = singleDic["properties"] as! Dictionary<String, AnyObject>
+        
+        if let pros = singleDic["properties"] as? Dictionary<String, AnyObject>  {
+            properties = pros
+            setUpdated(getProperty(.R_MODIFY_DATE) as! String)
+        }
         
         if let type = singleDic["type"] as? String {
             setTypeWithDmType(type)
@@ -62,8 +66,6 @@ class RestObject {
         if let published = getProperty(.R_CREATION_DATE) as? String {
             setPublished(published)
         }
-        
-        setUpdated(getProperty(.R_MODIFY_DATE) as! String)
     }
     
     init(searchDic: NSDictionary) {
@@ -230,6 +232,7 @@ enum RestObjectType : String {
     case group = "Group"
     case user = "User"
     case comment = "Comment"
+    case reply = "Reply"
 }
 
 enum ObjectProperties: String {

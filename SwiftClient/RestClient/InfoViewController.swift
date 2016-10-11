@@ -10,11 +10,10 @@ import UIKit
 import SwiftyJSON
 import Alamofire
 
-class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    @IBOutlet weak var infoImageView: UIImageView!
-    @IBOutlet weak var groupedTableView: UITableView!
-    @IBOutlet weak var previewButton: UIBarButtonItem!
+class InfoViewController: UITableViewController {
     
+    @IBOutlet weak var previewButton: UIBarButtonItem!
+
     var object: RestObject!
     var comments: [RestObject] = []
     let sectionTitles = ["Basic", "Links", "Comments"]
@@ -32,18 +31,13 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set agents
-        groupedTableView.delegate = self
-        groupedTableView.dataSource = self
-        
         // Set auto layout for cell
-        groupedTableView.estimatedRowHeight = 60
-        groupedTableView.rowHeight = UITableViewAutomaticDimension
-        
-        setImage()
+        tableView.estimatedRowHeight = 60
+        tableView.rowHeight = UITableViewAutomaticDimension
+
         unshowPreviewButton()
 
-        view.bringSubviewToFront(groupedTableView)
+        view.bringSubviewToFront(tableView)
         
         if showComments() {
             loadComments()
@@ -81,10 +75,6 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    private func setImage() {
-        self.infoImageView.image = UIImage(named: "InfoImage")!
-    }
-    
     private func unshowPreviewButton() {
         previewButton.enabled = false
         previewButton.tintColor = UIColor.clearColor()
@@ -109,7 +99,9 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         RestService.getRestObject(id) { restObject, error in
             if restObject != nil {
                 self.object = restObject!
-                self.groupedTableView.reloadData()
+                self.comments.removeAll()
+                self.loadComments()
+                self.tableView.reloadData()
             }
         }
     }
@@ -117,31 +109,28 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Data
     
     func loadComments() {
-        comments.removeAll()
-        
         let aiHelper = ActivityIndicatorHelper()
-        aiHelper.addActivityIndicator(groupedTableView)
+        aiHelper.addActivityIndicator(tableView)
         aiHelper.startActivityIndicator()
         
         let commentService = CommentCollectionService()
         commentService.url = object.getLink(LinkRel.comments.rawValue)!
-        commentService.getEntries(commentPage, thisViewController: self) { comments, isLastPage in
+        commentService.getCommentsAndReplies(commentPage, thisViewController: self) { comments, isLastPage in
             self.isCommentLastPage = isLastPage
             for comment in comments {
                 self.comments.append(comment)
             }
             // set for ui
-            self.view?.bringSubviewToFront(self.groupedTableView)
-            
+            self.view?.bringSubviewToFront(self.tableView)
             // refresh list view to show all items
             dispatch_async(dispatch_get_main_queue(), {
                 () -> Void in
-                self.groupedTableView.reloadData()
+                self.tableView.reloadData()
                 aiHelper.stopActivityIndicator()
             })
         }
     }
-    
+
     // MARK: - Table view control
     private func getDicForSection(section: Int) -> Dictionary<String, String> {
         switch section {
@@ -160,11 +149,11 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return isSysObject && shownSections.contains(2)
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return sectionTitles.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if shownSections.contains(section) {
             switch section {
             case 2:
@@ -178,7 +167,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return 0
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 2 && showComments() {
             return sectionTitles[2]
         }
@@ -188,7 +177,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return nil
     }
     
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 2 && showComments() {
             let cell = tableView.dequeueReusableCellWithIdentifier("CommentFootView") as! CommentFootView
             cell.initCell()
@@ -197,14 +186,14 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return nil
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 2 && showComments() {
             return CommentFootView.height
         }
         return tableView.sectionFooterHeight
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let section = indexPath.section
 
         if section == 0 || section == 1 {
@@ -214,33 +203,49 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
             cell.initCell(key, value: dic[key]!)
             return cell
         } else if section == 2 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("CommentItemTableViewCell", forIndexPath: indexPath) as! CommentItemTableViewCell
-            cell.initCell(comments[indexPath.row] as! Comment)
-            return cell
+            let cellObject = comments[indexPath.row] as! Comment
+            if cellObject.getType() == RestObjectType.comment.rawValue {
+                let cell = tableView.dequeueReusableCellWithIdentifier("CommentItemTableViewCell", forIndexPath: indexPath) as! CommentItemTableViewCell
+                cell.initCell(cellObject)
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCellWithIdentifier("ReplyItemTableViewCell", forIndexPath: indexPath) as! ReplyItemTableViewCell
+                cell.initCell(cellObject)
+                return cell
+            }
         }
         return UITableViewCell.init()
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 2 {
+    private func getHeightForComment(indexPath: NSIndexPath) -> CGFloat {
+        let isComment = comments[indexPath.row].getType() == RestObjectType.comment.rawValue
+        if isComment {
             return CommentItemTableViewCell.height
+        } else {
+            return ReplyItemTableViewCell.height
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 2 {
+            return getHeightForComment(indexPath)
         }
         return UITableViewAutomaticDimension
     }
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 2 {
-            return CommentItemTableViewCell.height
+            return getHeightForComment(indexPath)
         }
         return UITableViewAutomaticDimension
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Middle, animated: true)
     }
     
-    // MARK: - Button Control
+    // MARK: - Bar Button Control    
     @IBAction func onClickPreview(sender: UIBarButtonItem) {
         showPreview()
     }
@@ -293,7 +298,7 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 return false
             }
             if let cell = sender as? InfoItemTableViewCell {
-                let indexPath = groupedTableView.indexPathForCell(cell)!
+                let indexPath = tableView.indexPathForCell(cell)!
                 // Only basic attribute excepting type and id could update.
                 if indexPath.section == 0 && indexPath.row > 1 {
                     return true
@@ -304,7 +309,12 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     // MARK: - Comments Misc
-    @IBAction func addNewComment(sender: UIButton) {
+    
+    @IBAction func onClickNewComment(sender: UIButton) {
+        showCommentDialog()
+    }
+    
+    private func showCommentDialog() {
         let commentController = UIAlertController(title: "Add new comment", message: "Please input your comment.", preferredStyle: .Alert)
         commentController.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
             textField.placeholder = "comment..."
@@ -315,7 +325,9 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let requesBody = ["content-value": content]
             RestService.createWithAuth(commentsUrl, requestBody: requesBody) { dic, error in
                 if dic != nil {
-                    self.loadComments()
+                    let comment = Comment(singleDic: dic!)
+                    self.comments.append(comment)
+                    self.tableView.reloadData()
                 }
             }
         }
@@ -323,5 +335,42 @@ class InfoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         commentController.addAction(sendAction)
         commentController.addAction(cancelAction)
         presentViewController(commentController, animated: true, completion: nil)
+    }
+    
+    private func getRelatedObjectIndex(sender: UIButton) -> Int {
+        let cell = sender.superview?.superview as! CommentItemTableViewCell
+        return tableView.indexPathForCell(cell)!.row
+    }
+    
+    @IBAction func onClickReply(sender: UIButton) {
+        showReplyDialog(sender)
+    }
+    
+    private func showReplyDialog(sender: UIButton) {
+        let replyController = UIAlertController(title: "Reply to comment", message: "Please input your reply", preferredStyle: .Alert)
+        replyController.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
+            textField.placeholder = "reply..."
+        }
+        let sendAction = UIAlertAction(title: "Send", style: .Default) { (action: UIAlertAction!) -> Void in
+            let content = replyController.textFields!.first!.text!
+            let index = self.getRelatedObjectIndex(sender)
+            let repliesUrl = self.comments[index].getLink(LinkRel.replies.rawValue)!
+            let requestBody = ["content-value": content]
+            RestService.createWithAuth(repliesUrl, requestBody: requestBody) { dic, error in
+                if dic != nil {
+                    let reply = Comment(singleDic: dic!)
+                    self.comments.insert(reply, atIndex: index + 1)
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        
+        replyController.addAction(sendAction)
+        replyController.addAction(cancelAction)
+        presentViewController(replyController, animated: true, completion: nil)
+    }
+
+    @IBAction func onClickDelete(sender: UIButton) {
     }
 }

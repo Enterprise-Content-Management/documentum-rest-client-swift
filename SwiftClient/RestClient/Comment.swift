@@ -9,29 +9,42 @@
 import UIKit
 
 class Comment: RestObject {
-    var author: Author!
-    var commentContent: String!
+    private var author: Author!
+    private var commentContent: String!
+    private var canDelete: Bool!
+    private var canReply: Bool!
     
     override init(entryDic: NSDictionary) {
         super.init(entryDic: entryDic)
         
-        setType(RestObjectType.comment.rawValue)
-        let singleDic = entryDic["content"] as! NSDictionary
-        commentContent = singleDic["content-value"] as! String
-        
         let authorDic = (entryDic["author"] as! NSArray)[0] as! Dictionary<String, String>
         author = Author(name: authorDic["name"], uri: authorDic["uri"])
+        
+        let singleDic = entryDic["content"] as! NSDictionary
+        setSingleComment(singleDic)
     }
     
     override init(singleDic: NSDictionary) {
         super.init(singleDic: singleDic)
-
-        setType(RestObjectType.comment.rawValue)
-        setUpdated(singleDic["modified-date"] as! String)
-        setPublished(singleDic["creation-date"] as! String)
         
         author = Author(name: singleDic["owner-name"] as! String, uri: nil)
-        commentContent = singleDic["content-value"] as! String
+        setSingleComment(singleDic)
+    }
+    
+    private func setSingleComment(dic: NSDictionary) {
+        commentContent = dic["content-value"] as! String
+        canDelete = dic["can-delete"] as! Bool
+        canReply = dic["can-reply"] as! Bool
+        
+        setUpdated(dic["modified-date"] as! String)
+        setPublished(dic["creation-date"] as! String)
+        
+        let parentId = dic["parent-id"] as! String
+        if parentId == "0" {
+            setType(RestObjectType.comment.rawValue)
+        } else {
+            setType(RestObjectType.reply.rawValue)
+        }
     }
     
     func getAuthorName() -> String {
@@ -44,6 +57,14 @@ class Comment: RestObject {
     
     func getCommentContent() -> String {
         return commentContent
+    }
+    
+    func getCanDelete() -> Bool {
+        return canDelete
+    }
+    
+    func getCanReply() -> Bool {
+        return canReply
     }
 }
 

@@ -53,6 +53,7 @@
 		1E8AB7721DAA197300ADFD8B /* CommentCollectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8AB7711DAA197300ADFD8B /* CommentCollectionService.swift */; };
 		1E8AB7741DAB2ED700ADFD8B /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8AB7731DAB2ED700ADFD8B /* Utility.swift */; };
 		1E8AB7761DAB3AC800ADFD8B /* CommentFootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8AB7751DAB3AC800ADFD8B /* CommentFootView.swift */; };
+		1E8AB77A1DAC8EF400ADFD8B /* ReplyItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8AB7791DAC8EF400ADFD8B /* ReplyItemTableViewCell.swift */; };
 		1E96A6B31D5DBF97008CEB47 /* UIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96A6B21D5DBF97008CEB47 /* UIUtil.swift */; };
 		1E9A6B0D1CAA848F00B97BC0 /* RestUriBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9A6B0C1CAA848F00B97BC0 /* RestUriBuilder.swift */; };
 		1E9FD0521D7D259600403DE7 /* MultiMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9FD0511D7D259600403DE7 /* MultiMemberViewController.swift */; };
@@ -174,6 +175,7 @@
 		1E8AB7711DAA197300ADFD8B /* CommentCollectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCollectionService.swift; sourceTree = "<group>"; };
 		1E8AB7731DAB2ED700ADFD8B /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		1E8AB7751DAB3AC800ADFD8B /* CommentFootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentFootView.swift; sourceTree = "<group>"; };
+		1E8AB7791DAC8EF400ADFD8B /* ReplyItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyItemTableViewCell.swift; sourceTree = "<group>"; };
 		1E96A6B21D5DBF97008CEB47 /* UIUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtil.swift; sourceTree = "<group>"; };
 		1E9A6B0C1CAA848F00B97BC0 /* RestUriBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestUriBuilder.swift; sourceTree = "<group>"; };
 		1E9FD0511D7D259600403DE7 /* MultiMemberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiMemberViewController.swift; sourceTree = "<group>"; };
@@ -516,6 +518,7 @@
 				1EEFF0DB1D92733C002D40C7 /* MemberTableViewCell.swift */,
 				1EC132261D9E468B00D8A3A4 /* CommentItemTableViewCell.swift */,
 				1E8AB7751DAB3AC800ADFD8B /* CommentFootView.swift */,
+				1E8AB7791DAC8EF400ADFD8B /* ReplyItemTableViewCell.swift */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -787,6 +790,7 @@
 				1E6299DD1CACD5D500A59B47 /* RestObject.swift in Sources */,
 				1E9A6B0D1CAA848F00B97BC0 /* RestUriBuilder.swift in Sources */,
 				1EC2F8F51D20F9660041CEEB /* SideMenuViewController.swift in Sources */,
+				1E8AB77A1DAC8EF400ADFD8B /* ReplyItemTableViewCell.swift in Sources */,
 				1E96A6B31D5DBF97008CEB47 /* UIUtil.swift in Sources */,
 				1ED776021D25079F0039CDA4 /* User.swift in Sources */,
 				1E6299D01CABB08100A59B47 /* RepositoryCollectionService.swift in Sources */,
