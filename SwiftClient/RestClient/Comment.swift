@@ -14,6 +14,8 @@ class Comment: RestObject {
     private var canDelete: Bool!
     private var canReply: Bool!
     
+    private var parentComment: Comment?
+    
     override init(entryDic: NSDictionary) {
         super.init(entryDic: entryDic)
         
@@ -45,6 +47,14 @@ class Comment: RestObject {
         } else {
             setType(RestObjectType.reply.rawValue)
         }
+    }
+    
+    func setParentComment(parent: Comment?) {
+        parentComment = parent
+    }
+    
+    func getParentComment() -> Comment? {
+        return parentComment
     }
     
     func getAuthorName() -> String {

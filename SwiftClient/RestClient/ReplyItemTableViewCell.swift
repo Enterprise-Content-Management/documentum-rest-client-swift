@@ -17,13 +17,17 @@ class ReplyItemTableViewCell: UITableViewCell {
     @IBOutlet weak var contentLabel: TopAlignTextLabel!
     
     func initCell(comment: Comment) {
-        IconHelper.setIconForLabel(iconLabel, iconName: .Reply, size: 16)
+        IconHelper.setIconForLabel(iconLabel, iconName: .BookmarkO, size: 16)
         setComment(comment)
     }
     
     private func setComment(comment: Comment) {
+        var prefix = ""
+        if let parent = comment.getParentComment() {
+            prefix = "@\(parent.getAuthorName()) "
+        }
         autherNameLabel.text = comment.getAuthorName()
-        dateLabel.text = Utility.getReadableDate(comment.getCommentDate())!
-        contentLabel.text = comment.getCommentContent()
+        dateLabel.text = Utility.getReadableDate(comment.getCommentDate(), dateStyle: .MediumStyle, timeStyle: .ShortStyle)!
+        contentLabel.text = prefix + comment.getCommentContent()
     }
 }

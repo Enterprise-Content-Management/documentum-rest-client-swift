@@ -28,6 +28,7 @@ class InfoViewController: UITableViewController {
     var commentPage: Int = 1
     var isCommentLastPage: Bool = true
     
+    var isUserCanComment: Bool = true
     let aiHelper = ActivityIndicatorHelper()
     
     override func viewDidLoad() {
@@ -179,7 +180,7 @@ class InfoViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if section == 2 && showComments() {
+        if section == 2 && showComments() && isUserCanComment {
             let cell = tableView.dequeueReusableCellWithIdentifier("CommentFootView") as! CommentFootView
             cell.initCell()
             return cell.contentView
@@ -188,7 +189,7 @@ class InfoViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 2 && showComments() {
+        if section == 2 && showComments() && isUserCanComment {
             return CommentFootView.height
         }
         return tableView.sectionFooterHeight
@@ -342,7 +343,13 @@ class InfoViewController: UITableViewController {
             let commentsUrl = self.object.getLink(LinkRel.comments.rawValue)!
             let requesBody = ["content-value": content]
             RestService.createWithAuth(commentsUrl, requestBody: requesBody) { dic, error in
-                if dic != nil {
+                if let error = error {
+                    if error.status == 403 {
+                        ErrorAlert.show(error.message, controller: self, dismissViewController: false)
+                        self.isUserCanComment = false
+                        self.tableView.reloadData()
+                    }
+                } else if dic != nil {
                     let comment = Comment(singleDic: dic!)
                     self.comments.append(comment)
                     self.tableView.reloadData()
@@ -377,6 +384,7 @@ class InfoViewController: UITableViewController {
             RestService.createWithAuth(repliesUrl, requestBody: requestBody) { dic, error in
                 if dic != nil {
                     let reply = Comment(singleDic: dic!)
+                    reply.setParentComment(self.comments[index] as? Comment)
                     self.comments.insert(reply, atIndex: index + 1)
                     self.tableView.reloadData()
                 }

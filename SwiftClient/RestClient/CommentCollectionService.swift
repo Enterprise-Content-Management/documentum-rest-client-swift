@@ -46,6 +46,7 @@ class CommentCollectionService: RestCollectionService {
     
     func getCommentsAndReplies(pageNo: NSInteger, thisViewController: UIViewController, completionHandler: ([RestObject], Bool) -> ()) {
         getEntries(pageNo, thisViewController: thisViewController) { objects, isLastPage in
+            var flags = objects
             var comments = objects
             if objects.isEmpty {
                 completionHandler(comments, isLastPage)
@@ -58,14 +59,16 @@ class CommentCollectionService: RestCollectionService {
                         ErrorAlert.show(error.message, controller: thisViewController)
                         return
                     } else {
+                        flags.removeAtIndex(i)
                         if let replies = array {
                             for j in 0..<replies.count {
                                 let dic = replies[j] as! NSDictionary
                                 let reply = Comment(entryDic: dic)
+                                reply.setParentComment(comment as? Comment)
                                 comments.insert(reply, atIndex: i + j + 1)
                             }
                         }
-                        if i + 1 == objects.count {
+                        if flags.isEmpty {
                             completionHandler(comments, isLastPage)
                         }
                     }
