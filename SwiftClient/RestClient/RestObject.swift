@@ -246,8 +246,12 @@ enum ObjectProperties: String {
     case OBJECT_NAME = "object_name"
     case PROPERTIES = "properties"
     case OWNER_NAME = "owner_name"
-    case USER_NAME = "user_name"
     case R_MODIFY_DATE = "r_modify_date"
     case R_CREATION_DATE = "r_creation_date"
+    case USER_NAME = "user_name"
+    case USER_SOURCE = "user_source"
+    case USER_LOGIN_NAME = "user_login_name"
+    case USER_PASSWORD = "user_password"
+    case USER_PRIVILEGES = "user_privileges"
 }
 

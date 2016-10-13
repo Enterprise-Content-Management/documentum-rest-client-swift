@@ -473,9 +473,9 @@
 			isa = PBXGroup;
 			children = (
 				1E82F3821CF5AB94001720BE /* AddObjectViewController.swift */,
-				1E397B771D178505005DB494 /* UpdateViewController.swift */,
 				1E06D7CE1D791EAD00BB413C /* AddUserViewController.swift */,
 				1EB101C51D7EACE5007138A9 /* AddGroupViewController.swift */,
+				1E397B771D178505005DB494 /* UpdateViewController.swift */,
 				1E6150361D9A524400BD10B4 /* DqlViewController.swift */,
 			);
 			name = crud;

@@ -8,16 +8,25 @@
 
 import UIKit
 
-class AddUserViewController: UITableViewController {
+class AddUserViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet var userNameTextField: UITextField!
     @IBOutlet var loginNameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var passwordConfirmTextField: UITextField!
+    @IBOutlet weak var privilegePicker: UIPickerView!
     
     var aiHelper = ActivityIndicatorHelper()
+    let userPrivilegesPickerSource: [String] = [
+        "None", "Create Type", "Create Cabinet", "Create Cabinet and Type", "Create Group",
+        "Create Group and Type", "Create Group and Cabinet", "Create Group, Cabinet and Type",
+        "System Administrator", "Super User"
+    ]
     
     override func viewDidLoad() {
+        privilegePicker.dataSource = self
+        privilegePicker.delegate = self
+        
         aiHelper.addActivityIndicator(view)
         view.bringSubviewToFront(tableView)
     }
@@ -36,8 +45,9 @@ class AddUserViewController: UITableViewController {
                     print("Successfully create a new USER \(user.getName()).")
                     self.aiHelper.stopActivityIndicator()
                     self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
-                }
-                if let error = error {
+                    UIUtil.getTopGroupsController()!.reloadData()
+                } else if let error = error {
+                    self.aiHelper.stopActivityIndicator()
                     let errorMsg = error.message
                     ErrorAlert.show(errorMsg, controller: self)
                     return
@@ -73,12 +83,13 @@ class AddUserViewController: UITableViewController {
         }
     }
 
-    private func constructAttrDic() -> Dictionary<String, String> {
-        var attrDic: Dictionary<String, String> = [:]
-        attrDic["user_source"] = "inline_password"
-        attrDic["user_name"] = UIUtil.getText(userNameTextField)
-        attrDic["user_login_name"] = UIUtil.getText(loginNameTextField)
-        attrDic["user_password"] = UIUtil.getText(passwordTextField)
+    private func constructAttrDic() -> Dictionary<String, AnyObject> {
+        var attrDic: Dictionary<String, AnyObject> = [:]
+        attrDic[ObjectProperties.USER_SOURCE.rawValue] = "inline password"
+        attrDic[ObjectProperties.USER_NAME.rawValue] = UIUtil.getText(userNameTextField)
+        attrDic[ObjectProperties.USER_LOGIN_NAME.rawValue] = UIUtil.getText(loginNameTextField)
+        attrDic[ObjectProperties.USER_PASSWORD.rawValue] = UIUtil.getText(passwordTextField)
+        attrDic[ObjectProperties.USER_PRIVILEGES.rawValue] = privilegePicker.selectedRowInComponent(0)
         return attrDic
     }
     
@@ -90,6 +101,23 @@ class AddUserViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Middle, animated: true)
+    }
+    
+    // MARK: - Pick view control
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return userPrivilegesPickerSource.count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return userPrivilegesPickerSource[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        // none
     }
 
 }

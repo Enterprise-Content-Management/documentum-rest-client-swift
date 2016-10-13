@@ -20,7 +20,7 @@ class JsonUtility {
         "name": "object_name"
     ]
     
-    static func getUpdateRequestBody(type: String, attrDic: Dictionary<String, String>) -> Dictionary<String, AnyObject> {
+    static func getUpdateRequestBody(type: String, attrDic: Dictionary<String, AnyObject>) -> Dictionary<String, AnyObject> {
         let root: String
         if REQUEST_ROOT[type] != nil {
             root = REQUEST_ROOT[type]!
@@ -31,7 +31,7 @@ class JsonUtility {
         return dic as! Dictionary<String, AnyObject>
     }
     
-    static func getUpdateRequestBodySingleAttr(type: String, attrName: String, attrValue: String) -> Dictionary<String, AnyObject> {
+    static func getUpdateRequestBodySingleAttr(type: String, attrName: String, attrValue: AnyObject) -> Dictionary<String, AnyObject> {
         let name: String
         if ATTR_NAME[attrName] != nil {
             name = ATTR_NAME[attrName]!

@@ -126,15 +126,15 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.typePickData!.count
+        return typePickData!.count
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return self.typePickData![row]
+        return typePickData![row]
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if self.typePickData![row] == RestObjectType.document.rawValue {
+        if typePickData![row] == RestObjectType.document.rawValue {
             isUploadable = true
         } else {
             isUploadable = false
