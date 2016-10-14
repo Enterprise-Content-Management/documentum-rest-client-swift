@@ -169,6 +169,17 @@ class RestService {
         )
     }
     
+    static func getPermissions(url: String, completionHandler: (JSON?, Error?) -> ()) {
+        sendRequest(.GET, url: url, headers: self.setPreAuth(),
+                    onSuccess: { json in
+                        completionHandler(json, nil)
+            },
+                    onFailure: { json in
+                        let error = Error(json: json)
+                        completionHandler(nil, error)
+        })
+    }
+    
     // MARK: - CRUD control requests
     
     private static func getStringOnSuccess(message: String, completionHandler: (String?, Error?) -> ()) {

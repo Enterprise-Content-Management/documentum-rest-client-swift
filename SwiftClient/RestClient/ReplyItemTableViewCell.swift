@@ -17,7 +17,7 @@ class ReplyItemTableViewCell: UITableViewCell {
     @IBOutlet weak var contentLabel: TopAlignTextLabel!
     
     func initCell(comment: Comment) {
-        IconHelper.setIconForLabel(iconLabel, iconName: .BookmarkO, size: 16)
+        IconHelper.setIconForLabel(iconLabel, iconName: .CommentsO, size: 16)
         setComment(comment)
     }
     

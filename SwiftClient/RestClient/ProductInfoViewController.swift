@@ -48,7 +48,7 @@ class ProductInfoViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellIdentifier = "InfoItemTableViewCell"
+        let cellIdentifier = "PropertyCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! InfoItemTableViewCell
     
         let key = sortedKeys[indexPath.row]

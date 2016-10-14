@@ -75,6 +75,7 @@ enum LinkRel: String {
     case dql = "http://identifiers.emc.com/linkrel/dql"
     case comments = "http://identifiers.emc.com/linkrel/comments"
     case replies = "http://identifiers.emc.com/linkrel/replies"
+    case permissions = "http://identifiers.emc.com/linkrel/permissions"
     
     static func getLink(linkRel: String, links: NSArray) -> String? {
         var downloadUrl: String?

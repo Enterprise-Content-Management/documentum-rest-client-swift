@@ -86,7 +86,12 @@ class AbstractRestObjectInfoViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellIdentifier = "InfoItemTableViewCell"
+        let cellIdentifier: String
+        if indexPath.section == 1 {
+            cellIdentifier = "PropertyCell"
+        } else {
+            cellIdentifier = "InfoItemTableViewCell"
+        }
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! InfoItemTableViewCell
         
         let section = indexPath.section

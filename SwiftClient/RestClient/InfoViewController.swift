@@ -46,6 +46,18 @@ class InfoViewController: UITableViewController {
         if showComments() {
             loadComments()
         }
+        
+        RestService.getPermissions(object.getLink(LinkRel.permissions.rawValue)!) { json, error in
+            if let error = error {
+                ErrorAlert.show(error.errorCode, controller: self, dismissViewController: false)
+            } else if let permissions = json?.dictionary {
+                let basicPermission = permissions["basic-permission"]?.stringValue
+                if BasicPermission.getPermissionInt(basicPermission!) < BasicPermission.RELATE.rawValue {
+                    self.isUserCanComment = false
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -437,8 +449,7 @@ class InfoViewController: UITableViewController {
                     
                     let index = indexPath.row
                     if object.getType() == RestObjectType.comment.rawValue && index < self.comments.count {
-                        let type = self.comments[index].getType()
-                        while(type == RestObjectType.reply.rawValue && index < self.comments.count) {
+                        while (self.comments[index].getType() == RestObjectType.reply.rawValue && index < self.comments.count) {
                             self.comments.removeAtIndex(index)
                             self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 2)], withRowAnimation: UITableViewRowAnimation.Fade)
                         }
@@ -451,5 +462,40 @@ class InfoViewController: UITableViewController {
     private func cancelDelete(indexPath: NSIndexPath) {
         print("Cancel deletion.")
         self.tableView.cellForRowAtIndexPath(indexPath)?.setEditing(false, animated: true)
+    }
+}
+
+enum BasicPermission: Int {
+    case NULL = 0
+    case NONE = 1
+    case BROWSE = 2
+    case READ = 3
+    case RELATE = 4
+    case VERSION = 5
+    case WRITE = 6
+    case DELETE = 7
+    
+    static func getPermissionInt(permission: String) -> Int {
+        let upperCase = permission.uppercaseString
+        switch upperCase {
+        case "NULL":
+            return 0
+        case "NONE":
+            return 1
+        case "BROWSE":
+            return 2
+        case "READ":
+            return 3
+        case "RELATE":
+            return 4
+        case "VERSION":
+            return 5
+        case "WRITE":
+            return 6
+            case "DELETE":
+                return 7
+        default:
+            return -1
+        }
     }
 }

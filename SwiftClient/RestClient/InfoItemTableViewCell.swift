@@ -20,19 +20,25 @@ class InfoItemTableViewCell : UITableViewCell {
         infoNameLabel.lineBreakMode = .ByWordWrapping
         
         switch style {
+        case .Basic:
+            setBasicStyle()
         case .Infomation:
             setInfomationStyle()
         case .Link:
             setLinkStyle()
         case .ProductInfo:
             setProductInfoStyle()
-        default:
-            break
         }
+    }
+    
+    func setBasicStyle() {
+        infoNameLabel.font = UIFont.boldSystemFontOfSize(16)
+        infoValueLabel.font = infoValueLabel.font?.fontWithSize(16)
     }
 
     func setInfomationStyle() {
-        infoNameLabel.font = infoNameLabel.font.fontWithSize(14)
+        infoNameLabel.font = UIFont.boldSystemFontOfSize(14)
+        infoValueLabel.font = infoValueLabel.font?.fontWithSize(14)
     }
     
     func setLinkStyle() {
@@ -41,7 +47,7 @@ class InfoItemTableViewCell : UITableViewCell {
     }
     
     func setProductInfoStyle() {
-        infoNameLabel.font = infoNameLabel.font?.fontWithSize(15)
+        infoNameLabel.font = UIFont.boldSystemFontOfSize(15)
         infoValueLabel.font = infoValueLabel.font?.fontWithSize(17)
     }
     
