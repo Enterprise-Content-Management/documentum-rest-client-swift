@@ -112,12 +112,14 @@ class AddUserViewController: UITableViewController, UIPickerViewDelegate, UIPick
         return userPrivilegesPickerSource.count
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return userPrivilegesPickerSource[row]
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        // none
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+        let frame = CGRectMake(0, 0, pickerView.frame.width, 30)
+        let label = UILabel(frame: frame)
+        label.textAlignment = .Center
+        
+        label.font = label.font.fontWithSize(15)
+        label.text = userPrivilegesPickerSource[row]
+        return label
     }
 
 }

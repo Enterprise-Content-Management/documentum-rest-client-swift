@@ -82,7 +82,9 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
             RestService.uploadFile(
             url, metadata: json, file: self.chosenData!, type: self.chosenType!
             ) { result, error in
-                if result != nil {
+                if let error = error {
+                    ErrorAlert.show(error.message, controller: self)
+                } else if result != nil {
                     print("Successfully create a new \(chosedType).")
                     self.goBackAndRefresh()
                 }

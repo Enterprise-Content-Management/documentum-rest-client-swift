@@ -264,10 +264,17 @@ class RestService {
                 case .Success(let upload, _, _):
                     upload.validate()
                     upload.responseJSON  { response in
-                        let value = response.result.value!
-                        let json = JSON(value)
-                        let dic = json.object as! Dictionary<String, AnyObject>
-                        completionHandler(dic, nil)
+                        switch response.result {
+                        case .Success:
+                            let value = response.result.value!
+                            let json = JSON(value)
+                            let dic = json.object as! Dictionary<String, AnyObject>
+                            completionHandler(dic, nil)
+                        case .Failure:
+                            let json = JSON(data: response.data!)
+                            print("error: \(json)")
+                            completionHandler(nil, Error(json: json))
+                        }
                     }
                 case .Failure(let encodingError):
                     print(encodingError)
