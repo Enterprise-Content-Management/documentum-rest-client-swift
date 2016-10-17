@@ -64,6 +64,7 @@
 		1EAB83A91D0524B9002AA4BC /* BundleFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAB83A81D0524B9002AA4BC /* BundleFile.swift */; };
 		1EAB83AB1D05477E002AA4BC /* FileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAB83AA1D05477E002AA4BC /* FileViewController.swift */; };
 		1EAB83AD1D056B79002AA4BC /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAB83AC1D056B79002AA4BC /* FileUtil.swift */; };
+		1EADDFA11DB46BAC00EBE155 /* DqlResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EADDFA01DB46BAC00EBE155 /* DqlResult.swift */; };
 		1EB101C61D7EACE5007138A9 /* AddGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB101C51D7EACE5007138A9 /* AddGroupViewController.swift */; };
 		1EC128501CEC1ACB0093E978 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC1284F1CEC1ACB0093E978 /* LoginViewController.swift */; };
 		1EC128541CF2B2580093E978 /* InfoItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC128531CF2B2580093E978 /* InfoItemTableViewCell.swift */; };
@@ -186,6 +187,7 @@
 		1EAB83A81D0524B9002AA4BC /* BundleFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleFile.swift; sourceTree = "<group>"; };
 		1EAB83AA1D05477E002AA4BC /* FileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileViewController.swift; sourceTree = "<group>"; };
 		1EAB83AC1D056B79002AA4BC /* FileUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
+		1EADDFA01DB46BAC00EBE155 /* DqlResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DqlResult.swift; sourceTree = "<group>"; };
 		1EB101C51D7EACE5007138A9 /* AddGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupViewController.swift; sourceTree = "<group>"; };
 		1EC1284F1CEC1ACB0093E978 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1EC128531CF2B2580093E978 /* InfoItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoItemTableViewCell.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 				1ED776011D25079F0039CDA4 /* User.swift */,
 				1E46DE961D702FE9005C492A /* Group.swift */,
 				1EC132241D9E432500D8A3A4 /* Comment.swift */,
+				1EADDFA01DB46BAC00EBE155 /* DqlResult.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -754,6 +757,7 @@
 				1E6299EF1CAE58EA00A59B47 /* RestCollectionService.swift in Sources */,
 				1E4951291D9B6C7C00D1877A /* ProductInfoViewController.swift in Sources */,
 				1EAB83AB1D05477E002AA4BC /* FileViewController.swift in Sources */,
+				1EADDFA11DB46BAC00EBE155 /* DqlResult.swift in Sources */,
 				1E8AB7761DAB3AC800ADFD8B /* CommentFootView.swift in Sources */,
 				1E665CC91CAA2F7B00EF3774 /* ItemTableViewCell.swift in Sources */,
 				1EC132251D9E432500D8A3A4 /* Comment.swift in Sources */,

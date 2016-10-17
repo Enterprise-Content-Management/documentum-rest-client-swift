@@ -45,7 +45,6 @@ class DqlViewController: AbstractCollectionViewController, UISearchBarDelegate {
     override func loadData(page: NSInteger) {
         let params = [
             "dql": dql!,
-            "inline": "true",
             "items-per-page": String(RestService.itemsPerPage),
             "page": String(page)
             ] as [String: String]
@@ -55,7 +54,7 @@ class DqlViewController: AbstractCollectionViewController, UISearchBarDelegate {
             } else if let array = response {
                 for entry in array {
                     let dic = entry as! NSDictionary
-                    let object = RestObject(searchDic: dic)
+                    let object = DqlResult(searchDic: dic)
                     self.filteredObjects.append(object)
                     self.objects.append(object)
                 }
@@ -96,7 +95,24 @@ class DqlViewController: AbstractCollectionViewController, UISearchBarDelegate {
         if dql == nil || dql!.isEmpty {
             ErrorAlert.show("Please type in dql.", controller: self, dismissViewController: false)
         }
+        dql = addRObjectIdInDql(dql)
+        
         loadData(page)
+    }
+    
+    private func addRObjectIdInDql(dql: String) -> String {
+        var characters = dql.characters.split(" ").map(String.init)
+        let selectedProperties = characters[1]
+        if selectedProperties == "*" {
+            return dql
+        }
+        if !selectedProperties.containsString("r_object_id") {
+            characters[1] = characters[1] + ",r_object_id"
+            let newDql = characters.joinWithSeparator(" ")
+            print("new Dql = \(newDql)")
+            return newDql
+        }
+        return dql
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
@@ -126,7 +142,7 @@ class DqlViewController: AbstractCollectionViewController, UISearchBarDelegate {
             restObject = self.objects[indexPath.row]
         }
         
-        RestService.getRestObject(restObject.getId()) { object, error in
+        RestService.getRestObject(restObject.getLink(LinkRel.selfRel.rawValue)!) { object, error in
             if let e = error {
                 ErrorAlert.show(e.message, controller: self, dismissViewController: false)
             } else if let object = object {

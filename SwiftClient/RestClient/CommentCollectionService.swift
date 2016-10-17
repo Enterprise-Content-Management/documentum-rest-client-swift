@@ -21,6 +21,15 @@ class CommentCollectionService: RestCollectionService {
         getService(pageNo) { entries, error in
             if let error = error {
                 let errorMsg = error.message
+                if error.errorCode == "E_SERVICE_NOT_INSTALLED" {
+                    let infoView = thisViewController as! InfoViewController
+                    if let index = infoView.shownSections.indexOf(2) {
+                        infoView.shownSections.removeAtIndex(index)
+                        infoView.tableView.reloadData()
+                    }
+                    infoView.aiHelper.stopActivityIndicator()
+                    ErrorAlert.show(errorMsg, controller: thisViewController, dismissViewController: false)
+                }
                 ErrorAlert.show(errorMsg, controller: thisViewController)
                 return
             } else {

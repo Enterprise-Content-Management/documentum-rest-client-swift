@@ -18,7 +18,7 @@ class RestObject {
         ObjectProperties.UPDATED.rawValue: ""
     ]
     
-    let jsonDic: NSDictionary
+    let jsonDic: NSDictionary!
     var links: Dictionary<String, String> = [:]
     var properties: Dictionary<String, AnyObject> = [:]
     
@@ -70,19 +70,6 @@ class RestObject {
     
     init(searchDic: NSDictionary) {
         jsonDic = searchDic
-        
-        setUpdated(searchDic[ObjectProperties.UPDATED.rawValue] as! String)
-        setPublished(searchDic[ObjectProperties.PUBLISHED.rawValue] as! String)
-        
-        let links = searchDic[ObjectProperties.LINKS.rawValue] as! NSArray
-        constructLinks(links)
-        let content = searchDic["content"] as! Dictionary<String, AnyObject>
-        properties = content[ObjectProperties.PROPERTIES.rawValue] as! Dictionary<String, AnyObject>
-        
-        setBasic(.ID, value: getLink(LinkRel.edit.rawValue)!)
-        setBasic(.NAME, value: getProperty(.OBJECT_NAME) as! String)
-        
-        setTypeByDic(content)
     }
     
     private func setTypeByDic(contentDic: NSDictionary) {
@@ -100,11 +87,11 @@ class RestObject {
     }
     
     // MARK: - Getters and Setters
-    private func setBasic(name: ObjectProperties, value: String) {
+    internal func setBasic(name: ObjectProperties, value: String) {
         basic[name.rawValue] = value
     }
     
-    private func getBasic(name: ObjectProperties) -> String {
+    internal func getBasic(name: ObjectProperties) -> String {
         return basic[name.rawValue]!
     }
     
