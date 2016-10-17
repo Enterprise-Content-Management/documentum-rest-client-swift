@@ -28,7 +28,7 @@ class InfoViewController: UITableViewController {
     var commentPage: Int = 1
     var isCommentLastPage: Bool = true
     
-    var isUserCanComment: Bool = true
+    var isUserCanComment: Bool = false
     let aiHelper = ActivityIndicatorHelper()
     
     override func viewDidLoad() {
@@ -44,16 +44,20 @@ class InfoViewController: UITableViewController {
         aiHelper.addActivityIndicator(tableView)
         
         if showComments() {
-            loadComments()
+            initData()
         }
-        
+    }
+    
+    // Determine this user's permission on object and load comments if any.
+    private func initData() {
         RestService.getPermissions(object.getLink(LinkRel.permissions.rawValue)!) { json, error in
             if let error = error {
                 ErrorAlert.show(error.errorCode, controller: self, dismissViewController: false)
             } else if let permissions = json?.dictionary {
                 let basicPermission = permissions["basic-permission"]?.stringValue
-                if BasicPermission.getPermissionInt(basicPermission!) < BasicPermission.RELATE.rawValue {
-                    self.isUserCanComment = false
+                if BasicPermission.getPermissionInt(basicPermission!) >= BasicPermission.RELATE.rawValue {
+                    self.isUserCanComment = true
+                    self.loadComments()
                     self.tableView.reloadData()
                 }
             }
@@ -158,9 +162,8 @@ class InfoViewController: UITableViewController {
     }
     
     private func showComments() -> Bool {
-        let type = object.getType()
-        let isSysObject = (type == RestObjectType.document.rawValue) || (type == RestObjectType.sysObject.rawValue)
-        return isSysObject && shownSections.contains(2)
+        let hasCommentsLink = object.getLink(LinkRel.comments.rawValue) != nil
+        return hasCommentsLink && shownSections.contains(2)
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

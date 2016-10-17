@@ -259,7 +259,11 @@ class AbstractCollectionViewController: UITableViewController, UISearchResultsUp
             if let selectedItemCell = view.superview as? ItemTableViewCell {
                 let indexPath = tableView.indexPathForCell(selectedItemCell)!
                 // path this information to cabinetviewcontroller
-                infoViewController.object = objects[indexPath.row]
+                if isSearchActive() {
+                    infoViewController.object = filteredObjects[indexPath.row]
+                } else {
+                    infoViewController.object = objects[indexPath.row]
+                }
             }
         }
     }

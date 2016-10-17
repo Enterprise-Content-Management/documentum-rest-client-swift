@@ -145,7 +145,7 @@
                                                 <constraint firstAttribute="width" constant="22" id="rp6-jN-JKu"/>
                                             </constraints>
                                             <connections>
-                                                <segue destination="OPn-3h-bEk" kind="show" id="ARs-uc-lbi"/>
+                                                <segue destination="OPn-3h-bEk" kind="show" identifier="ShowInfo" id="ARs-uc-lbi"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -381,7 +381,7 @@
                                                 <constraint firstAttribute="width" constant="22" id="rFF-A4-7Jr"/>
                                             </constraints>
                                             <connections>
-                                                <segue destination="OPn-3h-bEk" kind="show" id="F7w-hS-Bfl"/>
+                                                <segue destination="OPn-3h-bEk" kind="show" identifier="ShowInfo" id="F7w-hS-Bfl"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -2551,10 +2551,10 @@
         <image name="DefaultImage" width="259" height="194"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="F7w-hS-Bfl"/>
         <segue reference="GRc-n3-ZvH"/>
-        <segue reference="cWB-DV-4qr"/>
         <segue reference="LDz-E6-wNn"/>
+        <segue reference="cWB-DV-4qr"/>
         <segue reference="x3M-E8-dl5"/>
+        <segue reference="ARs-uc-lbi"/>
     </inferredMetricsTieBreakers>
 </document>
