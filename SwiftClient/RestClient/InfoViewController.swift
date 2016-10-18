@@ -444,7 +444,7 @@ class InfoViewController: UITableViewController {
             let deletLink = object.getLink(LinkRel.delete.rawValue)!
             RestService.deleteWithAuth(deletLink) { result, error in
                 if result != nil {
-                    print("Successfully delete this comment from cloud.")
+                    printLog("Successfully delete this comment from cloud.")
                     self.aiHelper.stopActivityIndicator()
                     
                     self.comments.removeAtIndex(indexPath.row)
@@ -463,7 +463,7 @@ class InfoViewController: UITableViewController {
     }
     
     private func cancelDelete(indexPath: NSIndexPath) {
-        print("Cancel deletion.")
+        printLog("Cancel deletion.")
         self.tableView.cellForRowAtIndexPath(indexPath)?.setEditing(false, animated: true)
     }
 }

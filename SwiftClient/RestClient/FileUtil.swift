@@ -25,9 +25,9 @@ class FileUtil {
         }
         do {
             try fileManager.removeItemAtPath(path)
-            print("Removed file at path of \(path)")
+            printLog("Removed file at path of \(path)")
         } catch {
-            print("Error to remove file which id is \(objectId) on this device")
+            printError("Error to remove file which id is \(objectId) on this device")
         }
     }
     

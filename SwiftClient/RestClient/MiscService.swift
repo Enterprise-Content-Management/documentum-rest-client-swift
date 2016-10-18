@@ -20,7 +20,7 @@ class MiscService {
             } else if let dic = response {
                 let childId = dic["child-id"] as! String
                 let parentID = dic["parent-id"] as! String
-                print("Successfully move \(childId) to \(parentID).")
+                printLog("Successfully move \(childId) to \(parentID).")
                 completionHandler()
             }
         }

@@ -42,7 +42,7 @@ class AddUserViewController: UITableViewController, UIPickerViewDelegate, UIPick
             RestService.createWithAuth(postUrl, requestBody: requestBody){ result, error in
                 if result != nil {
                     let user = User(singleDic: result!)
-                    print("Successfully create a new USER \(user.getName()).")
+                    printLog("Successfully create a new USER \(user.getName()).")
                     self.aiHelper.stopActivityIndicator()
                     self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
                     UIUtil.getTopGroupsController()!.reloadData()

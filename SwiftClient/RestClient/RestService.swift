@@ -67,14 +67,14 @@ class RestService {
             .responseJSON { response in
                 switch response.result {
                 case .Success:
-                    print("Success request to \(url)")
+                    printLog("Success request to \(url)")
                     if let value = response.result.value {
                         let json = JSON(value)
                         onSuccess(json)
                     }
                 case .Failure:
                     let json = JSON(data: response.data!)
-                    print("error: \(json)")
+                    printError("error: \(json)")
                     onFailure(json)
                 }
         }
@@ -283,7 +283,7 @@ class RestService {
                             completionHandler(dic, nil)
                         case .Failure:
                             let json = JSON(data: response.data!)
-                            print("error: \(json)")
+                            printError("error: \(json)")
                             completionHandler(nil, Error(json: json))
                         }
                     }
@@ -306,7 +306,7 @@ class RestService {
             fileUrl = FileUtil.getSaveToUrl(objectId)
             FileUtil.deleteFile(objectId)
 
-            print("Download path: \(fileUrl!.absoluteString)")
+            printLog("Download path: \(fileUrl!.absoluteString)")
             return fileUrl!
         }
             .response { request, response, data, error in
@@ -316,10 +316,10 @@ class RestService {
                     let parts = url.characters.split("/").map(String.init)
                     let hostname = parts[1].characters.split(":").map(String.init)[0]
                     let e = Error(msg: "A server with the specified hostname '\(hostname)' could not be recognizable by this device.")
-                    print("Failed with error:\(error).")
+                    printError("Failed with error:\(error).")
                     completionHandler(nil, e)
                 } else {
-                    print("Downloaded file successfully.")
+                    printLog("Downloaded file successfully.")
                     completionHandler(NSData(contentsOfURL: fileUrl!), nil)
                 }
         }
@@ -335,7 +335,7 @@ class RestService {
             .responseJSON { response in
                 switch response.result {
                 case .Success:
-                    print("http status: Success! for get to url \(url)")
+                    printLog("http status: Success! for get to url \(url)")
                     if let value = response.result.value {
                         let json = JSON(value)
                         let dictionary = json.object as! Dictionary<String, AnyObject>
@@ -359,12 +359,12 @@ class RestService {
             .responseJSON { response in
                 switch response.result {
                 case .Success:
-                    print("Success move to \(url).")
+                    printLog("Success move to \(url).")
                     let json = JSON(response.result.value!)
                     completionHandler(json.object as? NSDictionary, nil)
                 case .Failure:
                     let json = JSON(data: response.data!)
-                    print("error: \(json)")
+                    printError("error: \(json)")
                     let error = Error(json: json)
                     completionHandler(nil, error)
                 }
@@ -387,11 +387,11 @@ class RestService {
                 let result: String!
                 if error != nil {
                     let json = JSON(data: data!)
-                    print("error: \(json)")
+                    printError("error: \(json)")
                     let e = json.object as! NSDictionary
                     result = e["message"] as! String
                 } else {
-                    print("Success request to \(url) with status code \(statusCode)")
+                    printLog("Success request to \(url) with status code \(statusCode)")
                     result = "Success"
                 }
                 onResponse(result)

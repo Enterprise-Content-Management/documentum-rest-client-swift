@@ -125,9 +125,9 @@ class MultiMemberViewController: AbstractCollectionViewController {
                     let description = op["description"] as! String
                     let opResponse = op["response"] as! NSDictionary
                     if opResponse["status"] as! Int == 201 {
-                        print("Successfully \(description)")
+                        printLog("Successfully \(description)")
                     } else {
-                        print("Fail to \(description)")
+                        printError("Fail to \(description)")
                     }
                 }
                 self.navigationController?.dismissViewControllerAnimated(true) {

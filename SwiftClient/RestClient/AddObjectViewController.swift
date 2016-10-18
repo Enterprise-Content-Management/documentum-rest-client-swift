@@ -85,7 +85,7 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
                 if let error = error {
                     ErrorAlert.show(error.message, controller: self)
                 } else if result != nil {
-                    print("Successfully create a new \(chosedType).")
+                    printLog("Successfully create a new \(chosedType).")
                     self.goBackAndRefresh()
                 }
             }
@@ -93,7 +93,7 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
             let requestBody = JsonUtility.getUpdateRequestBody(type, attrDic: attrDic)
             RestService.createWithAuth(self.postUrl!, requestBody: requestBody){ result, error in
                 if result != nil {
-                    print("Successfully create a new \(chosedType).")
+                    printLog("Successfully create a new \(chosedType).")
                     self.goBackAndRefresh()
                 }
                 if let error = error {
@@ -114,7 +114,7 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
     
     private func updatePostUrl() -> String {
         let url = postUrl!.stringByReplacingOccurrencesOfString("objects", withString: "documents")
-        print("postUrl is now \(url)")
+        printLog("postUrl is now \(url)")
         return url
     }
 
@@ -178,7 +178,7 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
         let localPath = documentDictionary.stringByAppendingString(imageName)
         let photoUrl = NSURL(fileURLWithPath:  localPath)
         filePathLabel.text = photoUrl.absoluteString
-        print("Photo path: \(photoUrl.absoluteString)")
+        printLog("Photo path: \(photoUrl.absoluteString)")
         
         let image = info[UIImagePickerControllerEditedImage] as! UIImage
         chosenData = UIImageJPEGRepresentation(image, 0.0) // 0.0 is lowest quaility and 1.0 is highest
@@ -201,7 +201,7 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
 //    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 //        CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error)-> Void in
 //            if (error != nil) {
-//                print("Reverse geocoder failed with error" + error!.localizedDescription)
+//                printErr("Reverse geocoder failed with error" + error!.localizedDescription)
 //                return
 //            }
 //            
@@ -209,7 +209,7 @@ class AddObjectViewController: UITableViewController, UIPickerViewDelegate, UIPi
 //                let pm = placemarks![0] as CLPlacemark
 //                self.displayLocationInfo(pm)
 //            } else {
-//                print("Problem with the data received from geocoder")
+//                printErr("Problem with the data received from geocoder")
 //            }
 //        })
 //    }

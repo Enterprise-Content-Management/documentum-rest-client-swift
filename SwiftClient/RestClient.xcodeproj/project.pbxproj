@@ -65,6 +65,7 @@
 		1EAB83AB1D05477E002AA4BC /* FileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAB83AA1D05477E002AA4BC /* FileViewController.swift */; };
 		1EAB83AD1D056B79002AA4BC /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAB83AC1D056B79002AA4BC /* FileUtil.swift */; };
 		1EADDFA11DB46BAC00EBE155 /* DqlResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EADDFA01DB46BAC00EBE155 /* DqlResult.swift */; };
+		1EADDFA31DB5B8AC00EBE155 /* LogUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EADDFA21DB5B8AC00EBE155 /* LogUtil.swift */; };
 		1EB101C61D7EACE5007138A9 /* AddGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB101C51D7EACE5007138A9 /* AddGroupViewController.swift */; };
 		1EC128501CEC1ACB0093E978 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC1284F1CEC1ACB0093E978 /* LoginViewController.swift */; };
 		1EC128541CF2B2580093E978 /* InfoItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC128531CF2B2580093E978 /* InfoItemTableViewCell.swift */; };
@@ -188,6 +189,7 @@
 		1EAB83AA1D05477E002AA4BC /* FileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileViewController.swift; sourceTree = "<group>"; };
 		1EAB83AC1D056B79002AA4BC /* FileUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
 		1EADDFA01DB46BAC00EBE155 /* DqlResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DqlResult.swift; sourceTree = "<group>"; };
+		1EADDFA21DB5B8AC00EBE155 /* LogUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogUtil.swift; sourceTree = "<group>"; };
 		1EB101C51D7EACE5007138A9 /* AddGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupViewController.swift; sourceTree = "<group>"; };
 		1EC1284F1CEC1ACB0093E978 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1EC128531CF2B2580093E978 /* InfoItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoItemTableViewCell.swift; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 				1EDF74381D23A95B00EB6ADC /* DbUtil.swift */,
 				1E96A6B21D5DBF97008CEB47 /* UIUtil.swift */,
 				1EEB097A1D81422C007E65D7 /* Context.swift */,
+				1EADDFA21DB5B8AC00EBE155 /* LogUtil.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -784,6 +787,7 @@
 				1E82F3811CF4386B001720BE /* JsonUtility.swift in Sources */,
 				1E46DE971D702FE9005C492A /* Group.swift in Sources */,
 				1E01D6621D893CD90014A005 /* MiscService.swift in Sources */,
+				1EADDFA31DB5B8AC00EBE155 /* LogUtil.swift in Sources */,
 				1EC782F71D139B2100982FA2 /* RestServiceEnhance.swift in Sources */,
 				1E397B7A1D17D020005DB494 /* ActivityIndicatorHelper.swift in Sources */,
 				1EB101C61D7EACE5007138A9 /* AddGroupViewController.swift in Sources */,

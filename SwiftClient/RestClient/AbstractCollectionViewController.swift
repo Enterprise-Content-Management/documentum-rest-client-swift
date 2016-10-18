@@ -223,13 +223,13 @@ class AbstractCollectionViewController: UITableViewController, UISearchResultsUp
             let deletLink = object.getLink(LinkRel.delete.rawValue)!
             RestService.deleteWithAuth(deletLink) { result, error in
                 if result != nil {
-                    print("Successfully delete \(objectFullName) from cloud.")
+                    printLog("Successfully delete \(objectFullName) from cloud.")
                     self.aiHelper.stopActivityIndicator()
                 }
             }
         }
         
-        print("Delete \(objectFullName) from list.")
+        printLog("Delete \(objectFullName) from list.")
         if !objects.isEmpty {
             objects.removeAtIndex(indexPath.row)
         }
@@ -239,7 +239,7 @@ class AbstractCollectionViewController: UITableViewController, UISearchResultsUp
     }
     
     private func cancelDelete(indexPath: NSIndexPath) {
-        print("Cancel deletion.")
+        printLog("Cancel deletion.")
         self.tableView.cellForRowAtIndexPath(indexPath)?.setEditing(false, animated: true)
         
     }

@@ -51,7 +51,7 @@ class FileViewController: UIViewController {
         RestService.getRestObject(objectUrl!) { restObject, error in
             if restObject != nil {
                 self.object = restObject
-                print("Successfully get object from \(self.objectUrl!)")
+                printLog("Successfully get object from \(self.objectUrl!)")
                 if FileUtil.isDownloaded(self.objectId!) {
                     self.loadFileFromLocal(self.objectId!)
                 } else {
@@ -182,7 +182,7 @@ class FileViewController: UIViewController {
                 checkinUrl!, metadata: json, file: data!, type: type!
             ) { dic, error in
                 if dic != nil {
-                    print("Successfully check out and check in for file \((self.object?.getName())!).")
+                    printLog("Successfully check out and check in for file \((self.object?.getName())!).")
                     let object = RestObject(singleDic: dic!)
                     self.aiHelper.stopActivityIndicator()
                     self.navigationController?.popViewControllerAnimated(true)
@@ -200,7 +200,7 @@ class FileViewController: UIViewController {
         do {
             try fileContentTextView.text.writeToURL(path, atomically: false, encoding: NSUTF8StringEncoding)
         } catch {
-            print("Error in writing to file \((file?.fileName)!)")
+            printError("Error in writing to file \((file?.fileName)!)")
         }
         aiHelper.stopActivityIndicator()
         navigationController?.popViewControllerAnimated(true)

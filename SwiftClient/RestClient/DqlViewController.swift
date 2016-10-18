@@ -109,7 +109,6 @@ class DqlViewController: AbstractCollectionViewController, UISearchBarDelegate {
         if !selectedProperties.containsString("r_object_id") {
             characters[1] = characters[1] + ",r_object_id"
             let newDql = characters.joinWithSeparator(" ")
-            print("new Dql = \(newDql)")
             return newDql
         }
         return dql

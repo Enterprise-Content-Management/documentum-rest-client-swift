@@ -230,18 +230,18 @@ class SysObjectViewController: AbstractCollectionViewController, UIGestureRecogn
     
     private func addToClickboard(object: RestObject) {
         Context.clickBoard = object
-        print("Add \(object.getNameWithType()) to clickboard.")
+        printLog("Add \(object.getNameWithType()) to clickboard.")
     }
     
     private func copyHere(object: RestObject) {
-        print("Copy \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
+        printLog("Copy \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
         MiscService.copyTo(object, thisController: self) {
             self.refreshData()
         }
     }
     
     private func moveHere(object: RestObject) {
-        print("Move \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
+        printLog("Move \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
         
         MiscService.moveTo(object, thisController: self) {
             self.refreshData()
@@ -249,7 +249,7 @@ class SysObjectViewController: AbstractCollectionViewController, UIGestureRecogn
     }
     
     private func linkHere(object: RestObject) {
-        print("Link \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
+        printLog("Link \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
         
         MiscService.linkTo(object, thisController: self) {
             self.refreshData()

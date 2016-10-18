@@ -171,13 +171,13 @@ class MembersViewController: AbstractCollectionViewController, UIGestureRecogniz
                 let removeLink = object.getLink(LinkRel.removeMember.rawValue)!
                 RestService.deleteWithAuth(removeLink) { result, error in
                     if result != nil {
-                        print("Successfully remove \(objectFullName) from group \(self.parentGroup!.getName()).")
+                        printLog("Successfully remove \(objectFullName) from group \(self.parentGroup!.getName()).")
                         self.aiHelper.stopActivityIndicator()
                     }
                 }
             }
             
-            print("Delete \(objectFullName) from list.")
+            printLog("Delete \(objectFullName) from list.")
             objects.removeAtIndex(indexPath.row)
             setFootViewText(objects.count)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)

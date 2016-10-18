@@ -54,7 +54,7 @@ class PopOverMenuForSysObjectController: UITableViewController {
     }
     
     private func copyHere(object: RestObject) {
-        print("Copy \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
+        printLog("Copy \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
         let topController = UIUtil.getTopController() as! SysObjectViewController
         MiscService.copyTo(object, thisController: topController) {
             topController.refreshData()
@@ -62,7 +62,7 @@ class PopOverMenuForSysObjectController: UITableViewController {
     }
     
     private func moveHere(object: RestObject) {
-        print("Move \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
+        printLog("Move \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
         let topController = UIUtil.getTopController() as! SysObjectViewController
         MiscService.moveTo(object, thisController: topController) {
             topController.refreshData()
@@ -70,7 +70,7 @@ class PopOverMenuForSysObjectController: UITableViewController {
     }
     
     private func linkHere(object: RestObject) {
-        print("Link \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
+        printLog("Link \(Context.clickBoard.getNameWithType()) to \(object.getNameWithType())")
         let topController = UIUtil.getTopController() as! SysObjectViewController
         MiscService.linkTo(object, thisController: topController) {
             topController.refreshData()

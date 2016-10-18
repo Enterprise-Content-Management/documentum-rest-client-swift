@@ -16,7 +16,7 @@ class RestServiceEnhance : RestService {
         RestService.getPropertiesAndLinks(Alamofire.Method.GET, url: contentUrl!) { properties, links, error in
             if error == nil {
                 if let downloadUrl = LinkRel.getLink(LinkRel.enclosure.rawValue, links: links!) {
-                    print("DownloadUrl for object \(object.getName()) is \(downloadUrl)")
+                    printLog("DownloadUrl for object \(object.getName()) is \(downloadUrl)")
                     doAfterDownloaded(downloadUrl, properties!, links!)
                 }
             }

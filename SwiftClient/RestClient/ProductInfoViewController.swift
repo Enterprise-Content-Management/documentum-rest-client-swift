@@ -23,7 +23,7 @@ class ProductInfoViewController: UITableViewController {
         RestService.getProductInfo(Context.productInfoUrl) { json, error in
             if let json = json {
                 self.productInfo = json.dictionary!["properties"]!.dictionary!
-                print("product info : \(self.productInfo)")
+                printLog("product info : \(self.productInfo)")
                 dispatch_async(dispatch_get_main_queue(), {
                     () -> Void in
                     self.tableView.reloadData()

@@ -37,7 +37,7 @@ class UpdateViewController: UITableViewController {
         let requestBody = JsonUtility.getUpdateRequestBodySingleAttr(type!, attrName: attrName, attrValue: attrValue)
         RestService.updateWithAuth(self.editUrl!, requestBody: requestBody){ result, error in
             if result != nil {
-                print("Successfully update \(attrName) to \(attrValue).")
+                printLog("Successfully update \(attrName) to \(attrValue).")
                 handler()
             }
         }

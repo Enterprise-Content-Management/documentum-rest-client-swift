@@ -51,7 +51,7 @@ class LoginViewController : UIViewController {
         let username = userNameTextField.text
         let password = passwordTextField.text
         if (username != nil && password != nil) {
-            print("Login info: username=\(username!), password=\(password!)")
+            printLog("Login info: username=\(username!), password=\(password!)")
             return true
         } else {
             return false
@@ -89,7 +89,7 @@ class LoginViewController : UIViewController {
             RestService.getUser(currentUserUrl) { object, error in
                 if let user = object {
                     menuViewController.currentUser = user
-                    print("Successfully Log into REPOSITORY \(Context.repo.getName()) as USER \(user.getName()) with priviledge \(user.getProperty("user_privileges")!).")
+                    printLog("Successfully Log into REPOSITORY \(Context.repo.getName()) as USER \(user.getName()) with priviledge \(user.getProperty("user_privileges")!).")
                 }
             }
         }
