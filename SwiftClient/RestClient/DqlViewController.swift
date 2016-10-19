@@ -23,6 +23,10 @@ class DqlViewController: AbstractCollectionViewController, UISearchBarDelegate {
         
         setSearchBar()
         setUI()
+        
+        // For now it is not available for history
+        historyButton.enabled = false
+        historyButton.tintColor = UIColor.clearColor()
     }
     
     override func viewWillAppear(animated: Bool) {

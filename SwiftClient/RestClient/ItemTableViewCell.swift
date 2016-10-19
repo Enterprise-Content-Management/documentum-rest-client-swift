@@ -19,7 +19,11 @@ class ItemTableViewCell: UITableViewCell {
     
     func initCell(filename: String, fileType: String) {
         fileNameLabel.text = filename
-        thumbnailPhotoImageView.image = UIImage(named: fileType)
+        if let image = UIImage(named: fileType) {
+            thumbnailPhotoImageView.image = image
+        } else {
+            thumbnailPhotoImageView.image = UIImage(named: "SysObject")
+        }
     }
     
     func initCell(object: RestObject) {

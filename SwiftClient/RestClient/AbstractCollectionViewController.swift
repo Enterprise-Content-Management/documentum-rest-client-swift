@@ -54,6 +54,9 @@ class AbstractCollectionViewController: UITableViewController, UISearchResultsUp
     
     internal func reloadData() {
         page = 1
+        if let footView = tableView.tableFooterView as? UILabel {
+            footView.text = ""
+        }
         clearAll()
         loadData()
         self.tableView.reloadData()
@@ -164,14 +167,20 @@ class AbstractCollectionViewController: UITableViewController, UISearchResultsUp
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        let lastRow = objects.count - 1
+        let restObjects: [RestObject]
+        if isSearchActive() {
+            restObjects = filteredObjects
+        } else {
+            restObjects = objects
+        }
+        let lastRow = restObjects.count - 1
         if indexPath.row == lastRow {
             if !isLastPage {
                 if indexPath.row == lastRow {
                     self.loadNextPageData()
                 }
             } else {
-                setFootViewText(objects.count)
+                setFootViewText(restObjects.count)
             }
         }
     }

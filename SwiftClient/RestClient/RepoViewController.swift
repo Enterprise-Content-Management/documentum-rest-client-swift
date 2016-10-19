@@ -22,15 +22,19 @@ class RepoViewController: AbstractCollectionViewController {
     
         loadData()
         
-        let rootUrl = DbUtil.getValueFromTable(attrName: DbUtil.ATTR_ROOTURL)!
-        navigationItem.title = rootUrl.substringFromIndex(rootUrl.startIndex.advancedBy(5)) + "/repositories"
-        
         // Set side menu toggle
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        let rootUrl = DbUtil.getValueFromTable(attrName: DbUtil.ATTR_ROOTURL)!
+        navigationItem.title = rootUrl.substringFromIndex(rootUrl.startIndex.advancedBy(5)) + "/repositories"
     }
     
     func setBarButtons() {

@@ -317,6 +317,7 @@ class SysObjectViewController: AbstractCollectionViewController, UIGestureRecogn
         RestService.getResponseWithAuthAndParam(searchUrl, params: params) { response, error in
             if let error = error {
                 ErrorAlert.show(error.message, controller: self, dismissViewController: false)
+                return
             } else if let array = response {
                 for entry in array {
                     let dic = entry as! NSDictionary

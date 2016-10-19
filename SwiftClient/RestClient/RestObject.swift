@@ -27,7 +27,9 @@ class RestObject {
         setBasic(.ID, value: entryDic[ObjectProperties.ID.rawValue] as! String)
         setBasic(.NAME, value: entryDic["title"]! as! String)
         setUpdated(entryDic[ObjectProperties.UPDATED.rawValue] as! String)
-        setPublished(entryDic[ObjectProperties.PUBLISHED.rawValue] as! String)
+        if let published = entryDic[ObjectProperties.PUBLISHED.rawValue] as? String {
+            setPublished(published)
+        }
         
         let content = entryDic["content"] as! Dictionary<String, AnyObject>
         if let propertiesDic = content[ObjectProperties.PROPERTIES.rawValue] as? NSDictionary {
@@ -81,6 +83,8 @@ class RestObject {
                 if let dmType = contentDic[ObjectProperties.TYPE.rawValue] as? String {
                     setTypeWithDmType(dmType)
                 }
+            case "item":
+                setTypeWithDmType(contentDic["type"] as! String)
             default:
                 setType(name.capitalizedString)
             }
@@ -193,8 +197,19 @@ class RestObject {
             case "dm_sysobject": return RestObjectType.sysObject.rawValue
             case "dm_group": return RestObjectType.group.rawValue
             case "dm_user": return RestObjectType.user.rawValue
-            default: return RestObjectType.sysObject.rawValue
+            default: return getSysObjectType(type)
         }
+    }
+    
+    internal static func getSysObjectType(type: String) -> String {
+        var parts = type.characters.split("_").map(String.init)
+        if parts[0] == "dm" {
+            parts.removeFirst()
+        }
+        for i in 0..<parts.count {
+            parts[i] = parts[i].capitalizedString
+        }
+        return parts.joinWithSeparator(" ")
     }
     
     static func getDmType(type: String) -> String {

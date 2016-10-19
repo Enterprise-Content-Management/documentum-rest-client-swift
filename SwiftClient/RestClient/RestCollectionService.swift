@@ -45,12 +45,13 @@ class RestCollectionService {
     
     func getEntries(
         pageNo: NSInteger,
-        thisViewController: UIViewController,
+        thisViewController: AbstractCollectionViewController,
         completionHandler: ([RestObject], Bool) -> ()) {
         self.getService(pageNo) { entries, error in
             if let error = error {
                 let errorMsg = error.message
                 ErrorAlert.show(errorMsg, controller: thisViewController)
+                thisViewController.aiHelper.stopActivityIndicator()
                 return
             } else {
                 var restObjects = [RestObject]()
