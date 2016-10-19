@@ -73,15 +73,16 @@ class RestObject {
     }
     
     private func setTypeByDic(contentDic: NSDictionary) {
-        if let dmType = contentDic[ObjectProperties.TYPE.rawValue] as? String {
-            setTypeWithDmType(dmType)
-        } else if contentDic["servers"] != nil {
-            setType(RestObjectType.repository.rawValue)
-        } else if let name = contentDic["name"] as? String {
-            if name.capitalizedString == RestObjectType.group.rawValue {
-                setType(RestObjectType.group.rawValue)
-            } else if name.capitalizedString == RestObjectType.user.rawValue {
-                setType(RestObjectType.user.rawValue)
+        if let name = contentDic["name"] as? String {
+            switch name {
+            case "REPO":
+                setType(RestObjectType.repository.rawValue)
+            case "object":
+                if let dmType = contentDic[ObjectProperties.TYPE.rawValue] as? String {
+                    setTypeWithDmType(dmType)
+                }
+            default:
+                setType(name.capitalizedString)
             }
         }
     }

@@ -123,17 +123,21 @@ class AbstractCollectionViewController: UITableViewController, UISearchResultsUp
         return objects.count
     }
     
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellIdentifier = "ItemTableViewCell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ItemTableViewCell
-        
+    internal func getSelectedObject(indexPath: NSIndexPath) -> RestObject {
         let object: RestObject
         if self.isSearchActive() {
             object = self.filteredObjects[indexPath.row]
         } else {
             object = self.objects[indexPath.row]
         }
+        return object
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cellIdentifier = "ItemTableViewCell"
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ItemTableViewCell
+        
+        let object = getSelectedObject(indexPath)
         
         // Set different view for disclosurable item and the opposite.
         let buttons = cell.contentView.subviews.filter{ view in
@@ -141,9 +145,7 @@ class AbstractCollectionViewController: UITableViewController, UISearchResultsUp
         }
         let infoButton = buttons[0]
         let type = object.getType()
-        if type == RestObjectType.cabinet.rawValue
-            || type == RestObjectType.folder.rawValue
-            || type == RestObjectType.repository.rawValue {
+        if object.getType() == RestObjectType.repository.rawValue || object.getLink(LinkRel.objects.rawValue) != nil {
             cell.accessoryType = .DisclosureIndicator
             infoButton.hidden = false
         } else {

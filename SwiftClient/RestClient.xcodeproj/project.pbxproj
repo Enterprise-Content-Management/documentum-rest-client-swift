@@ -74,6 +74,7 @@
 		1EC132271D9E468B00D8A3A4 /* CommentItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC132261D9E468B00D8A3A4 /* CommentItemTableViewCell.swift */; };
 		1EC2F8F51D20F9660041CEEB /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC2F8F41D20F9660041CEEB /* SideMenuViewController.swift */; };
 		1EC782F71D139B2100982FA2 /* RestServiceEnhance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC782F61D139B2100982FA2 /* RestServiceEnhance.swift */; };
+		1ED226381DB71313002A6B40 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED226371DB71313002A6B40 /* Type.swift */; };
 		1ED776001D24EF4B0039CDA4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED775FF1D24EF4B0039CDA4 /* ProfileViewController.swift */; };
 		1ED776021D25079F0039CDA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED776011D25079F0039CDA4 /* User.swift */; };
 		1ED776061D251D4A0039CDA4 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED776051D251D4A0039CDA4 /* CheckBox.swift */; };
@@ -199,6 +200,7 @@
 		1EC2F8F41D20F9660041CEEB /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		1EC5398D1D41C1AD0024D789 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		1EC782F61D139B2100982FA2 /* RestServiceEnhance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestServiceEnhance.swift; sourceTree = "<group>"; };
+		1ED226371DB71313002A6B40 /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		1ED775FF1D24EF4B0039CDA4 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1ED776011D25079F0039CDA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1ED776051D251D4A0039CDA4 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
@@ -282,9 +284,9 @@
 		1E6299C91CABACE800A59B47 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				1E6299EE1CAE58EA00A59B47 /* RestCollectionService.swift */,
 				1E6299CF1CABB08100A59B47 /* RepositoryCollectionService.swift */,
 				1E6299EC1CAE197C00A59B47 /* SysObjectCollectionService.swift */,
-				1E6299EE1CAE58EA00A59B47 /* RestCollectionService.swift */,
 				1E06D7CC1D74356E00BB413C /* GroupCollectionService.swift */,
 				1E9FD0531D7D25FE00403DE7 /* UserCollectionService.swift */,
 				1E01D6611D893CD90014A005 /* MiscService.swift */,
@@ -296,15 +298,16 @@
 		1E6299CC1CABAE2200A59B47 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				1E6299DC1CACD5D500A59B47 /* RestObject.swift */,
 				1E6299CD1CABAEF800A59B47 /* Repository.swift */,
 				1E6299DA1CACD58400A59B47 /* Cabinet.swift */,
-				1E6299DC1CACD5D500A59B47 /* RestObject.swift */,
 				1E6299E61CAE147C00A59B47 /* Folder.swift */,
 				1E6299EA1CAE18D700A59B47 /* SysObject.swift */,
 				1ED776011D25079F0039CDA4 /* User.swift */,
 				1E46DE961D702FE9005C492A /* Group.swift */,
 				1EC132241D9E432500D8A3A4 /* Comment.swift */,
 				1EADDFA01DB46BAC00EBE155 /* DqlResult.swift */,
+				1ED226371DB71313002A6B40 /* Type.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -755,6 +758,7 @@
 				1E167A5D1CAA54DB000459E3 /* Item.swift in Sources */,
 				1E06D7D11D79791900BB413C /* PopOverMenuForGroupsViewController.swift in Sources */,
 				1E6299EB1CAE18D700A59B47 /* SysObject.swift in Sources */,
+				1ED226381DB71313002A6B40 /* Type.swift in Sources */,
 				1E397B781D178505005DB494 /* UpdateViewController.swift in Sources */,
 				1E9FD0541D7D25FE00403DE7 /* UserCollectionService.swift in Sources */,
 				1E6299EF1CAE58EA00A59B47 /* RestCollectionService.swift in Sources */,

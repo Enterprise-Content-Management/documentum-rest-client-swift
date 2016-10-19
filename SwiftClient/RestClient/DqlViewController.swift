@@ -131,9 +131,7 @@ class DqlViewController: AbstractCollectionViewController, UISearchBarDelegate {
     
     // MARK: Table view control
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
-        
+    internal func handleSelectedObject(indexPath: NSIndexPath, completionHandler: (RestObject) -> Void) {
         let restObject: RestObject
         if isActive {
             restObject = self.filteredObjects[indexPath.row]
@@ -145,16 +143,44 @@ class DqlViewController: AbstractCollectionViewController, UISearchBarDelegate {
             if let e = error {
                 ErrorAlert.show(e.message, controller: self, dismissViewController: false)
             } else if let object = object {
-                if object.getLink(LinkRel.objects.rawValue) != nil {
-                    let nextViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SysObjectCollectionView") as! SysObjectViewController
-                    nextViewController.parentObject = object
-                    nextViewController.formerPath = "/\(object.getName())"
-                    self.navigationController!.pushViewController(nextViewController, animated: true)
-                } else {
-                    let nextViewController = self.storyboard?.instantiateViewControllerWithIdentifier("InfoView") as! InfoViewController
-                    nextViewController.object = object
-                    self.navigationController!.pushViewController(nextViewController, animated: true)
-                }
+                completionHandler(object)
+            }
+        }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
+        
+        handleSelectedObject(indexPath) { object in
+            if object.getLink(LinkRel.objects.rawValue) != nil {
+                self.showFolderView(object)
+            } else {
+                self.showInfoView(object)
+            }
+        }
+    }
+    
+    private func showFolderView(object: RestObject) {
+        let nextViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SysObjectCollectionView") as! SysObjectViewController
+        nextViewController.parentObject = object
+        nextViewController.formerPath = "/\(object.getName())"
+        nextViewController.menuButton.enabled = false
+        nextViewController.menuButton.tintColor = UIColor.clearColor()
+        self.navigationController!.pushViewController(nextViewController, animated: true)
+    }
+    
+    private func showInfoView(object: RestObject) {
+        let nextViewController = self.storyboard?.instantiateViewControllerWithIdentifier("InfoView") as! InfoViewController
+        nextViewController.object = object
+        self.navigationController!.pushViewController(nextViewController, animated: true)
+    }
+    
+    @IBAction func onClickInfo(sender: UIButton) {
+        let view = sender.superview!
+        if let selectedItemCell = view.superview as? ItemTableViewCell {
+            let indexPath = tableView.indexPathForCell(selectedItemCell)!
+            handleSelectedObject(indexPath) { object in
+                self.showInfoView(object)
             }
         }
     }
