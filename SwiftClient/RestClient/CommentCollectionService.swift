@@ -62,7 +62,7 @@ class CommentCollectionService: RestCollectionService {
             }
             for i in 0..<objects.count {
                 let comment = comments[i]
-                let repliesUrl = comment.getLink(LinkRel.replies.rawValue)!
+                let repliesUrl = comment.getLink(LinkRel.replies)!
                 RestService.getResponseWithAuthAndParam(repliesUrl, params: self.getParams(1)) { array, error in
                     if let error = error {
                         ErrorAlert.show(error.message, controller: thisViewController)

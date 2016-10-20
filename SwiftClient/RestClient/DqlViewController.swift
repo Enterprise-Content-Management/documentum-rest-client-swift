@@ -94,28 +94,13 @@ class DqlViewController: AbstractCollectionViewController, UISearchBarDelegate {
         }
         ai.startActivityIndicator()
 
-        searchUrl = Context.repo.getLink(LinkRel.dql.rawValue)!.characters.split("{").map(String.init)[0]
+        searchUrl = Context.repo.getLink(LinkRel.dql)!.characters.split("{").map(String.init)[0]
         dql = searchBar.text
         if dql == nil || dql!.isEmpty {
             ErrorAlert.show("Please type in dql.", controller: self, dismissViewController: false)
         }
-        dql = addRObjectIdInDql(dql)
-        
+
         loadData(page)
-    }
-    
-    private func addRObjectIdInDql(dql: String) -> String {
-        var characters = dql.characters.split(" ").map(String.init)
-        let selectedProperties = characters[1]
-        if selectedProperties == "*" {
-            return dql
-        }
-        if !selectedProperties.containsString("r_object_id") {
-            characters[1] = characters[1] + ",r_object_id"
-            let newDql = characters.joinWithSeparator(" ")
-            return newDql
-        }
-        return dql
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
@@ -134,33 +119,41 @@ class DqlViewController: AbstractCollectionViewController, UISearchBarDelegate {
     }
     
     // MARK: Table view control
-    
-    internal func handleSelectedObject(indexPath: NSIndexPath, completionHandler: (RestObject) -> Void) {
-        let restObject: RestObject
-        if isActive {
-            restObject = self.filteredObjects[indexPath.row]
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath) as! ItemTableViewCell
+        
+        cell.canGoDeep()
+        if getSelectedObject(indexPath).getLink(LinkRel.selfRel) == nil {
+            cell.getInfoButton().hidden = true
         } else {
-            restObject = self.objects[indexPath.row]
+            IconHelper.setIconForButton(cell.getInfoButton(), iconName: .Search, size: 20)
         }
         
-        RestService.getRestObject(restObject.getLink(LinkRel.selfRel.rawValue)!) { object, error in
-            if let e = error {
-                ErrorAlert.show(e.message, controller: self, dismissViewController: false)
-            } else if let object = object {
-                completionHandler(object)
-            }
-        }
+        return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
         
-        handleSelectedObject(indexPath) { object in
-            if object.getLink(LinkRel.objects.rawValue) != nil {
-                self.showFolderView(object)
-            } else {
-                self.showInfoView(object)
+        let object = getSelectedObject(indexPath)
+        showPropertyView(object)
+    }
+    
+    @IBAction func onClickInfo(sender: UIButton) {
+        let cell = sender.superview!.superview as! ItemTableViewCell
+        let indexPath = tableView.indexPathForCell(cell)!
+        
+        let object = getSelectedObject(indexPath)
+        if object.getLink(LinkRel.selfRel) != nil {
+            handleSelectedObject(indexPath) { object in
+                if object.getLink(LinkRel.objects.rawValue) != nil {
+                    self.showFolderView(object)
+                } else {
+                    self.showPropertyView(object)
+                }
             }
+        } else {
+            ErrorAlert.show("Please at least include 'r_object_id' in search proepties.", controller: self, dismissViewController: false)
         }
     }
     
@@ -173,18 +166,20 @@ class DqlViewController: AbstractCollectionViewController, UISearchBarDelegate {
         self.navigationController!.pushViewController(nextViewController, animated: true)
     }
     
-    private func showInfoView(object: RestObject) {
-        let nextViewController = self.storyboard?.instantiateViewControllerWithIdentifier("InfoView") as! InfoViewController
-        nextViewController.object = object
+    private func showPropertyView(object: RestObject) {
+        let nextViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+        nextViewController.restObject = object
+        nextViewController.sectionChosed = [0, 1]
         self.navigationController!.pushViewController(nextViewController, animated: true)
     }
     
-    @IBAction func onClickInfo(sender: UIButton) {
-        let view = sender.superview!
-        if let selectedItemCell = view.superview as? ItemTableViewCell {
-            let indexPath = tableView.indexPathForCell(selectedItemCell)!
-            handleSelectedObject(indexPath) { object in
-                self.showInfoView(object)
+    internal func handleSelectedObject(indexPath: NSIndexPath, completionHandler: (RestObject) -> Void) {
+        let restObject = getSelectedObject(indexPath)
+        RestService.getRestObject(restObject.getLink(LinkRel.selfRel.rawValue)!) { object, error in
+            if let e = error {
+                ErrorAlert.show(e.message, controller: self, dismissViewController: false)
+            } else if let object = object {
+                completionHandler(object)
             }
         }
     }

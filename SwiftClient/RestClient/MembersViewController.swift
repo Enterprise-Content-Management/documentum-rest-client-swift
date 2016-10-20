@@ -50,8 +50,8 @@ class MembersViewController: AbstractCollectionViewController, UIGestureRecogniz
         
         let memberUsersUrl: String
         if let group = parentGroup {
-            groupsUrl = group.getLink(LinkRel.groups.rawValue)!
-            memberUsersUrl = group.getLink(LinkRel.users.rawValue)!
+            groupsUrl = group.getLink(LinkRel.groups)!
+            memberUsersUrl = group.getLink(LinkRel.users)!
         } else {
             memberUsersUrl = ""
         }
@@ -148,7 +148,7 @@ class MembersViewController: AbstractCollectionViewController, UIGestureRecogniz
             restObject = self.objects[indexPath.row]
         }
         
-        if restObject.getLink(LinkRel.users.rawValue) != nil {
+        if restObject.getLink(LinkRel.users) != nil {
             let nextViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MembersViewController") as! MembersViewController
             nextViewController.parentGroup = restObject
             navigationController!.pushViewController(nextViewController, animated: true)
@@ -167,8 +167,8 @@ class MembersViewController: AbstractCollectionViewController, UIGestureRecogniz
             let object = objects[indexPath.row] as RestObject
             let objectFullName = "\(objects[indexPath.row].getType()) \(objects[indexPath.row].getName())"
             
-            if object.getLink(LinkRel.delete.rawValue) != nil {
-                let removeLink = object.getLink(LinkRel.removeMember.rawValue)!
+            if object.getLink(LinkRel.delete) != nil {
+                let removeLink = object.getLink(LinkRel.removeMember)!
                 RestService.deleteWithAuth(removeLink) { result, error in
                     if result != nil {
                         printLog("Successfully remove \(objectFullName) from group \(self.parentGroup!.getName()).")

@@ -46,7 +46,7 @@ class RestObject {
         jsonDic = singleDic
         let links = singleDic[ObjectProperties.LINKS.rawValue] as! NSArray
         constructLinks(links)
-        setBasic(.ID, value: getLink(LinkRel.selfRel.rawValue)!)
+        setBasic(.ID, value: getLink(LinkRel.selfRel)!)
         
         if let pros = singleDic["properties"] as? Dictionary<String, AnyObject>  {
             properties = pros
@@ -149,6 +149,10 @@ class RestObject {
         return links[rel]
     }
     
+    func getLink(rel: LinkRel) -> String? {
+        return getLink(rel.rawValue)
+    }
+    
     func getRawId() -> String {
         let idArray = getId().characters.split("/").map(String.init)
         let last = idArray.count - 1
@@ -156,7 +160,7 @@ class RestObject {
     }
     
     func getRawParentID() -> String {
-        let parentLink = getLink(LinkRel.parent.rawValue)!
+        let parentLink = getLink(LinkRel.parent)!
         let idArray = parentLink.characters.split("/").map(String.init)
         let last = idArray.count - 1
         return idArray[last]

@@ -141,22 +141,7 @@ class AbstractCollectionViewController: UITableViewController, UISearchResultsUp
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ItemTableViewCell
         
         let object = getSelectedObject(indexPath)
-        
-        // Set different view for disclosurable item and the opposite.
-        let buttons = cell.contentView.subviews.filter{ view in
-            return view is UIButton
-        }
-        let infoButton = buttons[0]
-        let type = object.getType()
-        if object.getType() == RestObjectType.repository.rawValue || object.getLink(LinkRel.objects.rawValue) != nil {
-            cell.accessoryType = .DisclosureIndicator
-            infoButton.hidden = false
-        } else {
-            cell.accessoryType = .None
-            infoButton.hidden = true
-        }
-        
-        cell.initCell(object.getName(), fileType: type)
+        cell.initCell(object)
         
         return cell
     }
@@ -230,8 +215,8 @@ class AbstractCollectionViewController: UITableViewController, UISearchResultsUp
         let object = objects[indexPath.row] as RestObject
         let objectFullName = "\(objects[indexPath.row].getType()) \(objects[indexPath.row].getName())"
         
-        if object.getLink(LinkRel.delete.rawValue) != nil {
-            let deletLink = object.getLink(LinkRel.delete.rawValue)!
+        if object.getLink(LinkRel.delete) != nil {
+            let deletLink = object.getLink(LinkRel.delete)!
             RestService.deleteWithAuth(deletLink) { result, error in
                 if result != nil {
                     printLog("Successfully delete \(objectFullName) from cloud.")

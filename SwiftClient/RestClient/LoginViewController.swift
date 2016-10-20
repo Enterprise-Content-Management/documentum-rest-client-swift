@@ -85,7 +85,7 @@ class LoginViewController : UIViewController {
             let cabinetViewController = naviViewController.viewControllers.first as! SysObjectViewController
             cabinetViewController.parentObject = Context.repo
 
-            let currentUserUrl = Context.repo.getLink(LinkRel.currentUser.rawValue)!
+            let currentUserUrl = Context.repo.getLink(LinkRel.currentUser)!
             RestService.getUser(currentUserUrl) { object, error in
                 if let user = object {
                     menuViewController.currentUser = user

@@ -211,7 +211,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="j1r-VQ-fQX" id="DQ5-dN-Zj0">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="64.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="65"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFF-dg-4Us">
@@ -223,30 +223,32 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="Bah-3H-K0p">
                                             <rect key="frame" x="14" y="5" width="55" height="55"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="55" id="8py-oQ-JpJ"/>
+                                                <constraint firstAttribute="width" constant="55" id="QQW-nF-xQL"/>
                                             </constraints>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="22" placeholderIntrinsicHeight="22" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MKv-K4-du6">
-                                            <rect key="frame" x="537" y="21" width="22" height="21"/>
+                                        <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="22" placeholderIntrinsicHeight="22" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MKv-K4-du6">
+                                            <rect key="frame" x="531" y="21" width="22" height="22"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="22" id="085-fY-0dj"/>
+                                                <constraint firstAttribute="width" constant="22" id="L8D-ra-p7C"/>
                                             </constraints>
+                                            <state key="normal" title="Search">
+                                                <color key="titleColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
                                             <connections>
-                                                <action selector="onClickInfo:" destination="Reh-f1-x9S" eventType="touchUpInside" id="Otd-Pe-dmT"/>
+                                                <action selector="onClickInfo:" destination="Reh-f1-x9S" eventType="touchUpInside" id="RCb-1e-2qs"/>
                                             </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="uFF-dg-4Us" firstAttribute="leading" secondItem="Bah-3H-K0p" secondAttribute="trailing" constant="8" symbolic="YES" id="1Sa-ql-4mg"/>
-                                        <constraint firstItem="MKv-K4-du6" firstAttribute="trailing" secondItem="DQ5-dN-Zj0" secondAttribute="trailingMargin" id="6PD-dp-3gk"/>
-                                        <constraint firstItem="Bah-3H-K0p" firstAttribute="leading" secondItem="DQ5-dN-Zj0" secondAttribute="leadingMargin" constant="6" id="Eer-3E-Qs5"/>
-                                        <constraint firstItem="MKv-K4-du6" firstAttribute="top" secondItem="DQ5-dN-Zj0" secondAttribute="topMargin" constant="13" id="Gwe-xB-Cea"/>
-                                        <constraint firstItem="uFF-dg-4Us" firstAttribute="centerY" secondItem="MKv-K4-du6" secondAttribute="centerY" id="HTw-nL-ttu"/>
-                                        <constraint firstItem="Bah-3H-K0p" firstAttribute="top" secondItem="DQ5-dN-Zj0" secondAttribute="topMargin" constant="-3" id="J8O-Tc-iIj"/>
-                                        <constraint firstItem="Bah-3H-K0p" firstAttribute="centerY" secondItem="uFF-dg-4Us" secondAttribute="centerY" id="KTh-HD-Pkp"/>
-                                        <constraint firstItem="MKv-K4-du6" firstAttribute="leading" secondItem="uFF-dg-4Us" secondAttribute="trailing" constant="24" id="jl8-Zk-9Cv"/>
-                                        <constraint firstItem="uFF-dg-4Us" firstAttribute="top" secondItem="DQ5-dN-Zj0" secondAttribute="topMargin" id="nWq-z6-vSb"/>
-                                        <constraint firstItem="uFF-dg-4Us" firstAttribute="centerY" secondItem="DQ5-dN-Zj0" secondAttribute="centerY" id="uRG-fz-Y68"/>
+                                        <constraint firstItem="Bah-3H-K0p" firstAttribute="centerY" secondItem="uFF-dg-4Us" secondAttribute="centerY" id="0YZ-QB-4ci"/>
+                                        <constraint firstItem="Bah-3H-K0p" firstAttribute="leading" secondItem="DQ5-dN-Zj0" secondAttribute="leadingMargin" constant="6" id="97T-IJ-BRb"/>
+                                        <constraint firstItem="uFF-dg-4Us" firstAttribute="top" secondItem="DQ5-dN-Zj0" secondAttribute="topMargin" id="AwC-eM-Yyu"/>
+                                        <constraint firstItem="uFF-dg-4Us" firstAttribute="leading" secondItem="Bah-3H-K0p" secondAttribute="trailing" constant="8" symbolic="YES" id="Byd-J8-1GV"/>
+                                        <constraint firstItem="MKv-K4-du6" firstAttribute="leading" secondItem="uFF-dg-4Us" secondAttribute="trailing" constant="18" id="HgF-Ot-Fw6"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="MKv-K4-du6" secondAttribute="trailing" constant="6" id="J53-XA-4jR"/>
+                                        <constraint firstItem="uFF-dg-4Us" firstAttribute="centerY" secondItem="MKv-K4-du6" secondAttribute="centerY" id="b7N-WQ-2lL"/>
+                                        <constraint firstItem="Bah-3H-K0p" firstAttribute="centerY" secondItem="DQ5-dN-Zj0" secondAttribute="centerY" id="gfv-tv-Od1"/>
+                                        <constraint firstItem="Bah-3H-K0p" firstAttribute="top" secondItem="DQ5-dN-Zj0" secondAttribute="topMargin" constant="-3" id="xHM-gX-phu"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

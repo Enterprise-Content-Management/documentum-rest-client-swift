@@ -28,7 +28,7 @@ class AddGroupViewController: UITableViewController {
         if !groupName.isEmpty {
             aiHelper.startActivityIndicator()
             let attrDic = constructAttrDic()
-            let postUrl = Context.repo.getLink(LinkRel.groups.rawValue)!
+            let postUrl = Context.repo.getLink(LinkRel.groups)!
             let requestBody = JsonUtility.getUpdateRequestBody(RestObjectType.group.rawValue, attrDic: attrDic)
             RestService.createWithAuth(postUrl, requestBody: requestBody){ result, error in
                 if result != nil {

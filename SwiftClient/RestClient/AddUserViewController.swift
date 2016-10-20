@@ -38,7 +38,7 @@ class AddUserViewController: UITableViewController, UIPickerViewDelegate, UIPick
             aiHelper.startActivityIndicator()
             let attrDic = constructAttrDic()
             let requestBody = JsonUtility.getUpdateRequestBody(RestObjectType.user.rawValue, attrDic: attrDic)
-            let postUrl = Context.repo.getLink(LinkRel.users.rawValue)!
+            let postUrl = Context.repo.getLink(LinkRel.users)!
             RestService.createWithAuth(postUrl, requestBody: requestBody){ result, error in
                 if result != nil {
                     let user = User(singleDic: result!)

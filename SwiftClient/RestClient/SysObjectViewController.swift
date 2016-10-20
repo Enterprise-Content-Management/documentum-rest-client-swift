@@ -74,7 +74,7 @@ class SysObjectViewController: AbstractCollectionViewController, UIGestureRecogn
     
     func setBarButtons() {
         IconHelper.setIconForBarButton(ellipsisButton, iconName: .EllipsisV)
-        IconHelper.setIconForBarButton(menuButton, iconName: .Bars)
+        IconHelper.setIconForBarButton(menuButton, iconName: .Navicon)
     }
     
     // MARK: Gesture control
@@ -99,7 +99,7 @@ class SysObjectViewController: AbstractCollectionViewController, UIGestureRecogn
             restObject = self.objects[indexPath.row]
         }
         
-        if restObject.getLink(LinkRel.objects.rawValue) != nil {
+        if restObject.getLink(LinkRel.objects) != nil {
             let nextViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SysObjectCollectionView") as! SysObjectViewController
             nextViewController.parentObject = restObject
             nextViewController.formerPath = formerPath
@@ -125,9 +125,9 @@ class SysObjectViewController: AbstractCollectionViewController, UIGestureRecogn
         
         let nextUrl: String
         if parentObject!.getType() == RestObjectType.repository.rawValue {
-            nextUrl = parentObject!.getLink(LinkRel.cabinets.rawValue)!
+            nextUrl = parentObject!.getLink(LinkRel.cabinets)!
         } else {
-            nextUrl = parentObject!.getLink(LinkRel.objects.rawValue)!
+            nextUrl = parentObject!.getLink(LinkRel.objects)!
         }
         let sysObjectService = SysObjectCollectionService(parentObject: parentObject!, url: nextUrl)
         self.thisUrl = nextUrl
@@ -305,7 +305,7 @@ class SysObjectViewController: AbstractCollectionViewController, UIGestureRecogn
    
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         aiHelper.startActivityIndicator()
-        let searchUrl = Context.repo.getLink(LinkRel.search.rawValue)!.characters.split("{").map(String.init)[0]
+        let searchUrl = Context.repo.getLink(LinkRel.search)!.characters.split("{").map(String.init)[0]
         var pathPieces = formerPath.characters.split("/").map(String.init)
         pathPieces.removeFirst(1)
         var locations = pathPieces.joinWithSeparator("/")

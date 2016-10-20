@@ -12,7 +12,7 @@ class MiscService {
     
     static func moveTo(object: RestObject, thisController: SysObjectViewController, completionHandler: () -> ()) {
         let clickedObject = Context.clickBoard
-        let requestUrl = clickedObject.getLink(LinkRel.parentLinks.rawValue)! + "/" + clickedObject.getRawParentID()
+        let requestUrl = clickedObject.getLink(LinkRel.parentLinks)! + "/" + clickedObject.getRawParentID()
         let dic = ["href": object.getId()]
         RestService.moveObject(requestUrl, requestBody: dic) { response, error in
             if let error = error {
@@ -28,7 +28,7 @@ class MiscService {
     
     static func copyTo(object: RestObject, thisController: SysObjectViewController, completionHandler: () -> ()) {
         let clickedObject = Context.clickBoard
-        let requestUrl = object.getLink(LinkRel.objects.rawValue)
+        let requestUrl = object.getLink(LinkRel.objects)
         let dic = ["href": clickedObject.getId()]
         RestService.createWithAuth(requestUrl!, requestBody: dic) { response, error in
             if let error = error {
@@ -41,7 +41,7 @@ class MiscService {
     
     static func linkTo(object: RestObject, thisController: SysObjectViewController, completionHandler: () -> ()) {
         let clickedObject = Context.clickBoard
-        let requestUrl = object.getLink(LinkRel.childLinks.rawValue)!
+        let requestUrl = object.getLink(LinkRel.childLinks)!
         let dic = ["href": clickedObject.getId()]
         RestService.createWithAuth(requestUrl, requestBody: dic) { response, error in
             if let error = error {

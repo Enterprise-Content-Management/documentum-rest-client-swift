@@ -77,11 +77,11 @@ enum LinkRel: String {
     case replies = "http://identifiers.emc.com/linkrel/replies"
     case permissions = "http://identifiers.emc.com/linkrel/permissions"
     
-    static func getLink(linkRel: String, links: NSArray) -> String? {
+    static func getLink(linkRel: LinkRel, links: NSArray) -> String? {
         var downloadUrl: String?
         for link in links {
             let link = link as! Dictionary<String, String>
-            if link["rel"] == linkRel {
+            if link["rel"] == linkRel.rawValue {
                 downloadUrl = link["href"]
             }
         }

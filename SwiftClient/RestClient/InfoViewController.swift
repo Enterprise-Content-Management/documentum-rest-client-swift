@@ -50,7 +50,7 @@ class InfoViewController: UITableViewController {
     
     // Determine this user's permission on object and load comments if any.
     private func initData() {
-        RestService.getPermissions(object.getLink(LinkRel.permissions.rawValue)!) { json, error in
+        RestService.getPermissions(object.getLink(LinkRel.permissions)!) { json, error in
             if let error = error {
                 ErrorAlert.show(error.errorCode, controller: self, dismissViewController: false)
             } else if let permissions = json?.dictionary {
@@ -132,7 +132,7 @@ class InfoViewController: UITableViewController {
         aiHelper.startActivityIndicator()
         
         let commentService = CommentCollectionService()
-        commentService.url = object.getLink(LinkRel.comments.rawValue)!
+        commentService.url = object.getLink(LinkRel.comments)!
         commentService.getCommentsAndReplies(commentPage, thisViewController: self) { comments, isLastPage in
             self.isCommentLastPage = isLastPage
             for comment in comments {
@@ -162,7 +162,7 @@ class InfoViewController: UITableViewController {
     }
     
     private func showComments() -> Bool {
-        let hasCommentsLink = object.getLink(LinkRel.comments.rawValue) != nil
+        let hasCommentsLink = object.getLink(LinkRel.comments) != nil
         return hasCommentsLink && shownSections.contains(2)
     }
     
@@ -302,7 +302,7 @@ class InfoViewController: UITableViewController {
     private func previewFile() {
         let textViewController = UIUtil.getViewController("FileViewController") as! FileViewController
         textViewController.needPreviewDownload = true
-        textViewController.objectUrl = object.getLink(LinkRel.selfRel.rawValue)
+        textViewController.objectUrl = object.getLink(LinkRel.selfRel)
         self.navigationController?.pushViewController(textViewController, animated: true)
     }
     
@@ -355,7 +355,7 @@ class InfoViewController: UITableViewController {
         }
         let sendAction = UIAlertAction(title: "Send", style: .Default) { (action: UIAlertAction!) -> Void in
             let content = commentController.textFields!.first!.text!
-            let commentsUrl = self.object.getLink(LinkRel.comments.rawValue)!
+            let commentsUrl = self.object.getLink(LinkRel.comments)!
             let requesBody = ["content-value": content]
             RestService.createWithAuth(commentsUrl, requestBody: requesBody) { dic, error in
                 if let error = error {
@@ -394,7 +394,7 @@ class InfoViewController: UITableViewController {
         let sendAction = UIAlertAction(title: "Send", style: .Default) { (action: UIAlertAction!) -> Void in
             let content = replyController.textFields!.first!.text!
             let index = self.getRelatedObjectIndex(sender).row
-            let repliesUrl = self.comments[index].getLink(LinkRel.replies.rawValue)!
+            let repliesUrl = self.comments[index].getLink(LinkRel.replies)!
             let requestBody = ["content-value": content]
             RestService.createWithAuth(repliesUrl, requestBody: requestBody) { dic, error in
                 if dic != nil {
@@ -440,8 +440,8 @@ class InfoViewController: UITableViewController {
         aiHelper.startActivityIndicator()
         let object = comments[indexPath.row] as RestObject
         
-        if object.getLink(LinkRel.delete.rawValue) != nil {
-            let deletLink = object.getLink(LinkRel.delete.rawValue)!
+        if object.getLink(LinkRel.delete) != nil {
+            let deletLink = object.getLink(LinkRel.delete)!
             RestService.deleteWithAuth(deletLink) { result, error in
                 if result != nil {
                     printLog("Successfully delete this comment from cloud.")

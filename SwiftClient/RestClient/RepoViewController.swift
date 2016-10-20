@@ -38,7 +38,7 @@ class RepoViewController: AbstractCollectionViewController {
     }
     
     func setBarButtons() {
-        IconHelper.setIconForBarButton(menuButton, iconName: .Bars)
+        IconHelper.setIconForBarButton(menuButton, iconName: .Navicon)
     }
     
     // MARK: Rest service control

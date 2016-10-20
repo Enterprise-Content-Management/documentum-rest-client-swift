@@ -26,7 +26,8 @@ class DqlResult: RestObject {
         }
         properties = content[ObjectProperties.PROPERTIES.rawValue] as! Dictionary<String, AnyObject>
         
-        let links = content[ObjectProperties.LINKS.rawValue] as! NSArray
-        constructLinks(links)
+        if let links = content[ObjectProperties.LINKS.rawValue] as? NSArray {
+            constructLinks(links)
+        }
     }
 }

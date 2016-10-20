@@ -123,12 +123,12 @@ class SideMenuViewController: UITableViewController {
         } else if segue.identifier == "ShowGroups" {
             let naviCV = segue.destinationViewController as! UINavigationController
             let groupsViewController = naviCV.topViewController as! MembersViewController
-            groupsViewController.groupsUrl = Context.repo.getLink(LinkRel.groups.rawValue)
+            groupsViewController.groupsUrl = Context.repo.getLink(LinkRel.groups)
             groupsViewController.navigationItem.title = "Groups Management"
         } else if segue.identifier == "ShowUsers" {
             let naviCV = segue.destinationViewController as! UINavigationController
             let usersViewController = naviCV.topViewController as! MembersViewController
-            usersViewController.groupsUrl = Context.repo.getLink(LinkRel.users.rawValue)
+            usersViewController.groupsUrl = Context.repo.getLink(LinkRel.users)
             usersViewController.navigationItem.title = "Users Management"
         }
     }

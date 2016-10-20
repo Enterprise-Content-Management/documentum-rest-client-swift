@@ -167,7 +167,7 @@ class FileViewController: UIViewController {
     
     private func uploadModifiedFile() {
         aiHelper.startActivityIndicator()
-        let checkoutUrl = object?.getLink(LinkRel.checkout.rawValue)
+        let checkoutUrl = object?.getLink(LinkRel.checkout)
         RestService.getPropertiesAndLinks(Alamofire.Method.PUT, url: checkoutUrl!) { properties, links, error in
             self.object?.links.removeAll()
             self.object?.constructLinks(links!)
@@ -175,7 +175,7 @@ class FileViewController: UIViewController {
             let json = JsonUtility.getUploadRequestBodyJson(self.constructAttrDic(self.object!))
             
             // TODO: make a alert window to allow choose from minor or major
-            let checkinUrl = self.object?.getLink(LinkRel.checkinMajor.rawValue)
+            let checkinUrl = self.object?.getLink(LinkRel.checkinMajor)
             let data = self.fileContentTextView.text.dataUsingEncoding(NSUTF8StringEncoding)
             let type = self.object?.getType()
             RestService.uploadFile(

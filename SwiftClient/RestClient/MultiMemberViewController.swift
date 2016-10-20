@@ -36,10 +36,10 @@ class MultiMemberViewController: AbstractCollectionViewController {
         let url: String
         if isGroups {
             service = GroupCollectionService()
-            url = Context.repo.getLink(LinkRel.groups.rawValue)!
+            url = Context.repo.getLink(LinkRel.groups)!
         } else {
             service = UserCollectionService()
-            url = Context.repo.getLink(LinkRel.users.rawValue)!
+            url = Context.repo.getLink(LinkRel.users)!
         }
         service.setUrl(url)
         service.getEntries(page, thisViewController: self) { objects, isLastPage in
@@ -113,7 +113,7 @@ class MultiMemberViewController: AbstractCollectionViewController {
         let requestBody = getBatchRequest(selectedObjects) as! Dictionary<String, AnyObject>
 
         aiHelper.startActivityIndicator()
-        let batchesUrl = Context.repo.getLink(LinkRel.batches.rawValue)!
+        let batchesUrl = Context.repo.getLink(LinkRel.batches)!
         RestService.createWithAuth(batchesUrl, requestBody: requestBody) { dic, error in
             if error != nil {
                 ErrorAlert.show(error!.message, controller: self, dismissViewController: false)
@@ -166,12 +166,12 @@ class MultiMemberViewController: AbstractCollectionViewController {
     private func getSingleOperation(id: String, object: RestObject) -> NSDictionary {
         let requestUrl: String
         if isGroups {
-            requestUrl = parentGroup.getLink(LinkRel.groups.rawValue)!
+            requestUrl = parentGroup.getLink(LinkRel.groups)!
         } else {
-            requestUrl = parentGroup.getLink(LinkRel.users.rawValue)!
+            requestUrl = parentGroup.getLink(LinkRel.users)!
         }
         let headers = [["name": "Content-Type", "value": RestService.MIME_JSON]] as NSArray
-        let objectId = object.getLink(LinkRel.selfRel.rawValue)!
+        let objectId = object.getLink(LinkRel.selfRel)!
         let entity = "{\"href\": \"\(objectId)\"}"
         
         return JsonUtility.buildSingleBatchOperation(
