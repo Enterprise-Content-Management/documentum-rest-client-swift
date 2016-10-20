@@ -11,7 +11,7 @@ import UIKit
 class MembersViewController: AbstractCollectionViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
     @IBOutlet var footView: UILabel!
     
-    // Only used by first time into Groups
+    // Only used by first time into Members
     var groupsUrl: String!
     
     var parentGroup: RestObject?
@@ -210,6 +210,11 @@ class MembersViewController: AbstractCollectionViewController, UIGestureRecogniz
         } else {
             menuView = UIUtil.getViewController("GroupsPopOverMenu") as! PopOverMenuForMembersViewController
             menuView.preferredContentSize = CGSizeMake(150, 85)
+            if navigationItem.title == "Users Management" {
+                menuView.disableCreateGroup = true
+            } else {
+                menuView.disableCreateUser = true
+            }
         }
         menuView.modalPresentationStyle = .Popover
         

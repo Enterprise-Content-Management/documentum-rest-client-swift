@@ -8,16 +8,20 @@
 
 import UIKit
 
-class PopOverMenuForSysObjectController: UITableViewController {
-    var dismissSelf: Bool = false
+class PopOverMenuForSysObjectController: AbstractPopOverMenuController {
+    @IBOutlet weak var miscControlButton: UIButton!
+    
     var parentObject: RestObject!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
-        if dismissSelf {
-            dismissSelf = false
-            dismissViewControllerAnimated(false, completion: nil)
+        if Context.clickBoard == nil {
+            miscControlButton.enabled = false
+            miscControlButton.selected = false
+        } else {
+            miscControlButton.enabled = true
+            miscControlButton.selected = true
         }
     }
     

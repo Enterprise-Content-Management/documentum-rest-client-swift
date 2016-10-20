@@ -8,18 +8,36 @@
 
 import UIKit
 
-class PopOverMenuForMembersViewController: UITableViewController {
-    
-    var dismissSelf: Bool = false
+class PopOverMenuForMembersViewController: AbstractPopOverMenuController {
     var chosedGroup: Group!
-    
+    var disableCreateUser: Bool = false
+    var disableCreateGroup: Bool = false
+
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         
-        if dismissSelf {
-            dismissSelf = false
-            dismissViewControllerAnimated(false, completion: nil)
+        if chosedGroup == nil {
+            if disableCreateUser {
+                unshowCreateUser()
+            }
+            if disableCreateGroup {
+                unshowCreateGroup()
+            }
         }
+    }
+    
+    private func unshowCreateUser() {
+        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+        let button = cell?.subviews[0].subviews[0] as! UIButton
+        button.enabled = false
+        button.selected = false
+    }
+    
+    private func unshowCreateGroup() {
+        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0))
+        let button = cell?.subviews[0].subviews[0] as! UIButton
+        button.enabled = false
+        button.selected = false
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

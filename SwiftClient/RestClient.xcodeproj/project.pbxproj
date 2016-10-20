@@ -75,6 +75,7 @@
 		1EC2F8F51D20F9660041CEEB /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC2F8F41D20F9660041CEEB /* SideMenuViewController.swift */; };
 		1EC782F71D139B2100982FA2 /* RestServiceEnhance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC782F61D139B2100982FA2 /* RestServiceEnhance.swift */; };
 		1ED226381DB71313002A6B40 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED226371DB71313002A6B40 /* Type.swift */; };
+		1ED2263A1DB8626B002A6B40 /* AbstractPopOverMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED226391DB8626B002A6B40 /* AbstractPopOverMenuController.swift */; };
 		1ED776001D24EF4B0039CDA4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED775FF1D24EF4B0039CDA4 /* ProfileViewController.swift */; };
 		1ED776021D25079F0039CDA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED776011D25079F0039CDA4 /* User.swift */; };
 		1ED776061D251D4A0039CDA4 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED776051D251D4A0039CDA4 /* CheckBox.swift */; };
@@ -201,6 +202,7 @@
 		1EC5398D1D41C1AD0024D789 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		1EC782F61D139B2100982FA2 /* RestServiceEnhance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestServiceEnhance.swift; sourceTree = "<group>"; };
 		1ED226371DB71313002A6B40 /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
+		1ED226391DB8626B002A6B40 /* AbstractPopOverMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractPopOverMenuController.swift; sourceTree = "<group>"; };
 		1ED775FF1D24EF4B0039CDA4 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1ED776011D25079F0039CDA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1ED776051D251D4A0039CDA4 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 			children = (
 				1E6299E01CAD1B3300A59B47 /* AbstractCollectionViewController.swift */,
 				1E49512B1D9B6F7100D1877A /* AbstractRestObjectInfoViewController.swift */,
+				1ED226391DB8626B002A6B40 /* AbstractPopOverMenuController.swift */,
 			);
 			name = abstract;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				1EAB83AA1D05477E002AA4BC /* FileViewController.swift */,
 				1ED775FF1D24EF4B0039CDA4 /* ProfileViewController.swift */,
 				1E4951281D9B6C7C00D1877A /* ProductInfoViewController.swift */,
+				1EDF74301D2373FE00EB6ADC /* SettingViewController.swift */,
 			);
 			name = single;
 			sourceTree = "<group>";
@@ -510,7 +514,6 @@
 			isa = PBXGroup;
 			children = (
 				1EC2F8F41D20F9660041CEEB /* SideMenuViewController.swift */,
-				1EDF74301D2373FE00EB6ADC /* SettingViewController.swift */,
 				1E06D7D01D79791900BB413C /* PopOverMenuForGroupsViewController.swift */,
 				1E01D65F1D89346D0014A005 /* PopOverMenuForSysObjectController.swift */,
 			);
@@ -805,6 +808,7 @@
 				1E8AB77A1DAC8EF400ADFD8B /* ReplyItemTableViewCell.swift in Sources */,
 				1E96A6B31D5DBF97008CEB47 /* UIUtil.swift in Sources */,
 				1ED776021D25079F0039CDA4 /* User.swift in Sources */,
+				1ED2263A1DB8626B002A6B40 /* AbstractPopOverMenuController.swift in Sources */,
 				1E6299D01CABB08100A59B47 /* RepositoryCollectionService.swift in Sources */,
 				1E06D7CF1D791EAD00BB413C /* AddUserViewController.swift in Sources */,
 				1E665C9B1CAA2BB700EF3774 /* AppDelegate.swift in Sources */,

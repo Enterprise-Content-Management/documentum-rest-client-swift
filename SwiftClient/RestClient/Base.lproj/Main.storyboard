@@ -338,6 +338,9 @@
                     </tableView>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="120" height="87"/>
+                    <connections>
+                        <outlet property="miscControlButton" destination="TPL-Tt-JhU" id="zmv-Np-Uqp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lTn-VR-skn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2340,7 +2343,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <state key="normal" title="  Create a User"/>
                                                     <connections>
-                                                        <segue destination="Ns0-QC-DgH" kind="show" identifier="CreateUser" id="pV8-Ha-68W"/>
+                                                        <segue destination="Ns0-QC-DgH" kind="show" identifier="CreateUser" id="5Xk-4x-G8f"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -2364,7 +2367,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <state key="normal" title="  Create a Group"/>
                                                     <connections>
-                                                        <segue destination="i9n-ai-Zt4" kind="show" identifier="CreateGroup" id="5R1-Xz-iEf"/>
+                                                        <segue destination="i9n-ai-Zt4" kind="show" identifier="CreateGroup" id="2cL-rY-qHb"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -2558,6 +2561,6 @@
         <segue reference="cWB-DV-4qr"/>
         <segue reference="LDz-E6-wNn"/>
         <segue reference="F7w-hS-Bfl"/>
-        <segue reference="x3M-E8-dl5"/>
+        <segue reference="wpm-cA-O6t"/>
     </inferredMetricsTieBreakers>
 </document>
