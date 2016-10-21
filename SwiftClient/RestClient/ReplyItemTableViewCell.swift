@@ -22,12 +22,8 @@ class ReplyItemTableViewCell: UITableViewCell {
     }
     
     private func setComment(comment: Comment) {
-        var prefix = ""
-        if let parent = comment.getParentComment() {
-            prefix = "@\(parent.getAuthorName()) "
-        }
         autherNameLabel.text = comment.getAuthorName()
         dateLabel.text = Utility.getReadableDate(comment.getCommentDate(), dateStyle: .MediumStyle, timeStyle: .ShortStyle)!
-        contentLabel.text = prefix + comment.getCommentContent()
+        contentLabel.text = comment.getCommentContent()
     }
 }

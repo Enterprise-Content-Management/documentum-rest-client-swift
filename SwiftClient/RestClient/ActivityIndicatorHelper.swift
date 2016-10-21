@@ -10,7 +10,7 @@ import UIKit
 
 class ActivityIndicatorHelper {
     
-    let activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 1000, 1000))
+    let activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 10000, 10000))
     
     func addActivityIndicator(parentView: UIView) {
         activityIndicator.activityIndicatorViewStyle = .Gray

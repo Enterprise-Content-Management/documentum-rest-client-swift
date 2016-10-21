@@ -89,6 +89,15 @@ class RepliesViewController: AbstractCollectionViewController {
         return [deleteAction]
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
+        if indexPath.row != 0 {
+            let nextViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RepliesViewController") as! RepliesViewController
+            nextViewController.parentComment = objects[indexPath.row - 1] as! Comment
+            self.navigationController!.pushViewController(nextViewController, animated: true)
+        }
+    }
+    
     // MARK: - Button Control
     @IBAction func onClickReply(sender: UIButton) {
         showCommentDialog()
@@ -159,8 +168,12 @@ class RepliesViewController: AbstractCollectionViewController {
                     printLog("Successfully delete this comment from cloud.")
                     self.aiHelper.stopActivityIndicator()
                     self.navigationController?.popViewControllerAnimated(true)
-                    let infoViewController = self.navigationController?.topViewController as! InfoViewController
-                    infoViewController.needUpdate = true
+                    let topViewController = self.navigationController?.topViewController
+                    if let infoViewController = topViewController as? InfoViewController {
+                        infoViewController.needUpdate = true
+                    } else if let repliesViewController = topViewController as? RepliesViewController {
+                        repliesViewController.needReloadData = true
+                    }
                 }
             }
         }

@@ -763,7 +763,7 @@
         <!--Replies View Controller-->
         <scene sceneID="dnL-Qd-uDt">
             <objects>
-                <tableViewController id="Dts-8f-viO" customClass="RepliesViewController" customModule="RestClient" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="RepliesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Dts-8f-viO" customClass="RepliesViewController" customModule="RestClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Mvb-zc-Uqv">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2740,7 +2740,7 @@
         <segue reference="GRc-n3-ZvH"/>
         <segue reference="cWB-DV-4qr"/>
         <segue reference="LDz-E6-wNn"/>
-        <segue reference="F7w-hS-Bfl"/>
         <segue reference="wpm-cA-O6t"/>
+        <segue reference="ARs-uc-lbi"/>
     </inferredMetricsTieBreakers>
 </document>
