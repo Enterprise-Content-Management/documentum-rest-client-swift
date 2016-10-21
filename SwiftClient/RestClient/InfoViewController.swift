@@ -34,10 +34,6 @@ class InfoViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set auto layout for cell
-        tableView.estimatedRowHeight = 60
-        tableView.rowHeight = UITableViewAutomaticDimension
-
         unshowPreviewButton()
 
         view.bringSubviewToFront(tableView)
@@ -54,12 +50,17 @@ class InfoViewController: UITableViewController {
             if let error = error {
                 ErrorAlert.show(error.errorCode, controller: self, dismissViewController: false)
             } else if let permissions = json?.dictionary {
-                let basicPermission = permissions["basic-permission"]?.stringValue
-                if BasicPermission.getPermissionInt(basicPermission!) >= BasicPermission.RELATE.rawValue {
+                let basicPermission = permissions["basic-permission"]!.stringValue
+                var log: String = "User \(RestUriBuilder.getCurrentUserName()) has basic permission level \(basicPermission) on this object, so he/she "
+                if BasicPermission.getPermissionInt(basicPermission) >= BasicPermission.RELATE.rawValue {
+                    log += "can "
                     self.isUserCanComment = true
                     self.loadComments()
                     self.tableView.reloadData()
+                } else {
+                    log += "can not "
                 }
+                printLog(log + "comment on this object.")
             }
         }
     }
@@ -323,23 +324,31 @@ class InfoViewController: UITableViewController {
 
                 self.needUpdate = true
             }
+        } else if segue.identifier == "ShowReplies"{
+            let repliesViewController = segue.destinationViewController as! RepliesViewController
+            let cell = sender as! ReplyItemTableViewCell
+            let indexPath = tableView.indexPathForCell(cell)!
+            repliesViewController.parentComment = comments[indexPath.row] as! Comment
         }
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if identifier == "UpdateAttribute" {
-            if object?.links[LinkRel.edit.rawValue] == nil {
-                return false
-            }
-            if let cell = sender as? InfoItemTableViewCell {
-                let indexPath = tableView.indexPathForCell(cell)!
-                // Only basic attribute excepting type and id could update.
-                if indexPath.section == 0 && indexPath.row > 1 {
-                    return true
+        if sender is InfoItemTableViewCell {
+            if identifier == "UpdateAttribute" {
+                if object?.links[LinkRel.edit.rawValue] == nil {
+                    return false
+                }
+                if let cell = sender as? InfoItemTableViewCell {
+                    let indexPath = tableView.indexPathForCell(cell)!
+                    // Only basic attribute excepting type and id could update.
+                    if indexPath.section == 0 && indexPath.row > 1 {
+                        return true
+                    }
                 }
             }
+            return false
         }
-        return false
+        return super.shouldPerformSegueWithIdentifier(identifier, sender: sender)
     }
     
     // MARK: - Comments Misc
@@ -357,6 +366,7 @@ class InfoViewController: UITableViewController {
             let content = commentController.textFields!.first!.text!
             let commentsUrl = self.object.getLink(LinkRel.comments)!
             let requesBody = ["content-value": content]
+            self.aiHelper.startActivityIndicator()
             RestService.createWithAuth(commentsUrl, requestBody: requesBody) { dic, error in
                 if let error = error {
                     if error.status == 403 {
@@ -369,6 +379,7 @@ class InfoViewController: UITableViewController {
                     self.comments.append(comment)
                     self.tableView.reloadData()
                 }
+                self.aiHelper.stopActivityIndicator()
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)

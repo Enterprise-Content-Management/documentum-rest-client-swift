@@ -76,6 +76,7 @@
 		1EC782F71D139B2100982FA2 /* RestServiceEnhance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC782F61D139B2100982FA2 /* RestServiceEnhance.swift */; };
 		1ED226381DB71313002A6B40 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED226371DB71313002A6B40 /* Type.swift */; };
 		1ED2263A1DB8626B002A6B40 /* AbstractPopOverMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED226391DB8626B002A6B40 /* AbstractPopOverMenuController.swift */; };
+		1ED2263C1DB9BAE2002A6B40 /* RepliesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED2263B1DB9BAE2002A6B40 /* RepliesViewController.swift */; };
 		1ED776001D24EF4B0039CDA4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED775FF1D24EF4B0039CDA4 /* ProfileViewController.swift */; };
 		1ED776021D25079F0039CDA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED776011D25079F0039CDA4 /* User.swift */; };
 		1ED776061D251D4A0039CDA4 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED776051D251D4A0039CDA4 /* CheckBox.swift */; };
@@ -203,6 +204,7 @@
 		1EC782F61D139B2100982FA2 /* RestServiceEnhance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestServiceEnhance.swift; sourceTree = "<group>"; };
 		1ED226371DB71313002A6B40 /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		1ED226391DB8626B002A6B40 /* AbstractPopOverMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractPopOverMenuController.swift; sourceTree = "<group>"; };
+		1ED2263B1DB9BAE2002A6B40 /* RepliesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepliesViewController.swift; sourceTree = "<group>"; };
 		1ED775FF1D24EF4B0039CDA4 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1ED776011D25079F0039CDA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1ED776051D251D4A0039CDA4 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 				1EAB83A41D051AA9002AA4BC /* FilesViewController.swift */,
 				1E46DE941D702FA6005C492A /* MembersViewController.swift */,
 				1E9FD0511D7D259600403DE7 /* MultiMemberViewController.swift */,
+				1ED2263B1DB9BAE2002A6B40 /* RepliesViewController.swift */,
 			);
 			name = collection;
 			sourceTree = "<group>";
@@ -773,6 +776,7 @@
 				1EC132251D9E432500D8A3A4 /* Comment.swift in Sources */,
 				1E46C9FC1D2BB4E5003172F7 /* Error.swift in Sources */,
 				1E6299E31CAD1F7E00A59B47 /* InfoViewController.swift in Sources */,
+				1ED2263C1DB9BAE2002A6B40 /* RepliesViewController.swift in Sources */,
 				1ED776061D251D4A0039CDA4 /* CheckBox.swift in Sources */,
 				1E06D7CD1D74356E00BB413C /* GroupCollectionService.swift in Sources */,
 				1EC128501CEC1ACB0093E978 /* LoginViewController.swift in Sources */,

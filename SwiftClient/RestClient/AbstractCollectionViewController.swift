@@ -77,9 +77,11 @@ class AbstractCollectionViewController: UITableViewController, UISearchResultsUp
     
     // Set offset for tableView so that searchBar would not show on screen unless pull down list.
     internal func setSearchBarOffset() {
-        if tableView.contentOffset == CGPoint(x: 0, y: 0) {
-            let searchBarHeight = tableView.tableHeaderView!.frame.size.height
-            tableView.contentOffset = CGPointMake(0, searchBarHeight)
+        if let searchBar = tableView.tableHeaderView {
+            if tableView.contentOffset == CGPoint(x: 0, y: 0) {
+                let searchBarHeight = searchBar.frame.size.height
+                tableView.contentOffset = CGPointMake(0, searchBarHeight)
+            }
         }
     }
     
@@ -99,7 +101,7 @@ class AbstractCollectionViewController: UITableViewController, UISearchResultsUp
         tableView.tableHeaderView = searchController.searchBar
     }
     
-    private func initRefreshControl() {
+    internal func initRefreshControl() {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(AbstractCollectionViewController.refreshData), forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl = refreshControl
@@ -171,8 +173,9 @@ class AbstractCollectionViewController: UITableViewController, UISearchResultsUp
     }
     
     internal func setFootViewText(num: NSInteger) {
-        let label = tableView.tableFooterView! as! UILabel
-        label.text = "- \(num) objects in total -"
+        if let label = tableView.tableFooterView as? UILabel {
+            label.text = "- \(num) objects in total -"
+        }
     }
 
     // Handle shift operation on single item

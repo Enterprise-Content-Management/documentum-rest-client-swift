@@ -13,6 +13,14 @@ class RestCollectionService {
     // Must be defined in subClass
     var url: String!
     
+    init() {
+        
+    }
+    
+    init(url: String) {
+        self.url = url
+    }
+    
     func setUrl(url: String) {
         self.url = url
     }
