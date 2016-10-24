@@ -14,8 +14,6 @@ class DqlViewController: AbstractCollectionViewController, UISearchBarDelegate {
     @IBOutlet weak var historyButton: UIBarButtonItem!
     
     var isActive: Bool = false
-    
-    var searchUrl: String!
     var dql: String!
     
     override func viewDidLoad() {
@@ -23,10 +21,6 @@ class DqlViewController: AbstractCollectionViewController, UISearchBarDelegate {
         
         setSearchBar()
         setUI()
-        
-        // For now it is not available for history
-        historyButton.enabled = false
-        historyButton.tintColor = UIColor.clearColor()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -47,6 +41,7 @@ class DqlViewController: AbstractCollectionViewController, UISearchBarDelegate {
     }
     
     override func loadData(page: NSInteger) {
+        let searchUrl = Context.repo.getLink(LinkRel.dql)!.characters.split("{").map(String.init)[0]
         let params = [
             "dql": dql!,
             "items-per-page": String(RestService.itemsPerPage),
@@ -94,13 +89,14 @@ class DqlViewController: AbstractCollectionViewController, UISearchBarDelegate {
         }
         ai.startActivityIndicator()
 
-        searchUrl = Context.repo.getLink(LinkRel.dql)!.characters.split("{").map(String.init)[0]
         dql = searchBar.text
         if dql == nil || dql!.isEmpty {
             ErrorAlert.show("Please type in dql.", controller: self, dismissViewController: false)
         }
 
         loadData(page)
+        
+        DbUtil.insertDqlHistory(NSDate(), dqlValue: dql) 
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
@@ -111,11 +107,6 @@ class DqlViewController: AbstractCollectionViewController, UISearchBarDelegate {
     // MARK: - Navigation
     @IBAction func onClickCancel(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    // TODO: do a history.
-    @IBAction func onClickHistory(sender: UIBarButtonItem) {
-        ErrorAlert.show("Remain to do", controller: self, dismissViewController: false)
     }
     
     // MARK: Table view control

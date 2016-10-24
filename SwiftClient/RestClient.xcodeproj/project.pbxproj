@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E01D65E1D892F670014A005 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E01D65D1D892F670014A005 /* Assets.xcassets */; };
 		1E01D6601D89346D0014A005 /* PopOverMenuForSysObjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E01D65F1D89346D0014A005 /* PopOverMenuForSysObjectController.swift */; };
 		1E01D6621D893CD90014A005 /* MiscService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E01D6611D893CD90014A005 /* MiscService.swift */; };
 		1E06D7CD1D74356E00BB413C /* GroupCollectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E06D7CC1D74356E00BB413C /* GroupCollectionService.swift */; };
@@ -77,6 +76,8 @@
 		1ED226381DB71313002A6B40 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED226371DB71313002A6B40 /* Type.swift */; };
 		1ED2263A1DB8626B002A6B40 /* AbstractPopOverMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED226391DB8626B002A6B40 /* AbstractPopOverMenuController.swift */; };
 		1ED2263C1DB9BAE2002A6B40 /* RepliesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED2263B1DB9BAE2002A6B40 /* RepliesViewController.swift */; };
+		1ED2263E1DBDB721002A6B40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ED2263D1DBDB721002A6B40 /* Assets.xcassets */; };
+		1ED226401DBDD66D002A6B40 /* DqlHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED2263F1DBDD66D002A6B40 /* DqlHistoryViewController.swift */; };
 		1ED776001D24EF4B0039CDA4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED775FF1D24EF4B0039CDA4 /* ProfileViewController.swift */; };
 		1ED776021D25079F0039CDA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED776011D25079F0039CDA4 /* User.swift */; };
 		1ED776061D251D4A0039CDA4 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED776051D251D4A0039CDA4 /* CheckBox.swift */; };
@@ -129,7 +130,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1E01D65D1D892F670014A005 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1E01D65F1D89346D0014A005 /* PopOverMenuForSysObjectController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopOverMenuForSysObjectController.swift; sourceTree = "<group>"; };
 		1E01D6611D893CD90014A005 /* MiscService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiscService.swift; sourceTree = "<group>"; };
 		1E06D7CC1D74356E00BB413C /* GroupCollectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCollectionService.swift; sourceTree = "<group>"; };
@@ -205,6 +205,8 @@
 		1ED226371DB71313002A6B40 /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		1ED226391DB8626B002A6B40 /* AbstractPopOverMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractPopOverMenuController.swift; sourceTree = "<group>"; };
 		1ED2263B1DB9BAE2002A6B40 /* RepliesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepliesViewController.swift; sourceTree = "<group>"; };
+		1ED2263D1DBDB721002A6B40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1ED2263F1DBDD66D002A6B40 /* DqlHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DqlHistoryViewController.swift; sourceTree = "<group>"; };
 		1ED775FF1D24EF4B0039CDA4 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1ED776011D25079F0039CDA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1ED776051D251D4A0039CDA4 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
@@ -396,7 +398,7 @@
 		1E665C991CAA2BB700EF3774 /* RestClient */ = {
 			isa = PBXGroup;
 			children = (
-				1E01D65D1D892F670014A005 /* Assets.xcassets */,
+				1ED2263D1DBDB721002A6B40 /* Assets.xcassets */,
 				1E82F37E1CF43836001720BE /* Utility */,
 				1E6299D11CABCEEB00A59B47 /* UI */,
 				1E9A6B0B1CAA843300B97BC0 /* Rest */,
@@ -493,6 +495,7 @@
 				1EB101C51D7EACE5007138A9 /* AddGroupViewController.swift */,
 				1E397B771D178505005DB494 /* UpdateViewController.swift */,
 				1E6150361D9A524400BD10B4 /* DqlViewController.swift */,
+				1ED2263F1DBDD66D002A6B40 /* DqlHistoryViewController.swift */,
 			);
 			name = crud;
 			sourceTree = "<group>";
@@ -686,7 +689,7 @@
 				1E167C591CAA8332000459E3 /* Podfile in Resources */,
 				1EDF74351D23A77700EB6ADC /* database.sql in Resources */,
 				1E665CA01CAA2BB700EF3774 /* Main.storyboard in Resources */,
-				1E01D65E1D892F670014A005 /* Assets.xcassets in Resources */,
+				1ED2263E1DBDB721002A6B40 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -780,6 +783,7 @@
 				1ED776061D251D4A0039CDA4 /* CheckBox.swift in Sources */,
 				1E06D7CD1D74356E00BB413C /* GroupCollectionService.swift in Sources */,
 				1EC128501CEC1ACB0093E978 /* LoginViewController.swift in Sources */,
+				1ED226401DBDD66D002A6B40 /* DqlHistoryViewController.swift in Sources */,
 				1E67BCB91D20C88400716A33 /* ErrorAlert.swift in Sources */,
 				1E9FD0521D7D259600403DE7 /* MultiMemberViewController.swift in Sources */,
 				1EC132271D9E468B00D8A3A4 /* CommentItemTableViewCell.swift in Sources */,

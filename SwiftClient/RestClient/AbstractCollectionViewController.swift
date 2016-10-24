@@ -44,7 +44,7 @@ class AbstractCollectionViewController: UITableViewController, UISearchResultsUp
         }
         self.setSearchBarOffset()
     }
-    
+
     // MARK: - Utility
     
     // Must be override by child controller

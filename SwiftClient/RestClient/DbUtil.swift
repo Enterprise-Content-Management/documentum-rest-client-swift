@@ -12,17 +12,23 @@ import SQLite
 class DbUtil {
     static let DATABASE = "database.db"
     static let TABLE_BASIC = "basic"
+    static let TABLE_DQL_HISTORY = "dql_history"
+    static let id = Expression<Int64>("id")
     static let attr = Expression<String>("attr")
     static let value = Expression<String>("value")
+    static let time = Expression<String>("time")
+    static let dql = Expression<String>("dql")
     
-    static let ATTR_ROOTURL = "rooturl"
-    static let ATTR_CONTEXT = "context"
-    static let ATTR_AUTO = "shouldautologin"
-    static let ATTR_USERNAME = "username"
-    static let ATTR_PASSWORD = "password"
-    static let ATTR_REMEMBER = "shouldremember"
+    static let ATTR_ROOTURL     = "rooturl"
+    static let ATTR_CONTEXT     = "context"
+    static let ATTR_AUTO        = "shouldautologin"
+    static let ATTR_USERNAME    = "username"
+    static let ATTR_PASSWORD    = "password"
+    static let ATTR_REMEMBER    = "shouldremember"
+    static let ATTR_TIME        = "time"
+    static let ATTR_DQL         = "dql"
     
-    static private func getConnectionOfDb(name: String) -> Connection? {
+    static private func getConnectionOfDb(name: String = DATABASE) -> Connection? {
         let paths = NSBundle.mainBundle().pathsForResourcesOfType("db", inDirectory: nil)
         let manager = NSFileManager.defaultManager()
         for path in paths {
@@ -41,7 +47,7 @@ class DbUtil {
     }
     
     static func getValueFromTable(tableName: String  = TABLE_BASIC, attrName: String) -> String? {
-        let db = getConnectionOfDb(DATABASE)
+        let db = getConnectionOfDb()
         let table = getFilteredTable(attrName: attrName)
         for item in try! db!.prepare(table) {
             return item[value]
@@ -50,9 +56,31 @@ class DbUtil {
     }
     
     static func updateValueFromTable(tableName: String = TABLE_BASIC, attrName: String, attrValue: String) {
-        let db = getConnectionOfDb(DATABASE)
+        let db = getConnectionOfDb()
         let table = getFilteredTable(attrName: attrName)
         try! db!.run(table.update(value <- attrValue))
+    }
+    
+    static func insertDqlHistory(dateValue: NSDate, dqlValue: String) -> Int64 {
+        let db = getConnectionOfDb()
+        let dqlTable = Table(TABLE_DQL_HISTORY)
+        let timeValue = Utility.getReadableDate(dateValue)
+        let insert = dqlTable.insert(time <- timeValue, dql <- dqlValue)
+        printLog("Insert dql history with TIME = \(timeValue), DQL = \(dqlValue)")
+        return try! db!.run(insert)
+    }
+    
+    static func getAllDqlHistories() -> AnySequence<Row> {
+        let db = getConnectionOfDb()
+        let dqlTable = Table(TABLE_DQL_HISTORY)
+        return try! db!.prepare(dqlTable)
+    }
+    
+    static func deleteDqlHistory(idValue: Int64) {
+        let db = getConnectionOfDb()
+        let dqlTable = Table(TABLE_DQL_HISTORY)
+        let history = dqlTable.filter(id == idValue)
+        try! db!.run(history.delete())
     }
 }
 
