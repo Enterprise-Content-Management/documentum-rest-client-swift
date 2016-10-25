@@ -12,6 +12,7 @@ class DqlHistoryViewController: UITableViewController, UISearchResultsUpdating, 
     @IBOutlet weak var footView: UILabel!
     @IBOutlet weak var clearBarButton: UIBarButtonItem!
 
+    let aiHelper: ActivityIndicatorHelper = ActivityIndicatorHelper()
     
     // Properties for search bar
     let searchController = UISearchController(searchResultsController: nil)
@@ -32,6 +33,7 @@ class DqlHistoryViewController: UITableViewController, UISearchResultsUpdating, 
         
         tableView.tableFooterView = footView
         IconHelper.setIconForBarButton(clearBarButton, iconName: .TrashO)
+        aiHelper.addActivityIndicator(tableView)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -70,7 +72,7 @@ class DqlHistoryViewController: UITableViewController, UISearchResultsUpdating, 
         if histories.isEmpty {
             footView.text = "- No History -"
         } else {
-            footView.text = "- \(histories.count) in total."
+            footView.text = "- \(histories.count) in total -"
         }
     }
     
@@ -105,6 +107,8 @@ class DqlHistoryViewController: UITableViewController, UISearchResultsUpdating, 
         let dqlViewController = UIUtil.getViewController("DqlViewController") as! DqlViewController
         dqlViewController.dql = dql
         dqlViewController.needReloadData = true
+        dqlViewController.historyButton.enabled = false
+        dqlViewController.historyButton.tintColor = UIColor.clearColor()
         navigationController?.pushViewController(dqlViewController, animated: true)
     }
     
@@ -159,11 +163,35 @@ class DqlHistoryViewController: UITableViewController, UISearchResultsUpdating, 
     
     // MARK: - Button Control
     @IBAction func onClickClear(sender: UIBarButtonItem) {
+        showClearDialog()
+    }
+    
+    private func showClearDialog() {
+        let showingMessage: String = "Are you sure to clear out histories?"
+        let alertController = UIAlertController(
+            title: "Clear out Warning",
+            message: showingMessage,
+            preferredStyle: .Alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancle", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let okAction = UIAlertAction(title: "OK", style: .Default) { (action: UIAlertAction!) in
+            self.doClearOut()
+        }
+        alertController.addAction(okAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    private func doClearOut() {
+        aiHelper.startActivityIndicator()
         for history in histories {
             DbUtil.deleteDqlHistory(history.id)
         }
         histories.removeAll()
         refreshTable()
+        aiHelper.stopActivityIndicator()
     }
 }
 
