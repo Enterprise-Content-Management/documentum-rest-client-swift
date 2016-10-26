@@ -20,6 +20,11 @@ class ProductInfoViewController: UITableViewController {
     }
     
     private func loadData() {
+        if Context.productInfoUrl == nil {
+            let error = Error(msg: "")
+            ErrorAlert.show(error.message, controller: self)
+            return
+        }
         RestService.getProductInfo(Context.productInfoUrl) { json, error in
             if let json = json {
                 self.productInfo = json.dictionary!["properties"]!.dictionary!

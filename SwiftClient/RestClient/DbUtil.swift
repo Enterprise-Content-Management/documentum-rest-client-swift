@@ -11,6 +11,7 @@ import SQLite
 
 class DbUtil {
     static let DATABASE = "database.db"
+    static let DATABASE_PATH = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]).URLByAppendingPathComponent(DATABASE).path!
     static let TABLE_BASIC = "basic"
     static let TABLE_DQL_HISTORY = "dql_history"
     static let id = Expression<Int64>("id")
@@ -29,15 +30,39 @@ class DbUtil {
     static let ATTR_DQL         = "dql"
     
     static private func getConnectionOfDb(name: String = DATABASE) -> Connection? {
-        let paths = NSBundle.mainBundle().pathsForResourcesOfType("db", inDirectory: nil)
         let manager = NSFileManager.defaultManager()
-        for path in paths {
-            if name == manager.displayNameAtPath(path) {
-                let db = try! Connection(path)
-                return db
-            }
+        if !manager.isReadableFileAtPath(DATABASE_PATH) {
+            copyDbToDocument()
+        }
+        
+        do {
+            let db = try Connection(DATABASE_PATH)
+            return db
+        } catch {
+            printError("Error in open connection for database")
         }
         return nil
+    }
+    
+    static func copyDbToDocument() {
+        let paths = NSBundle.mainBundle().pathsForResourcesOfType("db", inDirectory: nil)
+        let manager = NSFileManager.defaultManager()
+        var originalPath: String = ""
+        for path in paths {
+            if DATABASE == manager.displayNameAtPath(path) {
+                originalPath = path
+                break
+            }
+        }
+        
+        if !manager.isReadableFileAtPath(DATABASE_PATH) {
+            do {
+                try manager.copyItemAtPath(originalPath, toPath: DATABASE_PATH)
+                printLog("Successfully copy database to path: \(DATABASE_PATH)")
+            } catch {
+                printError("Error in copy database")
+            }
+        }
     }
     
     static private func getFilteredTable(tableName: String  = TABLE_BASIC, attrName: String) -> Table {

@@ -41,7 +41,7 @@ class SettingViewController: UITableViewController {
         DbUtil.updateValueFromTable(attrName: DbUtil.ATTR_CONTEXT, attrValue: contextCell.infoValueLabel.text)
         let shouldAutoLogin = isAutoLoginCell.switchItem.on.description
         DbUtil.updateValueFromTable(attrName: DbUtil.ATTR_AUTO, attrValue: shouldAutoLogin)
-        self.dismissViewControllerAnimated(true) {
+        dismissViewControllerAnimated(true) {
             let topViewController = UIUtil.getTopController()
             if  topViewController is RepoViewController {
                 let repoViewController = topViewController as! RepoViewController
@@ -63,5 +63,9 @@ class SettingViewController: UITableViewController {
                 }
             }
         }
+    }
+    
+    @IBAction func onClickCancel(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }

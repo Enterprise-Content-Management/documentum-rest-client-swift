@@ -312,14 +312,14 @@
                                             <rect key="frame" x="15" y="16" width="31.5" height="19.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pod-bV-sF7">
                                             <rect key="frame" x="15" y="35.5" width="40.5" height="13.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -2339,6 +2339,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Setting" id="4De-Ik-Oex">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="kzs-PT-o9d">
+                            <connections>
+                                <action selector="onClickCancel:" destination="4R1-N8-qzP" id="Qyr-vs-0bC"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="ot6-67-OwS">
                             <connections>
                                 <action selector="onClickSave:" destination="4R1-N8-qzP" id="f7T-oS-1VW"/>

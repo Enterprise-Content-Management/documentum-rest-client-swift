@@ -17,9 +17,13 @@ class Error {
     var id: String!
     
     init(msg: String, detail: String = "nothing") {
-        status = 400
+        status = 0
         errorCode = "E_ERROR"
-        message = msg
+        if msg == "" {
+            message = "Lost connection. Please check if REST server is running."
+        } else {
+            message = msg
+        }
         details = detail
         id = "ID"
     }
