@@ -33,7 +33,7 @@ class InfoItemTableViewCell : UITableViewCell {
     
     func setBasicStyle() {
         infoNameLabel.font = UIFont.boldSystemFontOfSize(16)
-        infoValueLabel.font = infoValueLabel.font?.fontWithSize(16)
+        infoValueLabel.font = infoValueLabel.font?.fontWithSize(14)
     }
 
     func setInfomationStyle() {

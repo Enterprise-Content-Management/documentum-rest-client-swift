@@ -10,7 +10,6 @@ import UIKit
 
 class DqlHistoryViewController: UITableViewController, UISearchResultsUpdating, UIGestureRecognizerDelegate {
     @IBOutlet weak var footView: UILabel!
-    @IBOutlet weak var clearBarButton: UIBarButtonItem!
 
     let aiHelper: ActivityIndicatorHelper = ActivityIndicatorHelper()
     
@@ -32,7 +31,6 @@ class DqlHistoryViewController: UITableViewController, UISearchResultsUpdating, 
         navigationItem.setHidesBackButton(true, animated: true)
         
         tableView.tableFooterView = footView
-        IconHelper.setIconForBarButton(clearBarButton, iconName: .TrashO)
         aiHelper.addActivityIndicator(tableView)
     }
     

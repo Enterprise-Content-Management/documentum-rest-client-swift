@@ -29,7 +29,6 @@
 		1E49512C1D9B6F7100D1877A /* AbstractRestObjectInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E49512B1D9B6F7100D1877A /* AbstractRestObjectInfoViewController.swift */; };
 		1E596D041D26534F00BD13F9 /* SwitchableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E596D031D26534F00BD13F9 /* SwitchableTableViewCell.swift */; };
 		1E6150351D9A3CBD00BD10B4 /* IconHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6150341D9A3CBD00BD10B4 /* IconHelper.swift */; };
-		1E6150371D9A524400BD10B4 /* DqlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6150361D9A524400BD10B4 /* DqlViewController.swift */; };
 		1E6299CE1CABAEF800A59B47 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6299CD1CABAEF800A59B47 /* Repository.swift */; };
 		1E6299D01CABB08100A59B47 /* RepositoryCollectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6299CF1CABB08100A59B47 /* RepositoryCollectionService.swift */; };
 		1E6299DB1CACD58400A59B47 /* Cabinet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6299DA1CACD58400A59B47 /* Cabinet.swift */; };
@@ -86,6 +85,7 @@
 		1EDF74391D23A95B00EB6ADC /* DbUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDF74381D23A95B00EB6ADC /* DbUtil.swift */; };
 		1EEB097B1D81422C007E65D7 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEB097A1D81422C007E65D7 /* Context.swift */; };
 		1EEFF0DC1D92733C002D40C7 /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEFF0DB1D92733C002D40C7 /* MemberTableViewCell.swift */; };
+		1EF1A7C01DC1D894007A53EE /* DqlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6150361D9A524400BD10B4 /* DqlViewController.swift */; };
 		B649C01B605ACDC877E53316 /* Pods_RestClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE603100E6D889883AA09AE7 /* Pods_RestClient.framework */; };
 /* End PBXBuildFile section */
 
@@ -775,6 +775,7 @@
 				1EAB83AB1D05477E002AA4BC /* FileViewController.swift in Sources */,
 				1EADDFA11DB46BAC00EBE155 /* DqlResult.swift in Sources */,
 				1E8AB7761DAB3AC800ADFD8B /* CommentFootView.swift in Sources */,
+				1EF1A7C01DC1D894007A53EE /* DqlViewController.swift in Sources */,
 				1E665CC91CAA2F7B00EF3774 /* ItemTableViewCell.swift in Sources */,
 				1EC132251D9E432500D8A3A4 /* Comment.swift in Sources */,
 				1E46C9FC1D2BB4E5003172F7 /* Error.swift in Sources */,
@@ -792,7 +793,6 @@
 				1EEFF0DC1D92733C002D40C7 /* MemberTableViewCell.swift in Sources */,
 				1E6299CE1CABAEF800A59B47 /* Repository.swift in Sources */,
 				1E167A5B1CAA5428000459E3 /* RepoViewController.swift in Sources */,
-				1E6150371D9A524400BD10B4 /* DqlViewController.swift in Sources */,
 				1E596D041D26534F00BD13F9 /* SwitchableTableViewCell.swift in Sources */,
 				1EC132231D9E110E00D8A3A4 /* TopAlignTextLabel.swift in Sources */,
 				1E6299E11CAD1B3300A59B47 /* AbstractCollectionViewController.swift in Sources */,

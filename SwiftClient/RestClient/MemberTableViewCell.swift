@@ -13,6 +13,7 @@ class MemberTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     
     func initCell(photoName: String, name: String) {
+        nameLabel.lineBreakMode = .ByTruncatingMiddle
         setThumbnailImage(photoName)
         setName(name)
     }

@@ -341,7 +341,7 @@ class InfoViewController: UITableViewController {
                 if let cell = sender as? InfoItemTableViewCell {
                     let indexPath = tableView.indexPathForCell(cell)!
                     // Only basic attribute excepting type and id could update.
-                    if indexPath.section == 0 && indexPath.row > 1 {
+                    if indexPath.section == 0 && indexPath.row == 1 {
                         return true
                     }
                 }
