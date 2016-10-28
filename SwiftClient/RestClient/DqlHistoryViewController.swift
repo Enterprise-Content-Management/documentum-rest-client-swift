@@ -160,6 +160,10 @@ class DqlHistoryViewController: UITableViewController, UISearchResultsUpdating, 
     }
     
     // MARK: - Button Control
+    @IBAction func onClickCancel(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+
     @IBAction func onClickClear(sender: UIBarButtonItem) {
         showClearDialog()
     }

@@ -106,7 +106,7 @@ class DqlViewController: AbstractCollectionViewController, UISearchBarDelegate {
     
     // MARK: - Navigation
     @IBAction func onClickCancel(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     // MARK: Table view control

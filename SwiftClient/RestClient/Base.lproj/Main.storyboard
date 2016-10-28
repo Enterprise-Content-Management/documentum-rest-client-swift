@@ -331,13 +331,26 @@
                             <outlet property="delegate" destination="wUZ-tC-SoC" id="5iq-gE-5H8"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem systemItem="cancel" id="em5-Zb-qZ6">
+                            <connections>
+                                <action selector="onClickCancel:" destination="Reh-f1-x9S" id="ok1-JD-DZG"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="DQL Search History" id="VZq-nN-t94">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Lfr-Qc-FWu">
+                            <connections>
+                                <action selector="onClickCancel:" destination="wUZ-tC-SoC" id="COv-45-ehv"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="wyH-m8-kcm">
                             <connections>
                                 <action selector="onClickClear:" destination="wUZ-tC-SoC" id="1wb-Gh-eLb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="footView" destination="vUT-Qr-2Vb" id="AZ0-j9-5wF"/>
                     </connections>
@@ -1015,7 +1028,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ds4-m3-Qhp">
-                                            <rect key="frame" x="17" y="2" width="80" height="40"/>
+                                            <rect key="frame" x="17" y="1.5" width="80" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="80" id="tPG-QU-5mS"/>
                                             </constraints>
@@ -1024,7 +1037,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dzv-TO-1CU">
-                                            <rect key="frame" x="100" y="3" width="483" height="38"/>
+                                            <rect key="frame" x="100" y="2.5" width="483" height="38"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES"/>
