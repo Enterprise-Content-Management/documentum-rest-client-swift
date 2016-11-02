@@ -69,9 +69,15 @@ class InfoViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         if needUpdate {
-            refreshTable()
+            refreshTable {
+                self.decidePreviewButtonShowOrNot()
+            }
+        } else {
+            decidePreviewButtonShowOrNot()
         }
-        
+    }
+    
+    private func decidePreviewButtonShowOrNot() {
         if downloadUrl == nil {
             if object.getType() == RestObjectType.document.rawValue {
                 // Set for preview button
@@ -114,15 +120,16 @@ class InfoViewController: UITableViewController {
         return (key.rawValue, object.basic[key.rawValue]!)
     }
     
-    private func refreshTable() {
-        let id = object.getId()
+    private func refreshTable(afterWards: Void -> Void) {
+        let selfLink = object.getLink(LinkRel.selfRel)!
         
-        RestService.getRestObject(id) { restObject, error in
+        RestService.getRestObject(selfLink) { restObject, error in
             if restObject != nil {
                 self.object = restObject!
                 self.comments.removeAll()
                 self.loadComments()
                 self.tableView.reloadData()
+                afterWards()
             }
         }
     }
@@ -463,7 +470,7 @@ class InfoViewController: UITableViewController {
                     
                     let index = indexPath.row
                     if object.getType() == RestObjectType.comment.rawValue && index < self.comments.count {
-                        while (self.comments[index].getType() == RestObjectType.reply.rawValue && index < self.comments.count) {
+                        while (index < self.comments.count && self.comments[index].getType() == RestObjectType.reply.rawValue) {
                             self.comments.removeAtIndex(index)
                             self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 2)], withRowAnimation: UITableViewRowAnimation.Fade)
                         }

@@ -93,7 +93,7 @@ class SysObjectViewController: AbstractCollectionViewController, UIGestureRecogn
         super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
         
         let restObject: RestObject
-        if self.searchController.active {  // isActive?
+        if searchController.active {  // isActive?
             restObject = self.filteredObjects[indexPath.row]
         } else {
             restObject = self.objects[indexPath.row]
@@ -107,6 +107,9 @@ class SysObjectViewController: AbstractCollectionViewController, UIGestureRecogn
         } else {
             let nextViewController = self.storyboard?.instantiateViewControllerWithIdentifier("InfoView") as! InfoViewController
             nextViewController.object = restObject
+            if searchController.active {
+                nextViewController.needUpdate = true
+            }
             self.navigationController!.pushViewController(nextViewController, animated: true)
         }
     }

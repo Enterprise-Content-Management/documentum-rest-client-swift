@@ -177,7 +177,7 @@ class MembersViewController: AbstractCollectionViewController, UIGestureRecogniz
                 }
             }
             
-            printLog("Delete \(objectFullName) from list.")
+            printLog("Remove \(objectFullName) from list.")
             objects.removeAtIndex(indexPath.row)
             setFootViewText(objects.count)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
@@ -185,8 +185,14 @@ class MembersViewController: AbstractCollectionViewController, UIGestureRecogniz
     }
     
     override func showAlert(indexPath: NSIndexPath, type: String, name: String, message: String) {
+        let msg: String
+        if parentGroup != nil {
+            msg = "Are you sure to remove this \(type.lowercaseString) named \(name) from GROUP \(parentGroup!.getName())"
+        } else {
+            msg = "Are you sure to delete this \(type.lowercaseString) named \(name)"
+        }
         super.showAlert(indexPath, type: type, name: name,
-                        message: "Are you sure to remove this \(type.lowercaseString) named \(name) from GROUP \(parentGroup!.getName())")
+                        message: msg)
     }
     
     // - MARK: Button actions

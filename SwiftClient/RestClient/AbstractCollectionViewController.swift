@@ -232,7 +232,6 @@ class AbstractCollectionViewController: UITableViewController, UISearchResultsUp
         if !objects.isEmpty {
             objects.removeAtIndex(indexPath.row)
         }
-        objects.removeAtIndex(indexPath.row)
         setFootViewText(objects.count)
         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
     }

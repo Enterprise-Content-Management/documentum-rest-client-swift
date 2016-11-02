@@ -33,6 +33,8 @@ class AddGroupViewController: UITableViewController {
             RestService.createWithAuth(postUrl, requestBody: requestBody){ result, error in
                 if result != nil {
                     printLog("Successfully create a new GROUP \(groupName).")
+                    self.aiHelper.stopActivityIndicator()
+                    self.dismissViewControllerAnimated(true, completion: nil)
                     UIUtil.getTopGroupsController()!.reloadData()
                 }
                 if let error = error {

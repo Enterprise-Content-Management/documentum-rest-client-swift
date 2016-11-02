@@ -18,10 +18,8 @@ class PopOverMenuForSysObjectController: AbstractPopOverMenuController {
         
         if Context.clickBoard == nil {
             miscControlButton.enabled = false
-            miscControlButton.selected = false
         } else {
             miscControlButton.enabled = true
-            miscControlButton.selected = true
         }
     }
     

@@ -12,8 +12,8 @@ import Alamofire
 class RestServiceEnhance : RestService {
     
     static func getDownloadUrl(object: RestObject, doAfterDownloaded: (String, NSDictionary, NSArray)-> Void) -> Void {
-        let contentUrl = object.getLink(LinkRel.content)
-        RestService.getPropertiesAndLinks(Alamofire.Method.GET, url: contentUrl!) { properties, links, error in
+        let contentUrl = object.getLink(LinkRel.content)!
+        RestService.getPropertiesAndLinks(Alamofire.Method.GET, url: contentUrl) { properties, links, error in
             if error == nil {
                 if let downloadUrl = LinkRel.getLink(LinkRel.enclosure, links: links!) {
                     printLog("DownloadUrl for object \(object.getName()) is \(downloadUrl)")
