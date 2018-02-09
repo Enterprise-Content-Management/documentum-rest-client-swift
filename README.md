@@ -8,7 +8,7 @@ This iOS project contains a reference implementation of Documentum REST Services
 purpose of this project is to demonstrate one way to develop a hypermedia driven REST client to consume Documentum
 REST Services. It does NOT indicate that users could not develop a REST client using other technologies.
 
-EMC shares the source code of this project for the technology sharing. If users plan to migrate the sample codes to their
+Opentext shares the source code of this project for the technology sharing. If users plan to migrate the sample codes to their
 products, they are responsible to maintain this part of the codes in their products and should agree with license polices
 of the referenced libraries used by this sample project.
 
